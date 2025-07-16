@@ -1,0 +1,32 @@
+[
+  {
+    "company": "Australian Bureau of Statistics",
+    "role": "DevOps Cadet",
+    "dates": "Feb 2024 - Present",
+    "points": [
+      "Supporting infrastructure automation and environment builds.",
+      "Working across cloud and on-prem services as part of cadet program.",
+      "Contributing to internal tooling and documentation."
+    ]
+  },
+  {
+    "company": "Commonwealth Bank of Australia",
+    "role": "Corporate Cards Helpdesk (Business Banking)",
+    "dates": "Aug 2023 - Present",
+    "points": [
+      "Frontline support for corporate card customers across incident, access and usage queries.",
+      "Collaboration with internal teams to resolve account issues.",
+      "High CSAT scores (placeholder)."
+    ]
+  },
+  {
+    "company": "Service NSW",
+    "role": "Digital Service Representative",
+    "dates": "Jan 2022 - Aug 2022",
+    "points": [
+      "Supported citizens using NSW digital platforms.",
+      "Guided users through licence and service processes.",
+      "Worked with sensitive data in compliance-driven environment."
+    ]
+  }
+]

@@ -1,0 +1,23 @@
+{
+  "name": "princealii-github-io",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "tailwindcss": "^3.4.10",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.39",
+    "@tailwindcss/typography": "^0.5.13",
+    "marked": "^15.0.0"
+  },
+  "devDependencies": {
+    "vite": "^5.4.0",
+    "prettier": "^3.3.3"
+  }
+}
