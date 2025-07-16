@@ -2,7 +2,7 @@ import { defineConfig } from 'vite';
 import { resolve } from 'path';
 
 export default defineConfig(({ mode }) => ({
-  base: './',
+  base: '/',
   root: '.',
   build: {
     outDir: 'dist',
