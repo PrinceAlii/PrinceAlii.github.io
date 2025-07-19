@@ -1,0 +1,9 @@
+[
+  {
+    "title": "Example Project",
+    "summary": "summary",
+    "image": "./src/assets/img/avatar-placeholder.png",
+    "github": "https://github.com/",
+    "tags": ["Cloud", "Automation", "Uni"]
+  }
+]
