@@ -1,154 +1,100 @@
 <!doctype html>
 <html lang="en-AU" class="dark">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Ali Bonagdaran | DevOps Cadet - Student</title>
-    <meta
-      name="description"
-      content="DevOps Cadet and IT student in Sydney, Australia."
-    />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="icon" type="image/png" href="./src/assets/icons/avatar-placeholder.png" />
-  </head>
-  <body class="relative">
-    <a
-      href="#main"
-      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:p-2 focus:bg-brand-500 focus:text-white"
-      >Skip to content</a
-    >
 
-    <header
-      id="site-header"
-      class="sticky-header flex items-center justify-between px-4 sm:px-8 h-14"
-    >
-      <a href="#home" class="h-mono text-brand-300 text-lg">Ali B</a>
-      <nav class="flex items-center gap-2 sm:gap-4" aria-label="Primary">
-        <a href="#about" class="nav-link" data-nav>About</a>
-        <a href="#experience" class="nav-link" data-nav>Experience</a>
-        <a href="#education" class="nav-link" data-nav>Education</a>
-        <a href="#projects" class="nav-link" data-nav>Projects</a>
-        <a href="#contact" class="nav-link" data-nav>Contact</a>
-      </nav>
-      <button
-        id="theme-toggle"
-        class="h-mono text-xs px-2 py-1 border border-neutral-700 rounded hover:border-brand-500"
-        aria-pressed="true"
-        aria-label="Toggle light or dark theme"
-      >
-        Dark
-      </button>
-    </header>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ali Bonagdaran | DevOps Cadet - Student</title>
+  <meta name="description" content="DevOps Cadet and IT student in Sydney, Australia." />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="./src/assets/icons/avatar-placeholder.png" />
+</head>
 
-    <main id="main" tabindex="-1">
-      <section id="home" class="hero">
-        <img
-          src="./src/assets/img/koi-pond.gif"
-          alt="Pixel art koi pond background"
-        />
-        <div
-          class="hero-content flex flex-col items-center justify-center min-h-[80vh] text-center"
-        >
-          <h1 class="h-mono text-5xl sm:text-6xl font-bold mb-4">
-            Ali Bonagdaran
-          </h1>
-          <p class="text-xl text-neutral-300 mb-8">DevOps Cadet & Student</p>
-          <div class="flex flex-wrap justify-center gap-4">
-            <a
-              href="#about"
-              class="h-mono px-5 py-3 rounded border border-brand-500 text-brand-300 hover:bg-brand-500/20"
-              >Learn more</a
-            >
-            <a
-              href="./src/assets/resume-website.pdf"
-              class="h-mono px-5 py-3 rounded border border-neutral-700 hover:border-brand-500"
-              download
-              >Download Resume</a
-            >
-          </div>
+<body class="relative">
+  <a href="#main"
+    class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:p-2 focus:bg-brand-500 focus:text-white">Skip
+    to content</a>
+
+  <header id="site-header" class="sticky-header flex items-center justify-between px-4 sm:px-8 h-14">
+    <a href="#home" class="h-mono text-brand-300 text-lg">Ali B</a>
+    <nav class="flex items-center gap-2 sm:gap-4" aria-label="Primary">
+      <a href="#about" class="nav-link" data-nav>About</a>
+      <a href="#experience" class="nav-link" data-nav>Experience</a>
+      <a href="#education" class="nav-link" data-nav>Education</a>
+      <a href="#projects" class="nav-link" data-nav>Projects</a>
+      <a href="#contact" class="nav-link" data-nav>Contact</a>
+    </nav>
+    <button id="theme-toggle" class="h-mono text-xs px-2 py-1 border border-neutral-700 rounded hover:border-brand-500"
+      aria-pressed="true" aria-label="Toggle light or dark theme">
+      Dark
+    </button>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <section id="home" class="hero">
+      <img src="./src/assets/img/koi-pond.gif" alt="Pixel art koi pond background" />
+      <div class="hero-content flex flex-col items-center justify-center min-h-[80vh] text-center">
+        <h1 class="h-mono text-5xl sm:text-6xl font-bold mb-4">
+          Ali Bonagdaran
+        </h1>
+        <p class="text-xl text-neutral-300 mb-8">DevOps Cadet & Student</p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="#about"
+            class="h-mono px-5 py-3 rounded border border-brand-500 text-brand-300 hover:bg-brand-500/20">Learn more</a>
+          <a href="./src/assets/resume-website.pdf"
+            class="h-mono px-5 py-3 rounded border border-neutral-700 hover:border-brand-500" download>Download
+            Resume</a>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section id="about" class="section">
-        <h2 class="section-title">About</h2>
-        <article
-          id="about-content"
-          class="prose prose-invert max-w-none"
-        ></article>
-      </section>
+    <section id="about" class="section">
+      <h2 class="section-title">About</h2>
+      <article id="about-content" class="prose prose-invert max-w-none"></article>
+    </section>
 
-      <section id="experience" class="section">
-        <h2 class="section-title">Experience</h2>
-        <div id="experience-list" class="grid gap-6"></div>
-      </section>
+    <section id="experience" class="section">
+      <h2 class="section-title">Experience</h2>
+      <div id="experience-list" class="grid gap-6"></div>
+    </section>
 
-      <section id="education" class="section">
-        <h2 class="section-title">Education</h2>
-        <div id="education-list" class="grid gap-6"></div>
-      </section>
+    <section id="education" class="section">
+      <h2 class="section-title">Education</h2>
+      <div id="education-list" class="grid gap-6"></div>
+    </section>
 
-      <section id="projects" class="section">
-        <h2 class="section-title">Projects</h2>
-        <div
-          id="projects-list"
-          class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
-        ></div>
-      </section>
+    <section id="projects" class="section">
+      <h2 class="section-title">Projects</h2>
+      <div id="projects-list" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </section>
 
-      <section id="contact" class="section text-center">
-        <h2 class="section-title">Contact</h2>
-        <p class="mb-8">Get in touch or find me online.</p>
-        <div class="flex justify-center gap-6 text-brand-300">
-          <a
-            id="contact-email"
-            class="icon-link"
-            href="mailto:ali@bonagdaran.com.au"
-            aria-label="Email Ali"
-          >
-            <img src="./src/assets/icons/email.svg" alt="Email" />
-          </a>
-          <a
-            id="contact-github"
-            class="icon-link"
-            href="#"
-            target="_blank"
-            rel="noopener"
-            aria-label="GitHub"
-          >
-            <img src="./src/assets/icons/github.svg" alt="GitHub" />
-          </a>
-          <a
-            id="contact-linkedin"
-            class="icon-link"
-            href="#"
-            target="_blank"
-            rel="noopener"
-            aria-label="LinkedIn"
-          >
-            <img src="./src/assets/icons/linkedin.svg" alt="LinkedIn" />
-          </a>
-          <a
-            id="contact-resume"
-            class="icon-link"
-            href="./resume.pdf"
-            download
-            aria-label="Download CV"
-          >
-            <img src="./src/assets/icons/download.svg" alt="Download CV" />
-          </a>
-        </div>
-      </section>
-    </main>
+    <section id="contact" class="section text-center">
+      <h2 class="section-title">Contact</h2>
+      <p class="mb-8">Get in touch or find me online.</p>
+      <div class="flex justify-center gap-6 text-brand-300">
+        <a id="contact-email" class="icon-link" href="mailto:ali@bonagdaran.com.au" aria-label="Email Ali">
+          <img src="./src/assets/icons/email.svg" alt="Email" />
+        </a>
+        <a id="contact-github" class="icon-link" href="#" target="_blank" rel="noopener" aria-label="GitHub">
+          <img src="./src/assets/icons/github.svg" alt="GitHub" />
+        </a>
+        <a id="contact-linkedin" class="icon-link" href="#" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <img src="./src/assets/icons/linkedin.svg" alt="LinkedIn" />
+        </a>
+        <a id="contact-resume" class="icon-link" href="./resume.pdf" download aria-label="Download CV">
+          <img src="./src/assets/icons/download.svg" alt="Download CV" />
+        </a>
+      </div>
+    </section>
+  </main>
 
-    <footer class="py-8 text-center text-xs text-neutral-500">
-      <p>© <span id="year"></span> Ali Bonagdaran</p>
-      <p class="sr-only">Pixel art from 1041uuu</p>
-    </footer>
+  <footer class="py-8 text-center text-xs text-neutral-500">
+    <p>© <span id="year"></span> Ali Bonagdaran</p>
+    <p class="sr-only">Pixel art from 1041uuu</p>
+  </footer>
 
-    <script type="module" src="/src/main.js"></script>
-  </body>
+  <script type="module" src="/src/main.js"></script>
+</body>
+
 </html>
