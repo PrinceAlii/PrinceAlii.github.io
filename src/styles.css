@@ -91,6 +91,10 @@ body {
   fill: currentColor;
 }
 
+.icon-link img {
+  @apply w-6 h-6;
+}
+
 /* motion reduction */
 @media (prefers-reduced-motion: reduce) {
   html {
