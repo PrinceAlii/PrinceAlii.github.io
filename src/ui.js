@@ -17,17 +17,26 @@ export function initScrollSpy() {
   sections.forEach(s => s && observer.observe(s));
 }
 
-// (translateY slower than scroll)
+// Parallax effect optimized with requestAnimationFrame
 export function initParallax() {
   const heroImg = document.querySelector('.hero img');
   if (!heroImg) return;
+
+  let ticking = false;
+
   window.addEventListener('scroll', () => {
-    const y = window.scrollY * 0.2; // intensity of parallax effect
-    heroImg.style.transform = `translateY(${y}px) scale(1.02)`;
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        const y = window.scrollY * 0.2;
+        heroImg.style.transform = `translateY(${y}px) scale(1.02)`;
+        ticking = false;
+      });
+      ticking = true;
+    }
   });
 }
 
-// fade in on scroll
+// Fade-in animations on scroll
 export function initFadeIns() {
   const els = document.querySelectorAll('.section, .card');
   const obs = new IntersectionObserver(
@@ -35,6 +44,7 @@ export function initFadeIns() {
       entries.forEach(e => {
         if (e.isIntersecting) {
           e.target.classList.add('opacity-100', 'translate-y-0');
+          obs.unobserve(e.target); // Run once
         }
       });
     },
