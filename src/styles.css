@@ -247,7 +247,7 @@ body {
 .timeline .card::before {
   content: "";
   position: absolute;
-  left: -1.1rem;
+  left: -1.6rem;
   top: 1.25rem;
   width: 0.7rem;
   height: 0.7rem;
@@ -257,10 +257,6 @@ body {
 }
 .light .timeline::before {
   background: linear-gradient(180deg, rgba(0, 98, 255, 0.45), rgba(0, 98, 255, 0));
-}
-
-.footer-icons {
-  @apply mt-3 flex justify-center gap-4 text-brand-300;
 }
 
 @media (prefers-reduced-motion: reduce) {

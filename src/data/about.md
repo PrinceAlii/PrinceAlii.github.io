@@ -1,6 +1,6 @@
 ## Hi!
 
-I’m Ali Bonagdaran, an IT student at the University of Technology Sydney and a DevOps Cadet with the Australian Bureau of Statistics in Sydney, Australia. I’m building capability across cloud, automation and infrastructure engineering while completing my Bachelor of Information Technology (expected Nov 2025).
+I’m Ali Bonagdaran, a Graduate at the Australian Bureau of Statistics in Sydney, Australia. I completed a Bachelor of Information Technology at the University of Technology Sydney in Nov 2025 and focus on cloud, automation, and infrastructure engineering.
 
 I enjoy practical problem solving, including:
 - Scripting deployments

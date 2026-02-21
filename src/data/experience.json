@@ -1,32 +1,56 @@
 [
   {
     "company": "Australian Bureau of Statistics",
-    "role": "DevOps Cadet",
-    "dates": "Feb 2024 - Present",
+    "role": "Graduate",
+    "dates": "Feb 2026 - Present",
     "points": [
-      "Supporting infrastructure automation and environment builds.",
-      "Working across cloud and on-prem services as part of cadet program.",
-      "Contributing to internal tooling and documentation."
+      "Rotating across DevOps and platform workstreams.",
+      "Supporting cloud migration and infrastructure improvement work."
+    ]
+  },
+  {
+    "company": "Australian Bureau of Statistics",
+    "role": "Cadet",
+    "dates": "Mar 2025 - Feb 2026",
+    "points": [
+      "Assisted with DevOps tooling and environment upgrades.",
+      "Supported CI/CD pipeline maintenance and documentation."
     ]
   },
   {
     "company": "Commonwealth Bank of Australia",
-    "role": "Corporate Cards Helpdesk (Business Banking)",
-    "dates": "Aug 2023 - Present",
+    "role": "Business Banking Associate",
+    "dates": "Nov 2024 - Jun 2025",
     "points": [
-      "Frontline support for corporate card customers across incident, access and usage queries.",
-      "Collaboration with internal teams to resolve account issues.",
-      "Clear, accurate case notes to support fast follow ups."
+      "Supported corporate card customers and internal teams.",
+      "Handled enquiries with accurate case notes and follow up."
     ]
   },
   {
     "company": "Service NSW",
-    "role": "Digital Service Representative",
-    "dates": "Jan 2022 - Aug 2022",
+    "role": "Customer Service Representative",
+    "dates": "Oct 2023 - Nov 2024",
     "points": [
-      "Supported citizens using NSW digital platforms.",
-      "Guided users through licence and service processes.",
-      "Worked with sensitive data in compliance-driven environment."
+      "Resolved complex licensing and registration transactions.",
+      "Maintained privacy and compliance in customer interactions."
+    ]
+  },
+  {
+    "company": "Service NSW",
+    "role": "Digital Services Representative",
+    "dates": "Mar 2023 - Oct 2023",
+    "points": [
+      "Guided customers on digital services and online forms.",
+      "Triaged requests and supported in centre digital adoption."
+    ]
+  },
+  {
+    "company": "McDonald's",
+    "role": "Crew Member",
+    "dates": "Aug 2019 - Mar 2023",
+    "points": [
+      "Delivered customer service in a fast paced environment.",
+      "Supported drive thru flow and team operations."
     ]
   }
 ]
