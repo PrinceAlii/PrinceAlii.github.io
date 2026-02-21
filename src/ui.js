@@ -17,10 +17,10 @@ export function initScrollSpy() {
   sections.forEach(s => s && observer.observe(s));
 }
 
-// Parallax effect optimized with requestAnimationFrame
 export function initParallax() {
   const heroImg = document.querySelector('.hero img');
   if (!heroImg) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
   let ticking = false;
 
@@ -36,9 +36,15 @@ export function initParallax() {
   });
 }
 
-// Fade-in animations on scroll
 export function initFadeIns() {
   const els = document.querySelectorAll('.section, .card');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduceMotion) {
+    els.forEach(el => {
+      el.classList.add('opacity-100', 'translate-y-0');
+    });
+    return;
+  }
   const obs = new IntersectionObserver(
     entries => {
       entries.forEach(e => {

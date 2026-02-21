@@ -5,34 +5,30 @@ import { initScrollSpy, initParallax, initFadeIns } from './ui.js';
 const root = document.documentElement;
 const btn = document.getElementById('theme-toggle');
 
-// Update button state on load based on what the inline script did
-if (root.classList.contains('dark')) {
-  btn.textContent = 'Dark';
-  btn.setAttribute('aria-pressed', 'true');
-} else {
-  btn.textContent = 'Light';
-  btn.setAttribute('aria-pressed', 'false');
-}
+const setThemeState = (isDark) => {
+  root.classList.toggle('dark', isDark);
+  root.classList.toggle('light', !isDark);
+  btn?.setAttribute('aria-pressed', String(isDark));
+  btn?.setAttribute('aria-label', isDark ? 'Switch to light theme' : 'Switch to dark theme');
+  btn?.setAttribute('data-theme', isDark ? 'dark' : 'light');
+};
 
-// Theme toggle handler
+setThemeState(root.classList.contains('dark'));
+
 btn?.addEventListener('click', () => {
-  const isDark = root.classList.toggle('dark');
+  const isDark = !root.classList.contains('dark');
+  setThemeState(isDark);
   localStorage.setItem('ali-theme', isDark ? 'dark' : 'light');
-  btn.textContent = isDark ? 'Dark' : 'Light';
-  btn.setAttribute('aria-pressed', String(isDark));
 });
 
-// Set current year
 const yearEl = document.getElementById('year');
 if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-// Initialize content
 loadAbout();
 loadExperience();
 loadEducation();
 loadProjects();
 
-// Initialize UI effects
 document.addEventListener('DOMContentLoaded', () => {
   initScrollSpy();
   initParallax();

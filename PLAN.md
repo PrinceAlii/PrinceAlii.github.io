@@ -1,87 +1,91 @@
-# Portfolio Remediation Plan
+# Website Improvement Plan
 
-## Status: Draft
-**Date:** 2026-02-10
-**Objective:** Refactor and polish the portfolio to professional engineering standards, eliminating "AI smell," improving performance, and fixing architectural flaws.
+## Overview
+This plan outlines the steps to modernize and polish the personal portfolio website for Ali Bonagdaran. The focus is on enhancing the visual design, improving user experience (UX), and refining the content presentation.
 
----
+## Phase 1: Visual Design & UI Polish
 
-## 1. Architectural Improvements
+### 1.1 Enhanced Theme Toggle
+- **Current State:** A simple text button toggles between "Dark" and "Light".
+- **Goal:** Replace with a sleek icon-based toggle (Sun/Moon).
+- **Action Items:**
+  - Import or create SVG icons for Sun and Moon.
+  - Update `index.html` to house the icon container.
+  - Update `src/main.js` to toggle the icon state along with the theme.
+  - animate the transition between icons.
 
-### 1.1 Move from `fetch` to `import`
-**Current State:** `content.js` fetches JSON/MD files at runtime.
-**Problem:**
-- Adds unnecessary network requests (waterfall).
-- If a request fails, sections break.
-- "Flashes" of empty content while loading.
-- Harder for search engines to index (content isn't in initial HTML, though Google is okay with it, it's not optimal).
-**Solution:**
-- Import `experience.json`, `education.json`, and `projects.json` directly into `content.js`. Vite bundles these automatically.
-- Import `about.md?raw` (using Vite's raw import feature) to get the markdown text at build time.
-- **Benefit:** Instant loading, no network errors, better offline support.
+### 1.2 Hero Section Refinement
+- **Current State:** Pixel art background with text overlay. Contrast could be better. Two buttons (Learn More, Download Resume).
+- **Goal:** Improve legibility and clarify the call-to-action (CTA).
+- **Action Items:**
+  - **Contrast:** Adjust the gradient overlay in `src/styles.css` to ensure text pops against the animated background.
+  - **CTAs:**
+    - Primary Button: "View Projects" (solid brand color).
+    - Secondary Button: "Contact Me" or "Download Resume" (outline style).
+  - **Typography:** Increase the weight of the main heading slightly for better impact.
 
-### 1.2 Fix Theme Flash (FOUC)
-**Current State:** Theme logic resides in `main.js`, which runs after the HTML parser.
-**Problem:** Users on light mode will see a dark flash before the script runs.
-**Solution:**
-- Move the critical theme check logic into a small, inline `<script>` tag inside `<head>` in `index.html`.
+### 1.3 Card Styling & Interactivity
+- **Current State:** Simple cards with a slight lift on hover.
+- **Goal:** Make cards feel more tactile and modern.
+- **Action Items:**
+  - **Hover Effects:** Add a subtle glow (box-shadow) or border color change on hover using the brand color.
+  - **Layout:** Ensure consistent padding and alignment within cards (Experience, Education, Projects).
+  - **Tags:** Style project tags to be more distinct (e.g., pill shape with subtle background).
 
-### 1.3 Deployment Workflow
-**Current State:** `deploy.yml` manually copies `CNAME`.
-**Problem:** Fragile and non-standard.
-**Solution:**
-- Move `CNAME` to the `public/` directory. Vite automatically copies everything from `public/` to `dist/`.
-- Remove the `cp` step from `deploy.yml`.
+### 1.4 Navigation & Footer
+- **Current State:** Sticky header, simple footer.
+- **Goal:** Ensure smooth navigation and a polished footer.
+- **Action Items:**
+  - **Active State:** Verify scroll-spy logic highlights the correct link.
+  - **Mobile Menu:** Ensure navigation is responsive (hamburger menu for mobile if needed, or scrollable horizontal list).
+  - **Footer:** Add social icons to the footer as well for easy access at the bottom of the page.
 
----
+## Phase 2: Content & Copy Enhancements
 
-## 2. Code Quality & Performance
+### 2.1 Project Showcase
+- **Current State:** Basic project cards with title, summary, and tags.
+- **Goal:** Provide more context and impact.
+- **Action Items:**
+  - **Detail:** If data allows, add a "Key Achievement" bullet or a more descriptive summary.
+  - **Links:** Ensure "GitHub" and "Live Demo" (if available) links are distinct icons/buttons.
+  - **Images:** Ensure project screenshots have a consistent aspect ratio (cover/contain).
 
-### 2.1 Sanitize & Optimize DOM Manipulation
-**Current State:** Uses `innerHTML` with template literals.
-**Problem:** Minor security risk (XSS) if data sources are compromised; sloppy practice.
-**Solution:**
-- Ensure no user input can enter these files.
-- Since we are switching to `import` (trusted data), `innerHTML` is acceptable for Markdown, but we will verify `marked` configuration.
-- For lists, we will stick to template literals for readability but review for any obvious injection points.
+### 2.2 Experience Section
+- **Current State:** List of roles with bullets.
+- **Goal:** Improve readability and visual hierarchy.
+- **Action Items:**
+  - **Timeline:** Consider a visual timeline connector (vertical line) to show progression.
+  - **Role vs. Company:** Make the Role title bold and prominent, Company secondary.
 
-### 2.2 Optimize Scroll Listeners
-**Current State:** `scroll` event in `ui.js` fires on every pixel.
-**Problem:** Can cause jank (stuttering) on mobile/lower-end devices.
-**Solution:**
-- Wrap `initParallax` logic in `requestAnimationFrame` to sync with the browser's repaint cycle.
+### 2.3 About Section
+- **Current State:** Markdown rendered text.
+- **Goal:** Break up large text blocks.
+- **Action Items:**
+  - **Formatting:** Ensure headers, lists, and paragraphs in `about.md` are styled with `prose` classes (Tailwind Typography) for readability.
+  - **Personal Touch:** Consider adding a profile photo next to the text if not already present.
 
-### 2.3 Professionalizing Content
-**Current State:**
-- `projects.json` contains "Example Project", "summary", and "test" fields.
-- `education.json` contains `"test": "test"`.
-- Comments in code are generic/AI-generated (e.g., `// hero image change`).
-**Solution:**
-- Remove dummy fields.
-- Replace generic comments with concise, engineer-focused comments (or remove them if the code is self-explanatory).
-- Ensure specific terminology is accurate (e.g., "DevOps Cadet" is good, keep it).
+## Phase 3: Technical & Performance
 
----
+### 3.1 Code Quality
+- **Refactoring:**
+  - `src/content.js`: Break down large template literal functions into smaller components if they grow.
+  - `src/styles.css`: Organize custom CSS and use Tailwind `@apply` consistently.
 
-## 3. Visual & UX Polish
+### 3.2 Accessibility (A11y)
+- **Goal:** Ensure the site is usable by everyone.
+- **Action Items:**
+  - **Contrast:** Verify color contrast ratios (especially text on images).
+  - **Focus States:** Ensure all interactive elements (buttons, links) have visible focus indicators.
+  - **ARIA:** Check `aria-label` on icon-only buttons (like social links).
 
-### 3.1 Accessibility
-**Current State:**
-- `tabindex="-1"` on `<main>` (standard for skip links, but good to verify).
-- Color contrast on "neutral-400" text needs verification.
-**Solution:**
-- Verify `aria-label` usage.
-- Ensure focus rings are visible and consistent.
+### 3.3 Performance
+- **Goal:** Fast load times.
+- **Action Items:**
+  - **Images:** Optimize the `koi-pond.gif` and `cityscape.gif`. Consider converting to modern video formats (WebM/MP4) or optimized GIF if size is an issue.
+  - **Lazy Loading:** Ensure images below the fold are lazy-loaded.
 
----
-
-## Execution Steps
-
-1.  **Refactor Data Loading:** Switch `content.js` to use ES modules `import`.
-2.  **Fix Theme:** Extract theme script to `index.html`.
-3.  **Cleanup & Polish:**
-    - Move `CNAME`.
-    - Clean JSON data.
-    - Rewrite/Remove comments.
-    - Optimize `ui.js`.
-4.  **Final Review:** Build and verify.
+## Execution Order
+1.  **UI/Theme:** Fix the toggle and hero styles.
+2.  **Cards:** Upgrade the look of Experience and Project cards.
+3.  **Content:** Refine the copy and layout of text sections.
+4.  **Review:** Final polish and accessibility check.
