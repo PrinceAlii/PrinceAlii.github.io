@@ -1,84 +1,54 @@
 # Ali Bonagdaran Portfolio
 
-Modern React + TypeScript portfolio built with a skills-first structure and an "Editorial Engineer" design direction.
+This site now runs on Hugo and is written to read like a normal personal resume site: clear summary, experience, education, projects, and contact details.
 
 ## Stack
 
-- `React 19` + `Vite 5`
-- `TypeScript` (strict mode)
-- `Tailwind CSS` with design tokens via CSS variables
-- `Framer Motion` for subtle section animation
-- `React Router` (hash routing for static hosting compatibility)
-
-## Project Structure
-
-```text
-src/
-  components/
-    layout/         # Shell primitives (Nav, Footer, Container)
-    sections/       # Home page sections (Hero, Skills, Agents, etc.)
-    ui/             # Reusable design-system components
-  data/             # Typed content models (projects, skills, experience)
-  hooks/            # Reusable hooks (theme management)
-  lib/              # Utilities (class merging)
-  pages/            # Route pages
-  styles/           # Global styles and token definitions
-  types/            # TypeScript interfaces
-```
+- Hugo (static site generator)
+- Hugo templates + data files
+- Plain CSS (no frontend framework)
 
 ## Run Locally
 
-```bash
-npm install
-npm run dev
-```
-
-Additional checks:
+If Hugo is installed:
 
 ```bash
-npm run typecheck
-npm run build
-npm run preview
+hugo server -D
 ```
 
-## Content Model
+Without a global Hugo install:
 
-### Add or Update Projects
+```bash
+npx hugo-bin server -D
+```
 
-Edit `src/data/projects.ts`. Each project should include:
+Build output:
 
-- `slug`: URL-safe identifier used for `/projects/:slug`
-- `title`, `summary`, `description`, `outcome`
-- `status`: `Live | Internal | Concept`
-- `featured`: controls home-page "Selected Work"
-- `skills`: array of `skill.id` values from `src/data/skills.ts`
-- `agents`: array of `agent.id` values from `src/data/agents.ts`
-- `highlights`: concise bullets for detail page
-- `links` (optional): `live`, `github`
+```bash
+npx hugo-bin --minify
+```
 
-### Update Skills
+Generated files are written to `public/`.
 
-Edit `src/data/skills.ts`:
+## Site Structure
 
-- Keep IDs stable to preserve project mappings.
-- Categories drive interactive filtering in the Skills section.
+```text
+assets/css/             # Site styles
+content/                # Page and project content
+data/                   # Profile, experience, and education data
+layouts/                # Hugo templates
+static/                 # CNAME, robots, favicon, resume PDF
+```
 
-### Update Agent Workflow
+## Editing Content
 
-Edit `src/data/agents.ts`:
+- Profile and contact: `data/profile.yaml`
+- Experience timeline: `data/experience.yaml`
+- Education: `data/education.yaml`
+- Projects:
+  - List page: `content/projects/_index.md`
+  - Individual project pages: `content/projects/*.md`
 
-- Keep IDs stable to preserve project mappings.
-- Agent data powers the interactive "Agents" section and project role mapping.
+## Deployment
 
-## Theme and Accessibility
-
-- Supports `light` and `dark` themes with a manual toggle.
-- Persists preference with `localStorage`.
-- Includes keyboard-visible focus states and a skip link.
-- Respects `prefers-reduced-motion`.
-
-## Performance Notes
-
-- Uses route-level code splitting for project pages.
-- Uses locally bundled Latin font subsets to reduce payload.
-- Lighthouse verification is documented from local preview runs.
+GitHub Actions builds with Hugo and publishes `public/` to the `gh-pages` branch.
