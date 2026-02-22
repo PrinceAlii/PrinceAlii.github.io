@@ -1,28 +1,36 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  darkMode: 'class',
-  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx,md}'],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       colors: {
-        brand: {
-          50: '#e6f0ff',
-          100: '#cce0ff',
-          200: '#99c1ff',
-          300: '#66a1ff',
-          400: '#3382ff',
-          500: '#0062ff',   // anchor
-          600: '#004ecc',
-          700: '#003999',
-          800: '#002566',
-          900: '#001233'
-        }
+        canvas: "hsl(var(--canvas) / <alpha-value>)",
+        surface: "hsl(var(--surface) / <alpha-value>)",
+        elevated: "hsl(var(--elevated) / <alpha-value>)",
+        border: "hsl(var(--border) / <alpha-value>)",
+        text: {
+          primary: "hsl(var(--text-primary) / <alpha-value>)",
+          secondary: "hsl(var(--text-secondary) / <alpha-value>)",
+          tertiary: "hsl(var(--text-tertiary) / <alpha-value>)",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent) / <alpha-value>)",
+          strong: "hsl(var(--accent-strong) / <alpha-value>)",
+          soft: "hsl(var(--accent-soft) / <alpha-value>)",
+        },
       },
       fontFamily: {
-        monohead: ['Consolas', 'JetBrains Mono', 'Source Code Pro', 'ui-monospace', 'SFMono-Regular', 'monospace'],
-        body: ['Roboto', 'Inter', 'ui-sans-serif', 'system-ui', 'sans-serif']
-      }
-    }
+        sans: ["Space Grotesk", "Avenir Next", "Segoe UI", "sans-serif"],
+        mono: ["IBM Plex Mono", "Cascadia Code", "ui-monospace", "monospace"],
+      },
+      boxShadow: {
+        editorial: "0 16px 40px -24px hsl(var(--shadow) / 0.8)",
+        glow: "0 0 0 1px hsl(var(--accent) / 0.24), 0 24px 60px -42px hsl(var(--accent) / 0.55)",
+      },
+      borderRadius: {
+        editorial: "1.25rem",
+      },
+    },
   },
-  plugins: [require('@tailwindcss/typography')]
+  plugins: [],
 };

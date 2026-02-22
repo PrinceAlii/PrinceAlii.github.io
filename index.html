@@ -1,122 +1,26 @@
 <!doctype html>
-<html lang="en-AU" class="dark">
-
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Ali Bonagdaran | ABS Graduate</title>
-  <meta name="description" content="ABS graduate focused on cloud, automation, and infrastructure engineering." />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
-  <link rel="icon" type="image/png" href="./src/assets/icons/avatar.png" />
-  <script>
-    (function() {
-      const saved = localStorage.getItem('ali-theme');
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      if (saved === 'dark' || (!saved && prefersDark)) {
-        document.documentElement.classList.add('dark');
-        document.documentElement.classList.remove('light');
-      } else {
-        document.documentElement.classList.remove('dark');
-        document.documentElement.classList.add('light');
-      }
-    })();
-  </script>
-</head>
-
-<body class="relative">
-  <a href="#main"
-    class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:p-2 focus:bg-brand-500 focus:text-white">Skip
-    to content</a>
-
-  <header id="site-header" class="sticky-header flex items-center justify-between px-4 sm:px-8 h-14">
-    <a href="#home" class="h-mono text-brand-300 text-lg">Ali B</a>
-    <nav class="nav-scroll" aria-label="Primary">
-      <a href="#about" class="nav-link" data-nav>About</a>
-      <a href="#experience" class="nav-link" data-nav>Experience</a>
-      <a href="#education" class="nav-link" data-nav>Education</a>
-      <a href="#projects" class="nav-link" data-nav>Projects</a>
-      <a href="#contact" class="nav-link" data-nav>Contact</a>
-    </nav>
-    <button id="theme-toggle" class="theme-toggle" aria-pressed="true" aria-label="Switch to light theme" data-theme="dark">
-      <span class="sr-only">Toggle theme</span>
-      <svg class="theme-icon icon-sun" viewBox="0 0 24 24" aria-hidden="true">
-        <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2" />
-        <path d="M12 2v3M12 19v3M4.93 4.93l2.12 2.12M16.95 16.95l2.12 2.12M2 12h3M19 12h3M4.93 19.07l2.12-2.12M16.95 7.05l2.12-2.12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-      </svg>
-      <svg class="theme-icon icon-moon" viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 1 0 9.8 9.8z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </button>
-  </header>
-
-  <main id="main" tabindex="-1">
-    <section id="home" class="hero">
-      <img src="./src/assets/img/koi-pond.gif" alt="Pixel art koi pond background" />
-      <div class="hero-content flex flex-col items-center justify-center min-h-[80vh] text-center">
-        <h1 class="h-mono text-5xl sm:text-6xl font-extrabold mb-4">
-          Ali Bonagdaran
-        </h1>
-        <p class="text-xl text-neutral-300 mb-8">ABS Graduate</p>
-        <div class="flex flex-wrap justify-center gap-4">
-          <a href="#projects" class="btn btn-primary">View Projects</a>
-          <a href="#contact" class="btn btn-secondary">Contact Me</a>
-        </div>
-      </div>
-    </section>
-
-    <section id="about" class="section">
-      <h2 class="section-title">About</h2>
-      <div class="about-grid">
-        <div class="about-image">
-          <img src="./src/assets/icons/avatar.png" alt="Profile photo" loading="lazy" decoding="async" />
-        </div>
-        <article id="about-content" class="prose max-w-none dark:prose-invert"></article>
-      </div>
-    </section>
-
-    <section id="experience" class="section">
-      <h2 class="section-title">Experience</h2>
-      <div id="experience-list" class="timeline"></div>
-    </section>
-
-    <section id="education" class="section">
-      <h2 class="section-title">Education</h2>
-      <div id="education-list" class="grid gap-6"></div>
-    </section>
-
-    <section id="projects" class="section">
-      <h2 class="section-title">Projects</h2>
-      <div id="projects-list" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
-    </section>
-
-    <section id="contact" class="section text-center">
-      <h2 class="section-title">Contact</h2>
-      <p class="mb-8">Get in touch or find me online.</p>
-      <p class="mb-8">ali@bonagdaran.com.au</p>
-      <div class="flex justify-center gap-6 text-brand-300">
-        <a id="contact-email" class="icon-link" href="mailto:ali@bonagdaran.com.au" aria-label="Email Ali">
-          <img src="./src/assets/icons/email.svg" alt="Email" />
-        </a>
-        <a id="contact-github" class="icon-link" href="https://github.com/PrinceAlii" target="_blank" rel="noopener" aria-label="GitHub">
-          <img src="./src/assets/icons/github.svg" alt="GitHub" />
-        </a>
-        <a id="contact-linkedin" class="icon-link" href="https://www.linkedin.com/in/alibonagdaran/" target="_blank" rel="noopener" aria-label="LinkedIn">
-          <img src="./src/assets/icons/linkedin.svg" alt="LinkedIn" />
-        </a>
-        <a id="contact-resume" class="icon-link" href="./src/assets/resume-website.pdf" download aria-label="Download Resume">
-          <img src="./src/assets/icons/download.svg" alt="Download CV" />
-        </a>
-      </div>
-    </section>
-  </main>
-
-  <footer class="py-8 text-center text-xs text-neutral-500">
-    <p>© <span id="year"></span> Ali Bonagdaran</p>
-    <p class="sr-only">Pixel art from 1041uuu</p>
-  </footer>
-
-  <script type="module" src="/src/main.js"></script>
-</body>
-
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ali Bonagdaran | Editorial Engineer</title>
+    <meta
+      name="description"
+      content="Ali Bonagdaran is a graduate cloud and platform engineer focused on reliable systems, automation, and product-grade frontend experiences."
+    />
+    <meta name="theme-color" content="#0f172a" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script>
+      (function () {
+        var savedTheme = localStorage.getItem("ali-theme");
+        var systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        var theme = savedTheme || (systemDark ? "dark" : "light");
+        document.documentElement.dataset.theme = theme;
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>
