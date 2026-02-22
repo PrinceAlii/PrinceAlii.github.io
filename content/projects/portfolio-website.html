@@ -1,0 +1,45 @@
++++
+title = "Portfolio Website"
+date = 2026-02-22
+summary = "My portfolio website rebuilt on Hugo with a data-driven content model and GitHub Pages deployment."
+technologies = ["Hugo", "GitHub Actions", "HTML", "CSS"]
+github = "https://github.com/PrinceAlii/PrinceAlii.github.io"
++++
+
+<p>
+  I rebuilt this project from a framework-heavy setup into a Hugo static site. The goal was to make updates faster,
+  keep the codebase simple, and improve page performance.
+</p>
+
+<h2>Scope</h2>
+<ul>
+  <li>Rework the site structure around quick recruiter scanning: About, Experience, Education, Projects, Contact.</li>
+  <li>Move profile content out of templates so updates do not require layout edits.</li>
+  <li>Keep deployment straightforward and repeatable.</li>
+</ul>
+
+<h2>Architecture</h2>
+<ul>
+  <li><code>layouts/</code> for reusable templates</li>
+  <li><code>data/</code> for profile, experience, and education YAML</li>
+  <li><code>content/projects/*.html</code> for project pages</li>
+  <li><code>assets/css/site.css</code> for the design system and responsive styles</li>
+</ul>
+
+<h2>Implementation Notes</h2>
+<ul>
+  <li>Added metadata and social preview tags</li>
+  <li>
+    Added full favicon and app icon coverage (<code>svg</code>, <code>ico</code>, <code>png</code>,
+    <code>apple-touch-icon</code>, <code>webmanifest</code>)
+  </li>
+  <li>Implemented light and dark theme with saved preference and accessible toggle semantics</li>
+  <li>Updated the GitHub Actions deploy workflow for safer branch publishing</li>
+</ul>
+
+<h2>Outcome</h2>
+<ul>
+  <li>Simpler day-to-day content updates</li>
+  <li>Better performance from static output</li>
+  <li>Clearer structure on mobile and desktop</li>
+</ul>
