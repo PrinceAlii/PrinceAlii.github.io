@@ -1,9 +1,12 @@
 {{ define "main" }}
   <article class="section">
     <div class="container narrow project-single">
-      <p><a class="text-link" href="{{ "/projects/" | relURL }}">&larr; Back to Projects</a></p>
-      <p class="meta project-meta">{{ .Date.Format "January 2006" }}</p>
+      <p><a class="text-link" href="{{ "/projects/" | relURL }}">&larr; All Projects</a></p>
+      <p class="meta project-meta">Published {{ .Date.Format "January 2006" }}</p>
       <h1>{{ .Title }}</h1>
+      {{ with .Summary }}
+        <p class="lead">{{ . }}</p>
+      {{ end }}
       {{ with .Params.technologies }}
         <ul class="pill-list">
           {{ range . }}
@@ -12,9 +15,10 @@
         </ul>
       {{ end }}
       {{ with .Params.github }}
-        <p><a class="text-link" href="{{ . }}">GitHub Repository</a></p>
+        <p><a class="text-link" href="{{ . }}">View source on GitHub</a></p>
       {{ end }}
       {{ .Content }}
+      <p><a class="text-link" href="{{ "/projects/" | relURL }}">Browse more projects</a></p>
     </div>
   </article>
 {{ end }}

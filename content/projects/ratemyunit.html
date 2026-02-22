@@ -1,0 +1,35 @@
++++
+title = "RateMyUnit"
+date = 2026-02-22
+summary = "Open-source platform for Australian university subject reviews with verified feedback, fast search, and scalable scraping pipelines."
+technologies = ["React", "Vite", "Fastify", "PostgreSQL", "Redis", "AWS", "Terraform"]
+github = "https://github.com/PrinceAlii/ratemyunit"
++++
+
+<p>
+  RateMyUnit is a full-stack platform for Australian university subject reviews.
+  It combines handbook scraping, verified student feedback, and fast search so students can make better enrolment decisions.
+</p>
+
+<h2>Core Capabilities</h2>
+<ul>
+  <li>Scrapes and normalizes unit data from CourseLoop, search-based handbooks, and legacy HTML sites.</li>
+  <li>Delivers fast unit lookup with filtering and consistent metadata across universities.</li>
+  <li>Collects verified reviews through student email checks and moderation workflows.</li>
+  <li>Runs large refresh jobs asynchronously with Redis-backed queues and retry-safe workers.</li>
+</ul>
+
+<h2>Tech Stack</h2>
+<ul>
+  <li><code>Frontend:</code> React 19, Vite, Tailwind CSS, TanStack Query</li>
+  <li><code>Backend:</code> Node.js, Fastify, BullMQ</li>
+  <li><code>Data:</code> PostgreSQL, Drizzle ORM, Redis</li>
+  <li><code>Infrastructure:</code> Terraform, AWS (EC2, RDS, ECR), Cloudflare proxy</li>
+</ul>
+
+<h2>Impact</h2>
+<ul>
+  <li>Created a central, searchable source of course-level review data.</li>
+  <li>Improved review trust with verification and moderation controls.</li>
+  <li>Shipped a production deployment pipeline with infrastructure as code.</li>
+</ul>

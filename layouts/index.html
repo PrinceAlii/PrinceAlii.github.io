@@ -92,28 +92,25 @@
       <div class="projects-layout">
         {{ range $featured }}
           <article class="project-feature">
-            <p class="meta project-meta">Featured project</p>
+            <p class="meta project-meta">Featured Case Study</p>
             <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
             <p>{{ .Summary }}</p>
             {{ with .Params.technologies }}
-              <ul class="pill-list">
-                {{ range . }}
-                  <li>{{ . }}</li>
-                {{ end }}
-              </ul>
+              <p class="meta">Stack: {{ delimit (first 4 .) ", " }}</p>
             {{ end }}
-            <p><a class="text-link" href="{{ .RelPermalink }}">Read case study</a></p>
+            <p><a class="text-link" href="{{ .RelPermalink }}">Read full case study</a></p>
           </article>
         {{ end }}
         <div class="projects-secondary">
           {{ range first 3 $secondary }}
             <article class="project-mini">
-              <p class="meta project-meta">Project</p>
+              <p class="meta project-meta">Project Snapshot</p>
               <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
               <p>{{ .Summary }}</p>
+              <p><a class="text-link" href="{{ .RelPermalink }}">View project details</a></p>
             </article>
           {{ end }}
-          <p><a class="button button-tertiary" href="{{ "/projects/" | relURL }}">View all projects</a></p>
+          <p><a class="button button-tertiary" href="{{ "/projects/" | relURL }}">Browse all projects</a></p>
         </div>
       </div>
     </div>
