@@ -1,25 +1,50 @@
 <!doctype html>
 <html lang="en-au">
   <head>
+    {{ $home := "/" | relURL }}
+    {{ $pageTitle := .Site.Title }}
+    {{ if not .IsHome }}
+      {{ $pageTitle = printf "%s | %s" .Title .Site.Title }}
+    {{ end }}
+    {{ $description := .Site.Params.description }}
+    {{ with .Description }}
+      {{ $description = . }}
+    {{ end }}
+    {{ $canonical := .Permalink }}
+    {{ $ogImage := "og-image.png" | absURL }}
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>
-      {{ if .IsHome }}
-        {{ .Site.Title }}
-      {{ else }}
-        {{ .Title }} | {{ .Site.Title }}
-      {{ end }}
-    </title>
-    <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <script>
-      (function () {
-        var stored = localStorage.getItem("site-theme");
-        var systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-        var theme = stored || (systemDark ? "dark" : "light");
-        document.documentElement.setAttribute("data-theme", theme);
-      })();
-    </script>
+    <title>{{ $pageTitle }}</title>
+    <meta name="description" content="{{ $description }}" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <link rel="canonical" href="{{ $canonical }}" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#102849" />
+    {{ if not hugo.IsServer }}
+      <meta
+        http-equiv="Content-Security-Policy"
+        content="default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; img-src 'self' data: https:; style-src 'self'; script-src 'self'; connect-src 'self'; font-src 'self' data:; object-src 'none'; upgrade-insecure-requests"
+      />
+    {{ end }}
+    <meta property="og:site_name" content="{{ .Site.Title }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="{{ $pageTitle }}" />
+    <meta property="og:description" content="{{ $description }}" />
+    <meta property="og:url" content="{{ $canonical }}" />
+    <meta property="og:image" content="{{ $ogImage }}" />
+    <meta property="og:image:alt" content="{{ .Site.Title }} preview image" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="{{ $pageTitle }}" />
+    <meta name="twitter:description" content="{{ $description }}" />
+    <meta name="twitter:image" content="{{ $ogImage }}" />
+    <link rel="icon" href="{{ "favicon.ico" | relURL }}?v=20260222" sizes="any" />
+    <link rel="icon" type="image/svg+xml" href="{{ "favicon.svg" | relURL }}?v=20260222" />
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ "favicon-32x32.png" | relURL }}?v=20260222" />
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ "favicon-16x16.png" | relURL }}?v=20260222" />
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ "apple-touch-icon.png" | relURL }}?v=20260222" />
+    <link rel="manifest" href="{{ "site.webmanifest" | relURL }}?v=20260222" />
+    {{ $themeInit := resources.Get "js/theme-init.js" | minify | fingerprint }}
+    <script src="{{ $themeInit.RelPermalink }}" integrity="{{ $themeInit.Data.Integrity }}"></script>
     {{ $styles := resources.Get "css/site.css" | minify | fingerprint }}
     <link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}" />
   </head>
@@ -27,17 +52,25 @@
     <a class="skip-link" href="#main">Skip to main content</a>
     <header class="site-header">
       <div class="container header-inner">
-        <a class="site-title" href="/">{{ .Site.Title }}</a>
+        <a class="site-title" href="{{ $home }}">{{ .Site.Title }}</a>
         <nav aria-label="Primary">
           <ul class="nav-list">
-            <li><a href="/#about">About</a></li>
-            <li><a href="/#experience">Experience</a></li>
-            <li><a href="/#education">Education</a></li>
-            <li><a href="/projects/">Projects</a></li>
-            <li><a href="/#contact">Contact</a></li>
+            <li><a href="{{ $home }}#about">About</a></li>
+            <li><a href="{{ $home }}#experience">Experience</a></li>
+            <li><a href="{{ $home }}#education">Education</a></li>
+            <li>
+              <a href="{{ "/projects/" | relURL }}" {{ if eq .Section "projects" }}aria-current="page"{{ end }}>Projects</a>
+            </li>
+            <li><a href="{{ $home }}#contact">Contact</a></li>
           </ul>
         </nav>
-        <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch colour theme">
+        <button
+          id="theme-toggle"
+          class="theme-toggle"
+          type="button"
+          aria-label="Switch colour theme"
+          aria-pressed="false"
+        >
           <span class="theme-toggle-label">Dark</span>
         </button>
       </div>
@@ -52,6 +85,7 @@
         <p>&copy; {{ now.Year }} {{ .Site.Title }}</p>
       </div>
     </footer>
-    <script src="/js/theme.js"></script>
+    {{ $themeScript := resources.Get "js/theme.js" | minify | fingerprint }}
+    <script src="{{ $themeScript.RelPermalink }}" integrity="{{ $themeScript.Data.Integrity }}" defer></script>
   </body>
 </html>
