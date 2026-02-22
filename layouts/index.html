@@ -5,6 +5,11 @@
       <p class="eyebrow">{{ $profile.role }}</p>
       <h1>{{ $profile.name }}</h1>
       <p class="lead">{{ $profile.summary }}</p>
+      <ul class="focus-list">
+        {{ range $profile.focus }}
+          <li>{{ . }}</li>
+        {{ end }}
+      </ul>
       <div class="actions">
         <a class="button button-primary" href="/projects/">View Projects</a>
         <a class="button button-secondary" href="{{ $profile.resume }}">Download Resume</a>
@@ -15,9 +20,12 @@
   <section id="about" class="section">
     <div class="container narrow">
       <h2>About</h2>
-      {{ range $profile.intro }}
-        <p>{{ . }}</p>
-      {{ end }}
+      <div class="about-copy">
+        {{ range $profile.intro }}
+          <p>{{ . }}</p>
+        {{ end }}
+        <p>{{ $profile.about_note }}</p>
+      </div>
     </div>
   </section>
 
@@ -66,6 +74,13 @@
           <article class="list-item">
             <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
             <p>{{ .Summary }}</p>
+            {{ with .Params.technologies }}
+              <ul class="pill-list">
+                {{ range . }}
+                  <li>{{ . }}</li>
+                {{ end }}
+              </ul>
+            {{ end }}
           </article>
         {{ end }}
       </div>

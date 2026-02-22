@@ -12,6 +12,14 @@
     </title>
     <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script>
+      (function () {
+        var stored = localStorage.getItem("site-theme");
+        var systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        var theme = stored || (systemDark ? "dark" : "light");
+        document.documentElement.setAttribute("data-theme", theme);
+      })();
+    </script>
     {{ $styles := resources.Get "css/site.css" | minify | fingerprint }}
     <link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}" />
   </head>
@@ -29,6 +37,9 @@
             <li><a href="/#contact">Contact</a></li>
           </ul>
         </nav>
+        <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch colour theme">
+          <span class="theme-toggle-label">Dark</span>
+        </button>
       </div>
     </header>
 
@@ -41,5 +52,6 @@
         <p>&copy; {{ now.Year }} {{ .Site.Title }}</p>
       </div>
     </footer>
+    <script src="/js/theme.js"></script>
   </body>
 </html>
