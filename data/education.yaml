@@ -1,6 +1,11 @@
 - qualification: "Bachelor of Information Technology"
   institution: "University of Technology Sydney"
   graduation: "Feb 2023 - Nov 2025"
+  details:
+    - "Major in Enterprise Systems Development"
+    - "Sub-Major in Networking and Cybersecurity"
+    - "GPA 6.21"
+    - "WAM 82.58"
 
 - qualification: "Higher School Certificate"
   institution: "St Leo's Catholic College, Wahroonga"

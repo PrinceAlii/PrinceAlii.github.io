@@ -1,4 +1,4 @@
-baseURL = "https://www.alibo.dev/"
+baseURL = "https://alibo.dev/"
 languageCode = "en-au"
 title = "Ali Bonagdaran"
 disableKinds = ["taxonomy", "term", "RSS"]

@@ -1,13 +1,13 @@
 name: "Ali Bonagdaran"
 role: "Graduate, Australian Bureau of Statistics"
 location: "Sydney, Australia"
-email: "ali@bonagdaran.com.au"
-summary: "Graduate focused on cloud, automation, and infrastructure engineering."
+email: "ali@bonagdaran.com"
+summary: "Graduate engineer focused on dependable cloud, automation, and infrastructure delivery."
 intro:
   - "Hi, my name is Ali Bonagdaran. I am based in Sydney and currently work as a Graduate at the Australian Bureau of Statistics."
   - "I completed a Bachelor of Information Technology at the University of Technology Sydney in November 2025."
   - "I enjoy practical problem solving, including scripting deployments, improving developer workflows, and making services easier to run and support."
-about_note: "I have also supported customers in banking and government service environments, which keeps me focused on reliability and the real people on the other end of the system."
+about_statement: "Experience in banking and government service environments keeps me focused on reliability, clarity, and systems that stay supportable in production."
 focus:
   - "Cloud migration support"
   - "Infrastructure automation"

@@ -1,7 +1,8 @@
 {{ define "main" }}
   <article class="section">
-    <div class="container narrow prose">
-      <p><a class="text-link" href="/projects/">&larr; Back to Projects</a></p>
+    <div class="container narrow project-single">
+      <p><a class="text-link" href="{{ "/projects/" | relURL }}">&larr; Back to Projects</a></p>
+      <p class="meta project-meta">{{ .Date.Format "January 2006" }}</p>
       <h1>{{ .Title }}</h1>
       {{ with .Params.technologies }}
         <ul class="pill-list">
