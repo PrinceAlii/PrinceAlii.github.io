@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en-au">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+      {{ if .IsHome }}
+        {{ .Site.Title }}
+      {{ else }}
+        {{ .Title }} | {{ .Site.Title }}
+      {{ end }}
+    </title>
+    <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    {{ $styles := resources.Get "css/site.css" | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="site-title" href="/">{{ .Site.Title }}</a>
+        <nav aria-label="Primary">
+          <ul class="nav-list">
+            <li><a href="/#about">About</a></li>
+            <li><a href="/#experience">Experience</a></li>
+            <li><a href="/#education">Education</a></li>
+            <li><a href="/projects/">Projects</a></li>
+            <li><a href="/#contact">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      {{ block "main" . }}{{ end }}
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>&copy; {{ now.Year }} {{ .Site.Title }}</p>
+      </div>
+    </footer>
+  </body>
+</html>

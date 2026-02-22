@@ -1,2 +1,5 @@
-dist/
-node_modules/
+/public/
+/resources/_gen/
+/node_modules/
+/dist/
+/.hugo_build.lock

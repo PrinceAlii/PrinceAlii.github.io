@@ -1,0 +1,19 @@
+{{ define "main" }}
+  <article class="section">
+    <div class="container narrow prose">
+      <p><a class="text-link" href="/projects/">&larr; Back to Projects</a></p>
+      <h1>{{ .Title }}</h1>
+      {{ with .Params.technologies }}
+        <ul class="pill-list">
+          {{ range . }}
+            <li>{{ . }}</li>
+          {{ end }}
+        </ul>
+      {{ end }}
+      {{ with .Params.github }}
+        <p><a class="text-link" href="{{ . }}">GitHub Repository</a></p>
+      {{ end }}
+      {{ .Content }}
+    </div>
+  </article>
+{{ end }}

@@ -1,0 +1,7 @@
+baseURL = "https://www.alibo.dev/"
+languageCode = "en-au"
+title = "Ali Bonagdaran"
+disableKinds = ["taxonomy", "term", "RSS"]
+
+[params]
+  description = "Ali Bonagdaran is a graduate at the Australian Bureau of Statistics focused on cloud, automation, and infrastructure engineering."
