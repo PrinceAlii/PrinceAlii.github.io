@@ -10,7 +10,7 @@
       {{ end }}
       {{ range $featured }}
         <article class="project-feature project-archive-feature">
-          <p class="meta project-meta">Featured Case Study</p>
+          <p class="meta project-meta">Featured Project</p>
           <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
           <p>{{ .Summary }}</p>
           {{ with .Params.technologies }}
@@ -23,7 +23,7 @@
         <div class="projects-secondary projects-archive-grid">
           {{ range $rest }}
             <article class="project-mini">
-              <p class="meta project-meta">Case Study</p>
+              <p class="meta project-meta">Project</p>
               <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
               <p>{{ .Summary }}</p>
               {{ with .Params.technologies }}
