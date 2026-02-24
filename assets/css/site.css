@@ -75,21 +75,12 @@ body {
   font-family: var(--font-body);
   color: var(--text);
   background-color: var(--bg-color);
-  background-image:
-    radial-gradient(circle at 0 0, rgba(88, 243, 207, 0.1), transparent 52%),
-    linear-gradient(145deg, rgba(13, 18, 35, 0.85), rgba(8, 10, 20, 0.9));
-  background-repeat: no-repeat;
+  background-image: url("/images/background.gif");
   background-size: cover;
-  background-attachment: scroll;
-}
-
-:root.enhanced-background body {
-  background-image:
-    linear-gradient(var(--bg-overlay), var(--bg-overlay)),
-    url("/images/background.gif"),
-    radial-gradient(circle at 0 0, rgba(88, 243, 207, 0.1), transparent 52%);
   background-position: center;
-  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  image-rendering: pixelated;
 }
 
 body::before {
@@ -456,6 +447,11 @@ p {
 
 .about-body {
   border-left: 4px solid var(--accent);
+}
+
+.about-body h2 {
+  border-left: none;
+  padding-left: 0;
 }
 
 .about-tagline {
