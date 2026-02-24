@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://alibo.dev/sitemap.xml
+Host: alibo.dev
