@@ -7,7 +7,7 @@ alwaysApply: true
 # Project
 
 - Personal site for **Ali Bonagdaran**, production URL **https://alibo.dev/** (`site` in `astro.config.mjs`).
-- Base theme: **Void** (Astro 5, Tailwind 4, `@ariaskit/astro-i18n`). Keep its `src/` layout and i18n JSON under `i18n/` unless you are deliberately migrating.
+- Base theme: **Void** (Astro 6, Tailwind 4, `@ariaskit/astro-i18n`). **English only** — single `i18n/en.json`, no locale switcher. Keep `src/` layout unless you are deliberately migrating.
 
 # Package manager
 

@@ -1,141 +1,114 @@
 {
-  "description": "Full Stack Engineer building performant web applications and developer tools. Currently crafting interfaces at Vercel",
+  "description": "Graduate at the ABS",
   "nav": {
     "about": "about",
-    "projects": "projects",
     "experience": "experience",
+    "education": "education",
+    "projects": "projects",
     "contact": "contact"
   },
   "hero": {
-    "title": "Full Stack Engineer",
-    "p1": "building performant web applications and developer tools. Currently crafting interfaces at Vercel",
-    "p2": "Previously shipped products at Linear, Stripe, and early-stage startups. I care about clean code, fast load times, and thoughtful UX.",
-    "p3": "When not coding, you'll find me contributing to open source, writing about web performance, or exploring new frameworks."
+    "title": "DevOps graduate",
+    "p1": "Line 1",
+    "p2": "Line 2",
+    "p3": "Line 3"
   },
   "projects": {
-    "title": "Projects",
+    "title": "Projects"
+  },
+  "education": {
+    "title": "Education",
     "item_1": {
-      "name": "hybrid-astro-ui",
-      "description": "UI elements for Astro using a hybrid model: zero-JS Astro + progressive enhancement with web components.",
-      "link": "https://github.com/JorgeRosbel/hybrid-astro-ui"
-    },
-    "item_2": {
-      "name": "http-sentinel",
-      "description": "A TypeScript library that provides a comprehensive set of HTTP error classes and utilities for handling HTTP errors.",
-      "link": "https://github.com/JorgeRosbel/http-sentinel"
-    },
-    "item_3": {
-      "name": "gitzen",
-      "description": "AI-powered CLI tool for automatic git commit message generation.",
-      "link": "https://github.com/JorgeRosbel/gitzen"
-    },
-    "item_4": {
-      "name": "NovaBoost",
-      "description": "Free Astro 5 & TailwindCSS blog template—SEO-optimized, with JSON-LD and optional AI post generation.",
-      "link": "https://github.com/JorgeRosbel/NovaBoost"
-    },
-    "item_5": {
-      "name": "astro-i18n",
-      "description": "Simple internationalization (i18n) library for Astro with TypeScript support.",
-      "link": "https://github.com/JorgeRosbel/astro-i18n"
-    },
-    "item_6": {
-      "name": "astro-collections",
-      "description": "A collection utilities library for Astro framework, providing easy collection management components.",
-      "link": "https://github.com/JorgeRosbel/astro-collections"
-    },
-    "item_7": {
-      "name": "Geofisik Tool",
-      "description": "Geophysical web application to monitor vertical displacements in structures with interactive maps and time-series charts.",
-      "link": "https://tool.geofisik.com/"
-    },
-    "item_8": {
-      "name": "EmoteShowcase",
-      "description": "Web app for dynamic resizing and visualization of emotes with live previews and optimized export for streaming.",
-      "link": "https://emoteshowcase.com/"
+      "period": "2023 - 025",
+      "role": "Bachelor of Information Technology",
+      "company": "University of Technology Sydney",
+      "description": "Major: Enterprise Systems Development, Sub-Major: Networking & Cybersecurity"
     }
   },
   "experience": {
     "title": "Experience",
     "item_1": {
-      "period": "2024 — now",
-      "role": "Senior Engineer",
-      "company": "Vercel",
-      "description": "Building the frontend cloud. Working on the dashboard, deployment infrastructure, and developer experience."
+      "period": "Feb 2026 - present",
+      "role": "Graduate",
+      "company": "Australian Bureau of Statistics",
+      "description": "Job desc"
     },
     "item_2": {
-      "period": "2022 — 2024",
-      "role": "Software Engineer",
-      "company": "Linear",
-      "description": "Shipped real-time sync, keyboard-first interactions, and performance optimizations."
+      "period": "Mar 2025 - Feb 2026",
+      "role": "Cadet",
+      "company": "Australian Bureau of Statistics",
+      "description": "Job desc"
     },
     "item_3": {
-      "period": "2020 — 2022",
-      "role": "Full Stack Developer",
-      "company": "Stripe",
-      "description": "Designed payment flows and merchant dashboards. Led the migration to React 18 and improved CI/CD pipelines."
+      "period": "Nov 2024 - Jun 2025",
+      "role": "Business Banking Associate",
+      "company": "Commonwealth Bank",
+      "description": "Job desc"
     },
     "item_4": {
-      "period": "2018 — 2020",
-      "role": "Frontend Engineer",
-      "company": "Early Startup",
-      "description": "First engineering hire. Built the core product from scratch using Next.js and Tailwind CSS."
+      "period": "Mar 2023 - Nov 2024",
+      "role": "Customer Service Representative",
+      "company": "Service NSW",
+      "description": "Job Desc"
+    },
+    "item_5": {
+      "period": "Aug 2019 - Mar 2023",
+      "role": "Crew Member",
+      "company": "McDonald's",
+      "description": "Job Desc"
     }
   },
   "skills": {
     "heading": "Skills",
-    "react": {
-      "title": "React",
-      "category": "Lib",
-      "description": "UI Components, Hooks, State Management",
-      "experience_years": "4",
-      "experience_label": "years of experience"
+    "devops": {
+      "title": "DevOps",
+      "category": "Practice",
+      "description": "CI/CD, automation, infra basics, keeping releases predictable",
+      "experience_years": "1+",
+      "experience_label": "years (and counting)"
+    },
+    "aws": {
+      "title": "AWS",
+      "category": "Cloud",
+      "description": "Core services, IAM, networking-in-progress, hands-on labs",
+      "experience_years": "1",
+      "experience_label": "year hands-on"
+    },
+    "linux": {
+      "title": "Linux",
+      "category": "Systems",
+      "description": "Shell, services, troubleshooting, daily driver comfort",
+      "experience_years": "2",
+      "experience_label": "years of use"
+    },
+    "python": {
+      "title": "Python",
+      "category": "Language",
+      "description": "Scripting, small tools, glue code for automation",
+      "experience_years": "2",
+      "experience_label": "years"
     },
     "typescript": {
       "title": "TypeScript",
       "category": "Language",
-      "description": "Static Typing, Generics, Interfaces",
-      "experience_years": "3",
-      "experience_label": "years of experience"
-    },
-    "astro": {
-      "title": "Astro",
-      "category": "Framework",
-      "description": "Island Architecture, Static Site Generation",
+      "description": "Typed JS, Astro/React-adjacent tinkering",
       "experience_years": "2",
-      "experience_label": "years of experience"
+      "experience_label": "years"
     },
-    "tailwind": {
-      "title": "Tailwind CSS",
-      "category": "Design",
-      "description": "Utility-First CSS, Responsive Design",
-      "experience_years": "4",
-      "experience_label": "years of experience"
-    },
-    "nodejs": {
-      "title": "Node.js",
-      "category": "Backend",
-      "description": "REST APIs, Express, Authentication",
+    "git": {
+      "title": "Git",
+      "category": "Tooling",
+      "description": "Branching, reviews, rebases when I'm brave",
       "experience_years": "3",
-      "experience_label": "years of experience"
-    },
-    "kali_linux": {
-      "title": "Kali Linux",
-      "category": "Security",
-      "description": "Pentesting, SQL Injection, Network Auditing",
-      "experience_years": "1",
-      "experience_label": "year of experience"
+      "experience_label": "years"
     }
   },
   "contact": {
-    "status": "Available for freelance",
     "email_label": "Email",
-    "email_url": "mailto:tu@email.com",
+    "email_url": "mailto:ali@bonagdaran.com",
     "github_label": "GitHub",
-    "github_url": "https://github.com/tu-usuario",
-    "x_label": "X",
-    "x_url": "https://x.com/tu-usuario",
-    "linkedin_label": "Linkedin",
-    "linkedin_url": "https://linkedin.com/in/tu-perfil"
+    "github_url": "https://github.com/PrinceAlii",
+    "linkedin_label": "LinkedIn",
+    "linkedin_url": "https://www.linkedin.com/in/alibonagdaran/"
   }
 }

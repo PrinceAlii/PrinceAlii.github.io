@@ -2,7 +2,7 @@
 type Option = { key:string; value:string }
 
 interface Props {
-    status: Option 
+    status?: Option;
     id:string;
     email_label?: Option ;
     email_url?: Option ;
@@ -21,15 +21,17 @@ const { status, email_label, email_url, github_label, github_url, x_label, x_url
     id={id}
     class="my-24 border-t pt-8 text-sm grid grid-cols-1 gap-3 place-items-center"
 >
-    <div>
-        <span
-            class="inline-block w-2 h-2 rounded-full bg-green-500 mr-2 animate-pulse"
-        ></span>
-        <span class="opacity-70 uppercase">{status.value}</span>
-        <span
-            class="inline-block w-2 h-2 rounded-full bg-green-500 ml-2 animate-pulse"
-        ></span>
-    </div>
+    {status && (
+        <div>
+            <span
+                class="inline-block w-2 h-2 rounded-full bg-green-500 mr-2 animate-pulse"
+            ></span>
+            <span class="opacity-70 uppercase">{status.value}</span>
+            <span
+                class="inline-block w-2 h-2 rounded-full bg-green-500 ml-2 animate-pulse"
+            ></span>
+        </div>
+    )}
     <div class="flex gap-4 [&_a]:opacity-70 [&_a]:hover:opacity-100 [&_a]:transition-colors [&_a]:duration-200">
         {email_url && email_label && (
             <a href={email_url.value}>
@@ -54,5 +56,12 @@ const { status, email_label, email_url, github_label, github_url, x_label, x_url
                 {linkedin_label.value}
             </a>
         )}
+    </div>
+
+    <div class="mt-8 opacity-30 hover:opacity-100 transition-all duration-500 text-[10px] uppercase tracking-[0.15em] font-light">
+        Powered by <a href="https://astro.build" target="_blank" rel="noopener noreferrer" class="hover:text-primary transition-colors border-b border-transparent hover:border-primary/40">Astro</a> 
+        &nbsp;&middot;&nbsp; 
+        <a href="https://github.com/JorgeRosbel/void" target="_blank" rel="noopener noreferrer" class="hover:text-primary transition-colors border-b border-transparent hover:border-primary/40">Void</a> theme by 
+        <a href="https://github.com/JorgeRosbel" target="_blank" rel="noopener noreferrer" class="hover:text-primary transition-colors border-b border-transparent hover:border-primary/40">JorgeRosbel</a>
     </div>
 </footer>

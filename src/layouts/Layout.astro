@@ -14,8 +14,24 @@ const { title, description, locale, alternateLinks } =
 ---
 
 <!doctype html>
-<html lang={locale} class="dark">
+<html lang={locale}>
 	<head>
+		<script is:inline>
+			const getTheme = () => {
+				if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+					return localStorage.getItem('theme');
+				}
+				return 'dark'; // Always Dark Default
+			};
+
+			const theme = getTheme();
+			if (theme === 'dark') {
+				document.documentElement.classList.add('dark');
+			} else {
+				document.documentElement.classList.remove('dark');
+			}
+			window.localStorage.setItem('theme', theme);
+		</script>
 		<PageMetadata
 			lang={locale}
 			title={title}

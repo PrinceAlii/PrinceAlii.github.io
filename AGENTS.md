@@ -1,6 +1,6 @@
 # Agents
 
-Stack: Astro 5 (Void theme), Tailwind 4, `@ariaskit/astro-i18n`, npm.
+Stack: Astro 6 (Void theme), Tailwind 4, `@ariaskit/astro-i18n`, English-only, npm.
 
 Before changing behavior or dependencies, read:
 
