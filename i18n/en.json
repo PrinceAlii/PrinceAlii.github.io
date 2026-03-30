@@ -19,7 +19,7 @@
   "education": {
     "title": "Education",
     "item_1": {
-      "period": "2023 - 025",
+      "period": "2023 — Nov 2025",
       "role": "Bachelor of Information Technology",
       "company": "University of Technology Sydney",
       "description": "Major: Enterprise Systems Development, Sub-Major: Networking & Cybersecurity"
@@ -46,16 +46,22 @@
       "description": "Job desc"
     },
     "item_4": {
-      "period": "Mar 2023 - Nov 2024",
+      "period": "Oct 2023 — Nov 2024",
       "role": "Customer Service Representative",
       "company": "Service NSW",
-      "description": "Job Desc"
+      "description": "Frontline service; high volume, de-escalation, and getting people unstuck."
     },
     "item_5": {
-      "period": "Aug 2019 - Mar 2023",
+      "period": "Mar 2023 — Oct 2023",
+      "role": "Digital Services Representative",
+      "company": "Service NSW",
+      "description": "Digital channel support — walking people through online services and troubleshooting."
+    },
+    "item_6": {
+      "period": "Aug 2019 — Mar 2023",
       "role": "Crew Member",
       "company": "McDonald's",
-      "description": "Job Desc"
+      "description": "Shift work under pressure; teamwork and consistency at stupid o'clock."
     }
   },
   "skills": {
