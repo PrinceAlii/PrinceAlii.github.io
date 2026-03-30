@@ -1,0 +1,26 @@
+---
+description: alibo.dev portfolio — stack, tooling, and contributor tone
+globs: "**/*"
+alwaysApply: true
+---
+
+# Project
+
+- Personal site for **Ali Bonagdaran**, production URL **https://alibo.dev/** (`site` in `astro.config.mjs`).
+- Base theme: **Void** (Astro 5, Tailwind 4, `@ariaskit/astro-i18n`). Keep its `src/` layout and i18n JSON under `i18n/` unless you are deliberately migrating.
+
+# Package manager
+
+- Use **npm only**. Do not add or document `pnpm`, `yarn`, or `bun`.
+
+# Astro habits
+
+- **Content collections:** `src/content/` with Zod schemas in `src/content/config.ts`; load with `getCollection` / `getEntry`.
+- **Islands:** Ship static HTML by default; use `client:load` / `client:idle` only when the UI needs JS.
+- **Images:** For local assets under `src/`, prefer `import { Image } from 'astro:assets'` with dimensions to limit layout shift.
+- **View transitions:** This repo uses Void’s `ClientRouter` in page metadata. Do not stack another transitions API on top without removing that first.
+
+# Git and comments (tone)
+
+- **Commits:** Short, lowercase, how you’d type on a weekend. Examples: `fix header spacing`, `wip`, `bump astro`. Avoid title-case changelog speak (`Initial commit`, `Refactor X for Y`).
+- **Code comments:** Sparse and casual when needed (`// todo: fix mobile nav`). No essay comments that restate what the code does.
