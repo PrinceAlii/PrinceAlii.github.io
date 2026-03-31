@@ -3,9 +3,27 @@
 		"id": 1,
 		"icon": {
 			"type": "lucide",
+			"name": "mail"
+		},
+		"text": "Email",
+		"link": "mailto:alibonagdaran@gmail.com"
+	},
+	{
+		"id": 2,
+		"icon": {
+			"type": "simple-icons",
+			"name": "linkedin"
+		},
+		"text": "LinkedIn",
+		"link": "https://www.linkedin.com/in/alibonagdaran/"
+	},
+	{
+		"id": 3,
+		"icon": {
+			"type": "lucide",
 			"name": "github"
 		},
 		"text": "GitHub",
-		"link": "https://github.com/your-github"
+		"link": "https://github.com/PrinceAlii"
 	}
 ]

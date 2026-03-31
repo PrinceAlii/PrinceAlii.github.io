@@ -22,7 +22,8 @@ const config = defineConfig({
 			openGraph: {
 				home: {
 					title: 'Ali Bonagdaran',
-					description: 'Personal portfolio of Ali Bonagdaran.',
+					description:
+						'Sydney-based IT graduate · Cloud, DevOps, and developer platforms (AWS, Kubernetes, GitLab).',
 				},
 				blog: {
 					title: 'Blog',

@@ -5,14 +5,18 @@
 			"type": "lucide",
 			"name": "map-pin"
 		},
-		"text": "Location"
+		"text": "Sydney, Australia"
 	},
 	{
 		"id": 2,
 		"icon": {
 			"type": "lucide",
-			"name": "calendar"
+			"name": "graduation-cap"
 		},
-		"text": "Born year"
+		"lines": [
+			"Bachelor of Information Technology",
+			"University of Technology Sydney",
+			"2023-2026"
+		]
 	}
 ]

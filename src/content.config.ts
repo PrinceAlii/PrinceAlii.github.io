@@ -19,11 +19,23 @@ const simpleIconSchema = z.object({
 
 const quickInfo = defineCollection({
 	loader: file("src/content/info.json"),
-	schema: z.object({
-		id: z.number(),
-		icon: z.union([lucideIconSchema, simpleIconSchema]),
-		text: z.string(),
-	}),
+	schema: z
+		.object({
+			id: z.number(),
+			icon: z.union([lucideIconSchema, simpleIconSchema]),
+			text: z.string().optional(),
+			lines: z.array(z.string()).min(1).optional(),
+		})
+		.superRefine((data, ctx) => {
+			const hasText = data.text != null && data.text.length > 0;
+			const hasLines = data.lines != null && data.lines.length > 0;
+			if (hasText === hasLines) {
+				ctx.addIssue({
+					code: z.ZodIssueCode.custom,
+					message: "Provide either text or lines (not both, not neither).",
+				});
+			}
+		}),
 });
 
 const socials = defineCollection({
@@ -43,7 +55,6 @@ const workExperience = defineCollection({
 		title: z.string(),
 		company: z.string(),
 		duration: z.string(),
-		description: z.string(),
 	}),
 });
 
