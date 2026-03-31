@@ -1,0 +1,18 @@
+[
+	{
+		"id": 1,
+		"icon": {
+			"type": "lucide",
+			"name": "map-pin"
+		},
+		"text": "Location"
+	},
+	{
+		"id": 2,
+		"icon": {
+			"type": "lucide",
+			"name": "calendar"
+		},
+		"text": "Born year"
+	}
+]
