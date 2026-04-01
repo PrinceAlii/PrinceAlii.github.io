@@ -3,12 +3,23 @@ import { name } from "spectre:globals";
 import Icon from "./Icon.astro";
 
 const path = Astro.url.pathname;
+const isHome = path === "/" || path === "";
+const isProjects = path.startsWith("/projects");
+const isContact = path === "/contact" || path.startsWith("/contact/");
 ---
 <nav>
   <a class="site-title" href="/">{name}</a>
   <ul>
     <li>
-      <a href="/projects" class:list={{ active: path.startsWith('/projects') }}>Projects</a>
+      <a href="/" class:list={{ active: isHome }}>Home</a>
+    </li>
+    <li class="nav-separator">/</li>
+    <li>
+      <a href="/projects" class:list={{ active: isProjects }}>Projects</a>
+    </li>
+    <li class="nav-separator">/</li>
+    <li>
+      <a href="/contact" class:list={{ active: isContact }}>Contact</a>
     </li>
     <li class="nav-separator">/</li>
     <li>
@@ -220,9 +231,14 @@ const path = Astro.url.pathname;
     padding: .25rem .5rem;
   }
 
-  nav a:hover, nav a:focus-visible, nav a.active {
+  /* Main nav links only (not the site title) so active/hover always reads on primary */
+  nav ul a:hover,
+  nav ul a:focus-visible,
+  nav ul a.active {
     background-color: var(--primary);
+    color: #ffffff;
     outline: none;
+    text-decoration: none;
   }
 
   #search {

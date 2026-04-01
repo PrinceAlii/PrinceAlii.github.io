@@ -1,0 +1,179 @@
+---
+export const prerender = true;
+
+import "../styles/index.css";
+
+import { getCollection } from "astro:content";
+import { name } from "spectre:globals";
+import Card from "../components/Card.astro";
+import Icon from "../components/Icon.astro";
+import Layout from "../layouts/Layout.astro";
+
+const socials = await getCollection("socials");
+
+const pageTitle = `Contact · ${name}`;
+const pageDescription =
+	"Get in touch via email, LinkedIn, or GitHub. Sydney, Australia.";
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+	<div class="layout-grid-left" slot="left">
+		<Card class="flex-col-card">
+			<h2 class="no-mt">Say hello</h2>
+			<p class="contact-aside">
+				If you are hiring, collaborating, or want to talk cloud and DevOps, I
+				would be glad to hear from you. The fastest way to reach me is email.
+			</p>
+			<p class="contact-aside contact-aside-muted">
+				Based in Sydney, Australia.
+			</p>
+		</Card>
+	</div>
+	<div class="layout-grid-right" slot="right">
+		<Card>
+			<div class="header-container">
+				<Icon
+					type="lucide"
+					name="mail"
+					width={24}
+					height={24}
+					class="glow-icon"
+				/>
+				<h2>Contact</h2>
+			</div>
+			<ul class="contact-methods">
+				{
+					socials
+						.sort((a, b) => a.data.id - b.data.id)
+						.map((item) => {
+							const isMail = item.data.link.startsWith("mailto:");
+							const displayHref = isMail
+								? item.data.link.replace(/^mailto:/, "")
+								: item.data.link;
+							const externalAttrs = isMail
+								? {}
+								: {
+										target: "_blank",
+										rel: "noopener noreferrer",
+									};
+							return (
+								<li>
+									<a
+										href={item.data.link}
+										class="contact-method-link"
+										{...externalAttrs}
+									>
+										<span class="overview-icon-wrap contact-method-icon-wrap">
+											<Icon
+												type={item.data.icon.type}
+												name={item.data.icon.name as any}
+												width={24}
+												height={24}
+												class="glow-icon"
+											/>
+										</span>
+										<span class="contact-method-body">
+											<span class="contact-method-label">{item.data.text}</span>
+											<span class="contact-method-href">{displayHref}</span>
+										</span>
+									</a>
+								</li>
+							);
+						})
+				}
+			</ul>
+		</Card>
+	</div>
+</Layout>
+
+<style>
+	.contact-aside {
+		margin: 0 0 1rem;
+		line-height: 1.55;
+		font-size: 0.9375rem;
+	}
+
+	.contact-aside-muted {
+		margin-bottom: 0;
+		color: var(--text-muted);
+		font-size: 0.875rem;
+	}
+
+	.contact-methods {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0;
+	}
+
+	.contact-methods li {
+		border-bottom: 1px solid var(--border-color);
+	}
+
+	.contact-methods li:last-child {
+		border-bottom: none;
+	}
+
+	.contact-method-link {
+		display: flex;
+		flex-direction: row;
+		align-items: flex-start;
+		gap: 0.75rem;
+		padding: 1rem 0;
+		color: inherit;
+		text-decoration: none;
+		transition:
+			background-color 0.15s ease,
+			color 0.15s ease;
+		margin: 0 -0.65rem;
+		padding-left: 0.65rem;
+		padding-right: 0.65rem;
+		border-radius: 0;
+	}
+
+	.contact-method-link:hover,
+	.contact-method-link:focus-visible {
+		background-color: var(--primary);
+		outline: none;
+		color: #ffffff;
+		text-decoration: none;
+	}
+
+	.contact-method-link:hover .contact-method-href,
+	.contact-method-link:focus-visible .contact-method-href {
+		color: rgba(255, 255, 255, 0.92);
+	}
+
+	.contact-method-link:hover :global(svg.glow-icon),
+	.contact-method-link:focus-visible :global(svg.glow-icon) {
+		color: #ffffff;
+		filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.45));
+	}
+
+	.contact-method-icon-wrap {
+		flex-shrink: 0;
+		padding: 0.2rem 0.35rem 0.35rem;
+	}
+
+	.contact-method-body {
+		display: flex;
+		flex-direction: column;
+		gap: 0.2rem;
+		min-width: 0;
+		flex: 1;
+	}
+
+	.contact-method-label {
+		font-weight: 700;
+		font-size: 0.9375rem;
+	}
+
+	.contact-method-href {
+		font-size: 0.8125rem;
+		color: var(--text-muted);
+		word-break: break-all;
+		font-family: "Geist Mono", "Courier New", Courier, monospace;
+	}
+</style>
