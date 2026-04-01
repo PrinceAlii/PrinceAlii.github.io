@@ -29,7 +29,8 @@ const { title, description, image, pagefindIgnore, article } = Astro.props;
 
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/png" href="/favicon.png" sizes="any" />
+		<link rel="apple-touch-icon" href="/favicon.png" />
 		<meta name="generator" content={Astro.generator} />
 
 		<title>{title}</title>
@@ -71,6 +72,9 @@ const { title, description, image, pagefindIgnore, article } = Astro.props;
 				<slot name="left" slot="left" />
 				<slot name="right" slot="right" />
 			</LayoutGrid>
+			<footer class="site-attribution">
+				<p>This site is based on <a href="https://github.com/louisescher/spectre" rel="noopener noreferrer">Spectre</a>, a terminal-inspired theme for Astro, built with TypeScript and Astro, originally by <a href="https://github.com/louisescher/spectre" rel="noopener noreferrer">louisescher/spectre</a>.</p>
+			</footer>
 			<slot name="404" />
 		</main>
 		<Background />
