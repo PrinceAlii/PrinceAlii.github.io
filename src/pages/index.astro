@@ -3,29 +3,30 @@ export const prerender = true;
 
 import "../styles/index.css";
 
+import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 import { getCollection, getEntry, render } from "astro:content";
-import type { ImageMetadata } from "astro";
-import { Image } from "astro:assets";
 import { name, openGraph } from "spectre:globals";
-import absLogoUrl from "../assets/employers/abs.svg?url";
-import cbaLogo from "../assets/employers/cba.jpg";
-import mcdonaldsLogo from "../assets/employers/mcdonalds.jpg";
-import serviceLogo from "../assets/employers/service.jpg";
+import type { ImageMetadata } from "astro";
+import absLogo from "../assets/employers/abs.jpeg";
+import cbaLogo from "../assets/employers/cba.png";
+import mcdonaldsLogo from "../assets/employers/mcd.png";
+import serviceLogo from "../assets/employers/service.png";
 import ProfilePicture from "../assets/profile.png";
 import Card from "../components/Card.astro";
 import Icon from "../components/Icon.astro";
 import ImageGlow from "../components/ImageGlow.astro";
 import Layout from "../layouts/Layout.astro";
 
-const [projects, about, workExperience, quickInfo, socials] =
-	await Promise.all([
+const [projects, about, workExperience, quickInfo, socials] = await Promise.all(
+	[
 		getCollection("projects"),
 		getEntry("other", "about"),
 		getCollection("workExperience"),
 		getCollection("quickInfo"),
 		getCollection("socials"),
-	]);
+	],
+);
 
 const { Content: About } = await render(about!);
 
@@ -78,20 +79,21 @@ function companyMonogram(companyName: string): string {
 	return c ? c.toUpperCase() : "·";
 }
 
-type EmployerLogo =
-	| { kind: "raster"; src: ImageMetadata }
-	| { kind: "vector"; src: string };
+type EmployerLogo = {
+	src: ImageMetadata;
+	style: "fullbleed" | "padded";
+};
 
 function getEmployerLogo(companyName: string): EmployerLogo | null {
 	switch (companyName) {
 		case "Australian Bureau of Statistics":
-			return { kind: "vector", src: absLogoUrl };
+			return { src: absLogo, style: "fullbleed" };
 		case "Commonwealth Bank of Australia":
-			return { kind: "raster", src: cbaLogo };
+			return { src: cbaLogo, style: "fullbleed" };
 		case "McDonald's":
-			return { kind: "raster", src: mcdonaldsLogo };
+			return { src: mcdonaldsLogo, style: "fullbleed" };
 		case "Service NSW":
-			return { kind: "raster", src: serviceLogo };
+			return { src: serviceLogo, style: "fullbleed" };
 		default:
 			return null;
 	}
@@ -232,64 +234,56 @@ const workGroups = groupWorkByConsecutiveCompany(workExperience);
 				<h2>Work Experience</h2>
 			</div>
 			<div class="work-experience-container">
-				{
-					workGroups.map((group) => {
-						const { name: companyName, location: companyLocation } =
-							splitCompanyLocation(group.company);
-						const locationLine =
-							companyLocation != null && companyLocation.length > 0
-								? companyLocation
-								: null;
-						const employerLogo = getEmployerLogo(companyName);
-						return (
-							<section class="work-experience-group">
-								<div class="work-company-header">
-									<div
-										class:list={[
-											"work-company-logo",
-											{
-												"work-company-logo--monogram": employerLogo == null,
-												"work-company-logo--vector":
-													employerLogo?.kind === "vector",
-												"work-company-logo--raster":
-													employerLogo?.kind === "raster",
-											},
-										]}
-										aria-hidden="true"
-									>
-										{employerLogo == null ? (
-											<span class="work-company-monogram">
-												{companyMonogram(companyName)}
-											</span>
-										) : employerLogo.kind === "vector" ? (
-											<img
-												src={employerLogo.src}
-												alt=""
-												class="work-company-logo-media work-company-logo-media--vector"
-												width="56"
-												height="56"
-												decoding="async"
-												loading="lazy"
-											/>
-										) : (
-											<Image
-												src={employerLogo.src}
-												alt=""
-												width={56}
-												height={56}
-												class="work-company-logo-media work-company-logo-media--raster"
-												loading="lazy"
-												densities={[1, 2]}
-											/>
-										)}
-									</div>
-									<div class="work-company-meta">
-										<h3 class="work-company-name">{companyName}</h3>
-										<p class="work-company-span">
-											{companySpanLabel(group.roles)}
-										</p>
-									</div>
-								</div>
+						{
+							workGroups.map((group) => {
+								const { name: companyName, location: companyLocation } =
+									splitCompanyLocation(group.company);
+								const locationLine =
+									companyLocation != null && companyLocation.length > 0
+										? companyLocation
+											: null;
+								const employerLogo = getEmployerLogo(companyName);
+								return (
+									<section class="work-experience-group">
+										<div class="work-company-header">
+											<div
+												class:list={[
+													"work-company-logo",
+													{
+														"work-company-logo--monogram": employerLogo == null,
+														"work-company-logo--raster":
+															employerLogo != null,
+														"work-company-logo--raster-fullbleed":
+															employerLogo?.style === "fullbleed",
+														"work-company-logo--raster-padded":
+															employerLogo?.style === "padded",
+												},
+											]}
+												aria-hidden="true"
+											>
+												{employerLogo == null ? (
+													<span class="work-company-monogram">
+														{companyMonogram(companyName)}
+													</span>
+												) : (
+													<Image
+														src={employerLogo.src}
+														alt=""
+														width={56}
+														height={56}
+														class="work-company-logo-media work-company-logo-media--raster"
+														loading="lazy"
+														densities={[1, 2]}
+													/>
+												)}
+											</div>
+											<div class="work-company-meta">
+											<h3 class="work-company-name">{companyName}</h3>
+											<p class="work-company-span">
+												{companySpanLabel(group.roles)}
+											</p>
+										</div>
+										</div>
 								{group.roles.length > 1 ? (
 									<div class="work-roles-timeline">
 										{group.roles.map((entry, roleIndex) => (
