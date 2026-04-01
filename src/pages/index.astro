@@ -3,9 +3,16 @@ export const prerender = true;
 
 import "../styles/index.css";
 
+import type { CollectionEntry } from "astro:content";
 import { getCollection, getEntry, render } from "astro:content";
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
 import { name, openGraph } from "spectre:globals";
-import ProfilePicture from "../assets/pfp.png";
+import absLogoUrl from "../assets/employers/abs.svg?url";
+import cbaLogo from "../assets/employers/cba.jpg";
+import mcdonaldsLogo from "../assets/employers/mcdonalds.jpg";
+import serviceLogo from "../assets/employers/service.jpg";
+import ProfilePicture from "../assets/profile.png";
 import Card from "../components/Card.astro";
 import Icon from "../components/Icon.astro";
 import ImageGlow from "../components/ImageGlow.astro";
@@ -21,6 +28,76 @@ const [projects, about, workExperience, quickInfo, socials] =
 	]);
 
 const { Content: About } = await render(about!);
+
+function splitCompanyLocation(company: string): {
+	name: string;
+	location: string | null;
+} {
+	const idx = company.indexOf(" · ");
+	if (idx === -1) {
+		return { name: company, location: null };
+	}
+	return {
+		name: company.slice(0, idx),
+		location: company.slice(idx + 3),
+	};
+}
+
+function companySpanLabel(roles: CollectionEntry<"workExperience">[]): string {
+	if (roles.length === 0) return "";
+	if (roles.length === 1) return roles[0].data.duration;
+	const oldest = roles[roles.length - 1].data.duration;
+	const newest = roles[0].data.duration;
+	const start = oldest.split(" - ")[0]?.trim() ?? "";
+	const endParts = newest.split(" - ");
+	const end = endParts[endParts.length - 1]?.trim() ?? "";
+	return start && end ? `${start} - ${end}` : newest;
+}
+
+function groupWorkByConsecutiveCompany(
+	entries: CollectionEntry<"workExperience">[],
+): { company: string; roles: CollectionEntry<"workExperience">[] }[] {
+	const ordered = [...entries].reverse();
+	const groups: {
+		company: string;
+		roles: CollectionEntry<"workExperience">[];
+	}[] = [];
+	for (const entry of ordered) {
+		const last = groups[groups.length - 1];
+		if (last?.company === entry.data.company) {
+			last.roles.push(entry);
+		} else {
+			groups.push({ company: entry.data.company, roles: [entry] });
+		}
+	}
+	return groups;
+}
+
+function companyMonogram(companyName: string): string {
+	const c = companyName.replace(/^[^A-Za-z0-9]+/, "").charAt(0);
+	return c ? c.toUpperCase() : "·";
+}
+
+type EmployerLogo =
+	| { kind: "raster"; src: ImageMetadata }
+	| { kind: "vector"; src: string };
+
+function getEmployerLogo(companyName: string): EmployerLogo | null {
+	switch (companyName) {
+		case "Australian Bureau of Statistics":
+			return { kind: "vector", src: absLogoUrl };
+		case "Commonwealth Bank of Australia":
+			return { kind: "raster", src: cbaLogo };
+		case "McDonald's":
+			return { kind: "raster", src: mcdonaldsLogo };
+		case "Service NSW":
+			return { kind: "raster", src: serviceLogo };
+		default:
+			return null;
+	}
+}
+
+const workGroups = groupWorkByConsecutiveCompany(workExperience);
 ---
 
 <Layout
@@ -43,33 +120,52 @@ const { Content: About } = await render(about!);
 				{
 					quickInfo.map((info) => (
 						<li>
-							<Icon
-								type={info.data.icon.type}
-								name={info.data.icon.name as any}
-								width={24}
-								height={24}
-								class="glow-icon"
-							/>
-							<span>{info.data.text}</span>
+							<span class="overview-icon-wrap">
+								<Icon
+									type={info.data.icon.type}
+									name={info.data.icon.name as any}
+									width={24}
+									height={24}
+									class="glow-icon"
+								/>
+							</span>
+							{info.data.lines ? (
+								<span class="quick-info-lines">
+									{info.data.lines.map((line, i) => (
+										<span
+											class:list={[
+												"qi-line",
+												{ "qi-line-dates": i === info.data.lines!.length - 1 },
+											]}
+										>
+											{line}
+										</span>
+									))}
+								</span>
+							) : (
+								<span>{info.data.text}</span>
+							)}
 						</li>
 					))
 				}
 			</ul>
 		</Card>
 		<Card>
-			<h3 class="no-mt">Socials</h3>
+			<h3 class="no-mt">Get in touch</h3>
 			<ul class="overview-list">
 				{
 					socials.map((item) => (
 						<li>
 							<a href={item.data.link} class="socials-link">
-								<Icon
-									type={item.data.icon.type}
-									name={item.data.icon.name as any}
-									width={24}
-									height={24}
-									class="glow-icon"
-								/>
+								<span class="overview-icon-wrap">
+									<Icon
+										type={item.data.icon.type}
+										name={item.data.icon.name as any}
+										width={24}
+										height={24}
+										class="glow-icon"
+									/>
+								</span>
 								<span>{item.data.text}</span>
 							</a>
 						</li>
@@ -137,16 +233,99 @@ const { Content: About } = await render(about!);
 			</div>
 			<div class="work-experience-container">
 				{
-					workExperience.reverse().map((entry) => (
-						<div class="work-experience-entry">
-							<span class="work-experience-duration">
-								{entry.data.duration}
-							</span>
-							<h3 class="work-experience-company">{entry.data.company}</h3>
-							<span class="work-experience-role">{entry.data.title}</span>
-							<p class="work-experience-desc">{entry.data.description}</p>
-						</div>
-					))
+					workGroups.map((group) => {
+						const { name: companyName, location: companyLocation } =
+							splitCompanyLocation(group.company);
+						const locationLine =
+							companyLocation != null && companyLocation.length > 0
+								? companyLocation
+								: null;
+						const employerLogo = getEmployerLogo(companyName);
+						return (
+							<section class="work-experience-group">
+								<div class="work-company-header">
+									<div
+										class:list={[
+											"work-company-logo",
+											{
+												"work-company-logo--monogram": employerLogo == null,
+												"work-company-logo--vector":
+													employerLogo?.kind === "vector",
+												"work-company-logo--raster":
+													employerLogo?.kind === "raster",
+											},
+										]}
+										aria-hidden="true"
+									>
+										{employerLogo == null ? (
+											<span class="work-company-monogram">
+												{companyMonogram(companyName)}
+											</span>
+										) : employerLogo.kind === "vector" ? (
+											<img
+												src={employerLogo.src}
+												alt=""
+												class="work-company-logo-media work-company-logo-media--vector"
+												width="56"
+												height="56"
+												decoding="async"
+												loading="lazy"
+											/>
+										) : (
+											<Image
+												src={employerLogo.src}
+												alt=""
+												width={56}
+												height={56}
+												class="work-company-logo-media work-company-logo-media--raster"
+												loading="lazy"
+												densities={[1, 2]}
+											/>
+										)}
+									</div>
+									<div class="work-company-meta">
+										<h3 class="work-company-name">{companyName}</h3>
+										<p class="work-company-span">
+											{companySpanLabel(group.roles)}
+										</p>
+									</div>
+								</div>
+								{group.roles.length > 1 ? (
+									<div class="work-roles-timeline">
+										{group.roles.map((entry, roleIndex) => (
+											<div class="work-role-row">
+												<div class="work-role-rail">
+													<span class="work-role-dot" />
+													{roleIndex < group.roles.length - 1 ? (
+														<span class="work-role-connector" />
+													) : null}
+												</div>
+												<div class="work-role-body">
+													<h4 class="work-role-title">{entry.data.title}</h4>
+													<p class="work-role-duration">{entry.data.duration}</p>
+													{locationLine ? (
+														<p class="work-role-location">{locationLine}</p>
+													) : null}
+												</div>
+											</div>
+										))}
+									</div>
+								) : (
+									<div class="work-single-role">
+										<h4 class="work-role-title">
+											{group.roles[0].data.title}
+										</h4>
+										<p class="work-role-duration">
+											{group.roles[0].data.duration}
+										</p>
+										{locationLine ? (
+											<p class="work-role-location">{locationLine}</p>
+										) : null}
+									</div>
+								)}
+							</section>
+						);
+					})
 				}
 			</div>
 		</Card>

@@ -33,9 +33,6 @@ body {
 	transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-[data-theme="light"] nav a.active,
-[data-theme="light"] nav a:hover,
-[data-theme="light"] nav a:focus-visible,
 [data-theme="light"] #search:focus,
 [data-theme="light"] #theme-toggle:hover,
 [data-theme="light"] #theme-toggle:focus-visible,
@@ -63,14 +60,93 @@ body {
 	list-style-type: none;
 	padding: 0;
 	margin: 0;
+	overflow: visible;
 }
 
 .overview-list li {
 	display: flex;
 	flex-direction: row;
-	align-items: center;
+	align-items: flex-start;
 	gap: 0.75rem;
 	margin-bottom: 0.75rem;
+	overflow: visible;
+}
+
+.overview-list li > span:last-child {
+	flex: 1;
+	min-width: 0;
+}
+
+.overview-icon-wrap {
+	flex-shrink: 0;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0.2rem 0.3rem 0.45rem;
+	box-sizing: content-box;
+}
+
+.overview-list li:has(.quick-info-lines) .overview-icon-wrap {
+	align-items: flex-start;
+	padding-top: 0.3rem;
+	padding-bottom: 0.55rem;
+}
+
+.overview-list li svg.glow-icon {
+	flex-shrink: 0;
+	display: block;
+}
+
+.quick-info-lines {
+	display: flex;
+	flex-direction: column;
+	gap: 0.2rem;
+	line-height: 1.38;
+	font-size: 0.9375rem;
+}
+
+.qi-line {
+	display: block;
+}
+
+.qi-line-dates {
+	color: var(--text-muted);
+	font-size: 0.875rem;
+	font-family: "Geist Mono", "Courier New", Courier, monospace;
+}
+
+.socials-link .overview-icon-wrap {
+	padding: 0.2rem 0.4rem 0.35rem;
+	align-self: center;
+	min-width: 2rem;
+	justify-content: center;
+	align-items: center;
+}
+
+.site-attribution {
+	max-width: 1280px;
+	margin: 0 auto;
+	padding: 2rem 2rem 2.5rem;
+	border-top: 1px solid var(--border-color);
+}
+
+.site-attribution p {
+	margin: 0;
+	font-size: 0.8125rem;
+	line-height: 1.55;
+	color: var(--text-muted);
+	text-align: center;
+}
+
+.site-attribution a {
+	color: var(--text-muted);
+	text-decoration: underline;
+	text-underline-offset: 2px;
+}
+
+.site-attribution a:hover,
+.site-attribution a:focus-visible {
+	color: var(--primary-light);
 }
 
 .overview-list li:last-of-type {
@@ -112,6 +188,15 @@ main {
 .glow-icon {
 	color: var(--primary);
 	filter: drop-shadow(0 0 4px var(--primary));
+}
+
+[data-theme="light"] .glow-icon {
+	filter: drop-shadow(0 0 1.5px rgba(65, 105, 225, 0.45));
+}
+
+[data-theme="light"] .contact-method-link:hover svg.glow-icon,
+[data-theme="light"] .contact-method-link:focus-visible svg.glow-icon {
+	filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.55));
 }
 
 .expressive-code {
