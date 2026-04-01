@@ -25,12 +25,16 @@ import Layout from "../layouts/Layout.astro";
   }
 
   .notfound-container h1 {
-    font-size: 4rem;
+    font-size: clamp(3rem, 2.2rem + 3vw, 4.5rem);
+    line-height: var(--text-leading-tight);
+    letter-spacing: var(--text-tracking-display);
     margin: 0;
   }
 
   .notfound-container p {
-    font-size: 1.25em;
+    font-size: var(--text-size-lead);
+    line-height: var(--text-leading-body);
+    max-width: 36ch;
   }
 
   .block-link {

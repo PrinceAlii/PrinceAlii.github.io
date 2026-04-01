@@ -34,6 +34,10 @@ body {
 body {
 	-webkit-font-smoothing: antialiased;
 	font-family: "Geist", Arial, Helvetica, sans-serif;
+	font-size: var(--text-size-body, 1rem);
+	line-height: var(--text-leading-body, 1.65);
+	font-kerning: normal;
+	text-rendering: optimizeLegibility;
 }
 
 input,
@@ -61,6 +65,10 @@ h4,
 h5,
 h6 {
 	text-wrap: pretty;
+	line-height: var(--text-leading-heading, 1.2);
+	letter-spacing: var(--text-tracking-heading, -0.01em);
+	font-weight: var(--text-weight-heading, 700);
+	margin: 0 0 0.75rem;
 }
 
 button {
@@ -82,7 +90,7 @@ code {
 }
 
 pre {
-	border: 1px solid rgb(#353535);
+	border: 1px solid var(--border-color);
 	overflow-y: hidden;
 	padding: 0.5rem;
 	border-radius: 0.25rem;
@@ -91,6 +99,6 @@ pre {
 pre.astro-code code {
 	display: flex;
 	flex-direction: column;
-	font-size: 0.875em;
+	font-size: var(--text-size-sm, 0.875rem);
 	gap: 0.5rem;
 }

@@ -60,9 +60,19 @@ const projects = await getCollection("projects");
 	}
 
 	.stat h3 {
-		font-size: 2em;
+		font-size: clamp(2rem, 1.5rem + 2.1vw, 3rem);
+		line-height: var(--text-leading-tight);
+		letter-spacing: var(--text-tracking-display);
 		margin: 0;
-		margin-bottom: .5rem;
+		margin-bottom: 0.5rem;
+		font-variant-numeric: tabular-nums;
+	}
+
+	.stat span {
+		font-family: "Geist Mono", "Courier New", Courier, monospace;
+		font-size: var(--text-size-sm);
+		line-height: var(--text-leading-meta);
+		letter-spacing: var(--text-tracking-meta);
 	}
 
 </style>

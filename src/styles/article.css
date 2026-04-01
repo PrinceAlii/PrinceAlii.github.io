@@ -7,14 +7,20 @@ article h4 {
 }
 
 article {
-	line-height: 1.6;
+	font-size: var(--text-size-body);
+	line-height: var(--text-leading-body);
 	min-width: 0;
+}
+
+article :where(p, li) {
+	max-width: 72ch;
+	line-height: var(--text-leading-body);
 }
 
 article hr {
 	height: 1px;
 	border: none;
-	background-color: #353535;
+	background-color: var(--border-color);
 }
 
 p:has(img) {
@@ -44,8 +50,10 @@ p img {
 }
 
 .toc-card ol li a {
-	color: #c7c7c7;
-	font-size: 0.925rem;
+	color: var(--text-muted);
+	font-size: var(--text-size-sm);
+	line-height: var(--text-leading-meta);
+	font-weight: var(--text-weight-medium);
 	padding: 0.25rem 0.5rem;
 	box-decoration-break: clone;
 	-webkit-box-decoration-break: clone;
@@ -69,7 +77,7 @@ p img {
 }
 
 ol li a.active {
-	color: white;
+	color: var(--text-on-primary);
 	background: var(--primary);
 }
 
@@ -103,13 +111,15 @@ ol li a.active {
 
 .article-h1 {
 	margin-bottom: 0;
-	font-size: 2em;
+	font-size: clamp(1.65rem, 1.3rem + 1.4vw, 2.4rem);
 	background: #ffffff;
 	padding: 0.25rem 0.675rem;
 	box-decoration-break: clone;
 	-webkit-box-decoration-break: clone;
 	position: relative;
-	line-height: 1.2;
+	line-height: var(--text-leading-tight);
+	letter-spacing: var(--text-tracking-display);
+	font-weight: var(--text-weight-display);
 	display: inline;
 	color: #000000;
 }
@@ -119,12 +129,16 @@ ol li a.active {
 	flex-direction: row;
 	gap: 0.5rem;
 	font-family: "Geist Mono", "Courier New", Courier, monospace;
+	font-size: var(--text-size-sm);
+	line-height: var(--text-leading-meta);
 	background: #ffffff;
 	color: #000000;
 	box-decoration-break: clone;
 	-webkit-box-decoration-break: clone;
 	padding: 0 0.75rem;
 	width: fit-content;
+	font-variant-numeric: tabular-nums;
+	letter-spacing: var(--text-tracking-meta);
 }
 
 @media screen and (max-width: 640px) {
@@ -141,21 +155,21 @@ ol li a.active {
 		display: inline;
 		background-color: transparent;
 		padding: 0;
-		color: white;
+		color: var(--text-on-primary);
 	}
 
 	.article-info {
 		display: block;
 		background-color: transparent;
 		padding: 0;
-		color: white;
+		color: var(--text-on-primary);
 	}
 }
 
 code:not(.astro-code code) {
 	background-color: #353535;
 	padding: 0.125rem 0.25rem;
-	font-size: 0.925rem;
+	font-size: var(--text-size-sm);
 }
 
 .article-image {
@@ -169,7 +183,7 @@ code:not(.astro-code code) {
 	margin-bottom: 1.5rem;
 	width: 100%;
 	height: 1px;
-	background-color: #353535;
+	background-color: var(--border-color);
 	border: none;
 }
 
@@ -191,11 +205,16 @@ table {
 	text-align: left;
 	border-spacing: 0;
 	border-collapse: collapse;
+	font-variant-numeric: tabular-nums;
 }
 
 table th {
 	padding: 0.5rem 1.5rem 0.5rem 0;
-	border-bottom: 1px solid #353535;
+	border-bottom: 1px solid var(--border-color);
+	font-size: var(--text-size-sm);
+	line-height: var(--text-leading-meta);
+	font-weight: var(--text-weight-medium);
+	letter-spacing: var(--text-tracking-meta);
 }
 
 table tbody {
@@ -203,7 +222,7 @@ table tbody {
 }
 
 table tbody tr {
-	border-bottom: 1px solid #353535;
+	border-bottom: 1px solid var(--border-color);
 }
 
 table tbody tr td {

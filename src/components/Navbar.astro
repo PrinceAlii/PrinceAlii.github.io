@@ -201,13 +201,19 @@ const isContact = path === "/contact" || path.startsWith("/contact/");
     justify-content: space-between;
     align-items: center;
     font-family: 'Geist Mono', 'Courier New', Courier, monospace;
+    font-size: var(--text-size-sm);
+    line-height: var(--text-leading-meta);
+    letter-spacing: var(--text-tracking-meta);
+    font-weight: var(--text-weight-medium);
     z-index: 50;
   }
 
   .site-title {
-    font-weight: 800;
+    font-weight: var(--text-weight-display);
     text-decoration: none;
-    font-size: 1.25em;
+    font-size: var(--text-size-title);
+    line-height: var(--text-leading-tight);
+    letter-spacing: var(--text-tracking-display);
     z-index: 2;
   }
 
@@ -236,7 +242,7 @@ const isContact = path === "/contact" || path.startsWith("/contact/");
   nav ul a:focus-visible,
   nav ul a.active {
     background-color: var(--primary);
-    color: #ffffff;
+    color: var(--text-on-primary);
     outline: none;
     text-decoration: none;
   }
@@ -251,6 +257,7 @@ const isContact = path === "/contact" || path.startsWith("/contact/");
     min-width: 12rem;
     max-width: 100%;
     color: var(--text-color);
+    font-variant-numeric: tabular-nums;
   }
 
   #search::placeholder {
@@ -408,7 +415,7 @@ const isContact = path === "/contact" || path.startsWith("/contact/");
       width: 100%;
       max-width: none;
       padding: 0;
-      font-size: 1.125em;
+      font-size: var(--text-size-body);
     }
   
     nav ul li a {
@@ -436,7 +443,7 @@ const isContact = path === "/contact" || path.startsWith("/contact/");
     #search-results {
       width: 100%;
       top: 100%;
-      font-size: 0.875em;
+      font-size: var(--text-size-sm);
     }
   }
 </style>
@@ -454,15 +461,20 @@ const isContact = path === "/contact" || path.startsWith("/contact/");
   }
 
   #search-results a:hover mark, #search-results a:focus-visible mark {
-    background-color: #ffffff;
-    color: #000000;
+    background-color: var(--text-on-primary);
+    color: var(--primary);
   }
 
   #search-results a h3 {
     margin-bottom: .5rem;
+    font-size: var(--text-size-body);
+    line-height: 1.35;
   }
 
   #search-results a p {
+    margin: 0;
+    font-size: var(--text-size-sm);
+    line-height: var(--text-leading-meta);
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
@@ -471,7 +483,7 @@ const isContact = path === "/contact" || path.startsWith("/contact/");
 
   #search-results mark {
     background-color: var(--primary);
-    color: white;
+    color: var(--text-on-primary);
   }
 
   .separator {

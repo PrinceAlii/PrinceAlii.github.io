@@ -1,8 +1,6 @@
 ---
 export const prerender = true;
 
-import "../styles/index.css";
-
 import { getCollection } from "astro:content";
 import { name } from "spectre:globals";
 import Card from "../components/Card.astro";
@@ -89,14 +87,19 @@ const pageDescription =
 <style>
 	.contact-aside {
 		margin: 0 0 1rem;
-		line-height: 1.55;
-		font-size: 0.9375rem;
+		line-height: var(--text-leading-body);
+		font-size: var(--text-size-body);
+		max-width: 48ch;
 	}
 
 	.contact-aside-muted {
 		margin-bottom: 0;
 		color: var(--text-muted);
-		font-size: 0.875rem;
+		font-size: var(--text-size-sm);
+		line-height: var(--text-leading-meta);
+		font-family: "Geist Mono", "Courier New", Courier, monospace;
+		font-variant-numeric: tabular-nums;
+		letter-spacing: var(--text-tracking-meta);
 	}
 
 	.contact-methods {
@@ -137,19 +140,19 @@ const pageDescription =
 	.contact-method-link:focus-visible {
 		background-color: var(--primary);
 		outline: none;
-		color: #ffffff;
+		color: var(--text-on-primary);
 		text-decoration: none;
 	}
 
 	.contact-method-link:hover .contact-method-href,
 	.contact-method-link:focus-visible .contact-method-href {
-		color: rgba(255, 255, 255, 0.92);
+		color: rgba(var(--text-on-primary-rgb), 0.92);
 	}
 
 	.contact-method-link:hover :global(svg.glow-icon),
 	.contact-method-link:focus-visible :global(svg.glow-icon) {
-		color: #ffffff;
-		filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.45));
+		color: var(--primary);
+		filter: none;
 	}
 
 	.contact-method-icon-wrap {
@@ -166,14 +169,18 @@ const pageDescription =
 	}
 
 	.contact-method-label {
-		font-weight: 700;
-		font-size: 0.9375rem;
+		font-weight: var(--text-weight-medium);
+		font-size: var(--text-size-body);
+		line-height: 1.4;
 	}
 
 	.contact-method-href {
-		font-size: 0.8125rem;
+		font-size: var(--text-size-sm);
 		color: var(--text-muted);
 		word-break: break-all;
 		font-family: "Geist Mono", "Courier New", Courier, monospace;
+		line-height: var(--text-leading-meta);
+		font-variant-numeric: tabular-nums;
+		letter-spacing: var(--text-tracking-meta);
 	}
 </style>
