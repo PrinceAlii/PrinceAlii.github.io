@@ -88,7 +88,7 @@ export const optionsSchema = z.object({
 	 */
 	name: z.string(),
 	/**
-	 * The theme color of the site. Optional. Defaults to `#8c5cf5`.
+	 * The theme colour of the site. Optional. Defaults to `#8c5cf5`.
 	 */
 	themeColor: z.string().optional(),
 	/**
@@ -113,7 +113,7 @@ export const optionsSchema = z.object({
 		projects: openGraphOptionsSchema,
 	}),
 	/**
-	 * All of this information can be find on [giscus' config page](https://giscus.app) under "Enable giscus" after entering all information.
+	 * All of this information can be found on [giscus' config page](https://giscus.app) under "Enable giscus" after entering all information.
 	 */
 	giscus: z.union([z.literal(false), giscusObjectSchema]),
 });

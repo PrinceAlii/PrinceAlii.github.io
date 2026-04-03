@@ -77,7 +77,7 @@ declare module "spectre:globals" {
 	 */
 	export const name: string;
 	/**
-	 * The theme color of the site.
+	 * The theme colour of the site.
 	 */
 	export const themeColor: string;
 	/**

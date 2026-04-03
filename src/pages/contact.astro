@@ -19,8 +19,8 @@ const pageDescription =
 		<Card class="flex-col-card">
 			<h2 class="no-mt">Say hello</h2>
 			<p class="contact-aside">
-				If you are hiring, collaborating, or want to talk cloud and DevOps, I
-				would be glad to hear from you. The fastest way to reach me is email.
+				If you're hiring or keen to chat about cloud and DevOps, I'd love to
+				hear from you. Email is usually the quickest way to reach me.
 			</p>
 			<p class="contact-aside contact-aside-muted">
 				Based in Sydney, Australia.
@@ -86,14 +86,14 @@ const pageDescription =
 
 <style>
 	.contact-aside {
-		margin: 0 0 1rem;
+		margin: 0 0 var(--space-sm);
 		line-height: var(--text-leading-body);
 		font-size: var(--text-size-body);
-		max-width: 48ch;
+		max-width: 46ch;
 	}
 
 	.contact-aside-muted {
-		margin-bottom: 0;
+		margin: var(--space-2xs) 0 0;
 		color: var(--text-muted);
 		font-size: var(--text-size-sm);
 		line-height: var(--text-leading-meta);
@@ -123,16 +123,16 @@ const pageDescription =
 		display: flex;
 		flex-direction: row;
 		align-items: flex-start;
-		gap: 0.75rem;
-		padding: 1rem 0;
+		gap: var(--space-sm);
+		padding: var(--space-sm) 0;
 		color: inherit;
 		text-decoration: none;
 		transition:
 			background-color 0.15s ease,
 			color 0.15s ease;
-		margin: 0 -0.65rem;
-		padding-left: 0.65rem;
-		padding-right: 0.65rem;
+		margin: 0 calc(-1 * var(--space-sm));
+		padding-left: var(--space-sm);
+		padding-right: var(--space-sm);
 		border-radius: 0;
 	}
 
@@ -157,13 +157,13 @@ const pageDescription =
 
 	.contact-method-icon-wrap {
 		flex-shrink: 0;
-		padding: 0.2rem 0.35rem 0.35rem;
+		padding: 0.2rem 0.3rem 0.35rem;
 	}
 
 	.contact-method-body {
 		display: flex;
 		flex-direction: column;
-		gap: 0.2rem;
+		gap: var(--space-2xs);
 		min-width: 0;
 		flex: 1;
 	}
@@ -177,10 +177,32 @@ const pageDescription =
 	.contact-method-href {
 		font-size: var(--text-size-sm);
 		color: var(--text-muted);
-		word-break: break-all;
+		overflow-wrap: anywhere;
+		word-break: normal;
+		hyphens: auto;
 		font-family: "Geist Mono", "Courier New", Courier, monospace;
 		line-height: var(--text-leading-meta);
 		font-variant-numeric: tabular-nums;
 		letter-spacing: var(--text-tracking-meta);
+	}
+
+	@media screen and (max-width: 640px) {
+		.contact-aside {
+			margin-bottom: var(--space-sm);
+		}
+
+		.contact-method-link {
+			gap: var(--space-sm);
+			padding-top: 0.72rem;
+			padding-bottom: 0.72rem;
+		}
+
+		.contact-method-label {
+			font-size: 0.95rem;
+		}
+
+		.contact-method-href {
+			font-size: 0.8125rem;
+		}
 	}
 </style>

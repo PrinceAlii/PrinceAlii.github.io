@@ -44,17 +44,6 @@ function splitCompanyLocation(company: string): {
 	};
 }
 
-function companySpanLabel(roles: CollectionEntry<"workExperience">[]): string {
-	if (roles.length === 0) return "";
-	if (roles.length === 1) return roles[0].data.duration;
-	const oldest = roles[roles.length - 1].data.duration;
-	const newest = roles[0].data.duration;
-	const start = oldest.split(" - ")[0]?.trim() ?? "";
-	const endParts = newest.split(" - ");
-	const end = endParts[endParts.length - 1]?.trim() ?? "";
-	return start && end ? `${start} - ${end}` : newest;
-}
-
 function groupWorkByConsecutiveCompany(
 	entries: CollectionEntry<"workExperience">[],
 ): { company: string; roles: CollectionEntry<"workExperience">[] }[] {
@@ -100,6 +89,9 @@ function getEmployerLogo(companyName: string): EmployerLogo | null {
 }
 
 const workGroups = groupWorkByConsecutiveCompany(workExperience);
+const latestProjects = [...projects]
+	.sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+	.slice(0, 2);
 ---
 
 <Layout
@@ -177,8 +169,8 @@ const workGroups = groupWorkByConsecutiveCompany(workExperience);
 		</Card>
 	</div>
 	<div class="layout-grid-right" slot="right">
-		<Card>
-			<div class="header-container">
+			<Card>
+				<div class="header-container">
 				<Icon
 					type="lucide"
 					name="user"
@@ -201,14 +193,11 @@ const workGroups = groupWorkByConsecutiveCompany(workExperience);
 					height={24}
 					class="glow-icon"
 				/>
-				<h2>Projects</h2>
-			</div>
-			<div class="content-container">
-				{
-					projects
-						.sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
-						.slice(0, 2)
-						.map((project) => (
+					<h2>Projects</h2>
+				</div>
+				<div class="content-container">
+					{latestProjects.length > 0 ? (
+						latestProjects.map((project) => (
 							<a href={`/projects/${project.id}`} class="post-container">
 								<div class="post-header">
 									<h3>{project.data.title}</h3>
@@ -219,9 +208,18 @@ const workGroups = groupWorkByConsecutiveCompany(workExperience);
 								<span>{project.data.description}</span>
 							</a>
 						))
-				}
-			</div>
-		</Card>
+					) : (
+						<div class="empty-state" role="status" aria-live="polite">
+							<h3 class="empty-state-title">Projects coming soon</h3>
+							<p class="empty-state-copy">
+								There are no project entries published yet. Check back soon for
+								work samples and build notes.
+							</p>
+							<a href="/contact" class="block-link">Get in touch instead</a>
+						</div>
+					)}
+				</div>
+			</Card>
 		<Card>
 			<div class="header-container">
 				<Icon
@@ -278,45 +276,42 @@ const workGroups = groupWorkByConsecutiveCompany(workExperience);
 												)}
 											</div>
 											<div class="work-company-meta">
-											<h3 class="work-company-name">{companyName}</h3>
-											<p class="work-company-span">
-												{companySpanLabel(group.roles)}
-											</p>
-										</div>
-										</div>
-								{group.roles.length > 1 ? (
-									<div class="work-roles-timeline">
-										{group.roles.map((entry, roleIndex) => (
-											<div class="work-role-row">
-												<div class="work-role-rail">
-													<span class="work-role-dot" />
-													{roleIndex < group.roles.length - 1 ? (
-														<span class="work-role-connector" />
-													) : null}
-												</div>
-												<div class="work-role-body">
-													<h4 class="work-role-title">{entry.data.title}</h4>
-													<p class="work-role-duration">{entry.data.duration}</p>
-													{locationLine ? (
-														<p class="work-role-location">{locationLine}</p>
-													) : null}
-												</div>
-											</div>
-										))}
+												<h3 class="work-company-name">{companyName}</h3>
+												{group.roles.length > 1 ? (
+													<div class="work-roles-timeline">
+														{group.roles.map((entry, roleIndex) => (
+															<div class="work-role-row">
+																<div class="work-role-rail">
+																	<span class="work-role-dot" />
+																	{roleIndex < group.roles.length - 1 ? (
+																		<span class="work-role-connector" />
+																	) : null}
+																</div>
+																<div class="work-role-body">
+																	<h4 class="work-role-title">{entry.data.title}</h4>
+																	<p class="work-role-duration">{entry.data.duration}</p>
+																	{locationLine ? (
+																		<p class="work-role-location">{locationLine}</p>
+																	) : null}
+																</div>
+															</div>
+														))}
+													</div>
+												) : (
+													<div class="work-single-role">
+														<h4 class="work-role-title">
+															{group.roles[0].data.title}
+														</h4>
+														<p class="work-role-duration">
+															{group.roles[0].data.duration}
+														</p>
+														{locationLine ? (
+															<p class="work-role-location">{locationLine}</p>
+														) : null}
+													</div>
+												)}
 									</div>
-								) : (
-									<div class="work-single-role">
-										<h4 class="work-role-title">
-											{group.roles[0].data.title}
-										</h4>
-										<p class="work-role-duration">
-											{group.roles[0].data.duration}
-										</p>
-										{locationLine ? (
-											<p class="work-role-location">{locationLine}</p>
-										) : null}
-									</div>
-								)}
+										</div>
 							</section>
 						);
 					})
@@ -325,3 +320,26 @@ const workGroups = groupWorkByConsecutiveCompany(workExperience);
 		</Card>
 	</div>
 </Layout>
+<style>
+	.empty-state {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-sm);
+		padding: var(--space-md);
+		border: 1px solid var(--border-color);
+		background: var(--surface-accent-soft);
+	}
+
+	.empty-state-title {
+		margin: 0;
+		font-size: var(--text-size-lead);
+		line-height: var(--text-leading-heading);
+	}
+
+	.empty-state-copy {
+		margin: 0;
+		max-width: 42ch;
+		color: var(--text-muted);
+		line-height: var(--text-leading-body);
+	}
+</style>
