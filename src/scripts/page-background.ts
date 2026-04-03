@@ -237,24 +237,20 @@ class PageBackground {
 	};
 
 	private pickRandomItems = <T>(arr: Array<T>, n = 20): Array<T> => {
-		let len = arr.length;
-
-		const result = new Array(n);
-		const taken = new Array(len);
-
-		if (n > len) {
+		if (n > arr.length) {
 			throw new AstroError(
 				"pickRandomItems: requested more elements than available",
 			);
 		}
 
-		while (n--) {
-			const x = Math.floor(Math.random() * len);
-			result[n] = arr[x in taken ? taken[x] : x];
-			taken[x] = --len in taken ? taken[len] : len;
+		const pool = [...arr];
+
+		for (let i = pool.length - 1; i > 0; i--) {
+			const j = Math.floor(Math.random() * (i + 1));
+			[pool[i], pool[j]] = [pool[j], pool[i]];
 		}
 
-		return result;
+		return pool.slice(0, n);
 	};
 
 	private setReducedMotion = (shouldReduceMotion: boolean) => {
