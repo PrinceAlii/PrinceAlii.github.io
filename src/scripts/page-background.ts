@@ -11,11 +11,13 @@ interface LetterInstance extends LetterPosition {
 	fadeout: number;
 }
 
-/**
- * PageBackground class
- */
+interface AnimationProfile {
+	density: number;
+	frameIntervalMs: number;
+}
+
 class PageBackground {
-	private LETTER_FADE_DURATION: [number, number] = [2, 7]; // Seconds
+	private LETTER_FADE_DURATION: [number, number] = [2, 7];
 
 	private baseCanvas: HTMLCanvasElement;
 	private overlayCanvas: HTMLCanvasElement;
@@ -30,18 +32,21 @@ class PageBackground {
 	private letterInstances: LetterInstance[] = [];
 
 	private primaryRgb: string;
+	private reducedMotionQuery: MediaQueryList | null = null;
+	private reducedMotion = false;
+	private animationFrameId: number | null = null;
+	private resizeRequested = false;
+	private animationDensity = 1;
+	private targetFrameIntervalMs = 16.7;
+	private lastRenderedAt = 0;
+	private onReducedMotionChange = (event: MediaQueryListEvent) => {
+		this.setReducedMotion(event.matches);
+	};
 
-	/**
-	 * Initializes the background on the page.
-	 * @param baseCanvas - The base canvas element. Used for static letters.
-	 * @param overlayCanvas - The overlay canvas element. Used for animated letters.
-	 */
 	constructor(baseCanvas: HTMLCanvasElement, overlayCanvas: HTMLCanvasElement) {
-		// Get 2D context for both canvases
 		const baseCtx = baseCanvas.getContext("2d");
 		const overlayCtx = overlayCanvas.getContext("2d");
 
-		// If either context is null, throw an error
 		if (!baseCtx || !overlayCtx) {
 			throw new AstroError("Unable to get 2D context.");
 		}
@@ -57,35 +62,91 @@ class PageBackground {
 		overlayCanvas.width = this.width;
 		overlayCanvas.height = this.height;
 
-		// Set the primary color to the first color in the theme
 		this.primaryRgb = window
 			.getComputedStyle(document.documentElement)
 			.getPropertyValue("--primary-rgb")
 			.trim();
 
-		this.initBackground();
+		this.reducedMotionQuery = window.matchMedia(
+			"(prefers-reduced-motion: reduce)",
+		);
+		this.setReducedMotion(this.reducedMotionQuery.matches);
+		this.reducedMotionQuery.addEventListener(
+			"change",
+			this.onReducedMotionChange,
+		);
 
-		requestAnimationFrame(this.redrawBackground);
+		this.refreshAnimationProfile();
+		this.initBackground();
 	}
 
-	/**
-	 * Sets up the background canvases. The text is decided based on the title of the page.
-	 */
+	private getAnimationProfile = (): AnimationProfile => {
+		const viewportArea = this.width * this.height;
+		const navigatorDetails = navigator as Navigator & {
+			deviceMemory?: number;
+			connection?: { saveData?: boolean };
+		};
+		const hardwareConcurrency = navigatorDetails.hardwareConcurrency ?? 4;
+		const deviceMemory = navigatorDetails.deviceMemory ?? 4;
+		const prefersReducedData = window.matchMedia(
+			"(prefers-reduced-data: reduce)",
+		).matches;
+
+		let density = 1;
+		let frameIntervalMs = 16.7;
+
+		if (viewportArea > 2_400_000 || this.width > 1600) {
+			density *= 0.85;
+			frameIntervalMs = 24;
+		}
+
+		if (viewportArea > 4_000_000 || this.width > 2200) {
+			density *= 0.75;
+			frameIntervalMs = 33.3;
+		}
+
+		if (hardwareConcurrency <= 4) {
+			density *= 0.85;
+			frameIntervalMs = Math.max(frameIntervalMs, 24);
+		}
+
+		if (deviceMemory <= 4) {
+			density *= 0.85;
+			frameIntervalMs = Math.max(frameIntervalMs, 24);
+		}
+
+		if (navigatorDetails.connection?.saveData || prefersReducedData) {
+			density *= 0.75;
+			frameIntervalMs = Math.max(frameIntervalMs, 33.3);
+		}
+
+		return {
+			density: Math.max(0.45, Math.min(1, density)),
+			frameIntervalMs,
+		};
+	};
+
+	private refreshAnimationProfile = () => {
+		const profile = this.getAnimationProfile();
+		this.animationDensity = profile.density;
+		this.targetFrameIntervalMs = profile.frameIntervalMs;
+	};
+
 	private initBackground = () => {
+		this.letterPositions = [];
+		this.letterInstances = [];
+
 		let text: string =
 			document.title.toLowerCase().split(" | ")[0].replace(/\s/g, "_") ||
 			"spectre";
 
-		// Add additional underscore to separate words
 		if (text.includes("_")) {
 			text += "_";
 		}
 
-		// Letters are 17px wide and 35px tall
 		const letters = Math.ceil(this.width / 17);
 		const lines = Math.ceil(this.height / 35);
 
-		// Loop through the canvas and draw the text
 		this.baseCtx.font = "28px Geist Mono";
 		this.baseCtx.textAlign = "start";
 		this.baseCtx.textBaseline = "top";
@@ -102,57 +163,67 @@ class PageBackground {
 			}
 		}
 
-		// Randomly select 75% of the letters to animate
-		const randomLetters = this.getRandomAmountFromArray<LetterPosition>(
-			this.letterPositions,
-			Number.parseInt((lines * 0.75).toFixed(), 10),
-		);
+		if (!this.reducedMotion) {
+			const animatedLetterCount = Math.max(
+				1,
+				Math.min(
+					this.letterPositions.length,
+					Math.round(lines * 0.75 * this.animationDensity),
+				),
+			);
+			const randomLetters = this.pickRandomItems<LetterPosition>(
+				this.letterPositions,
+				animatedLetterCount,
+			);
 
-		this.overlayCtx.font = "bold 28px Geist Mono";
-		this.overlayCtx.textAlign = "start";
-		this.overlayCtx.textBaseline = "top";
-		this.overlayCtx.fillStyle = `rgba(${this.primaryRgb}, 0)`;
-		this.overlayCtx.shadowBlur = 16;
-		this.overlayCtx.shadowColor = `rgba(${this.primaryRgb}, 0)`;
+			this.overlayCtx.font = "bold 28px Geist Mono";
+			this.overlayCtx.textAlign = "start";
+			this.overlayCtx.textBaseline = "top";
+			this.overlayCtx.fillStyle = `rgba(${this.primaryRgb}, 0)`;
+			this.overlayCtx.shadowBlur = this.targetFrameIntervalMs > 24 ? 12 : 16;
+			this.overlayCtx.shadowColor = `rgba(${this.primaryRgb}, 0)`;
 
-		// Draw the letters on the overlay canvas
-		for (const letter of randomLetters) {
-			this.overlayCtx.fillText(letter.letter, letter.x, letter.y);
+			const now = Date.now();
 
-			// Some number between LETTER_FADE_DURATION[0] and LETTER_FADE_DURATION[1] (in seconds)
-			const animLength =
-				this.LETTER_FADE_DURATION[0] +
-				Math.random() *
-					(this.LETTER_FADE_DURATION[1] - this.LETTER_FADE_DURATION[0]);
+			for (const letter of randomLetters) {
+				this.overlayCtx.fillText(letter.letter, letter.x, letter.y);
 
-			this.letterInstances.push({
-				x: letter.x,
-				y: letter.y,
-				letter: letter.letter,
-				timestamp: Date.now(),
-				fadeout: Date.now() + animLength * 1000,
-			});
+				const animLength =
+					this.LETTER_FADE_DURATION[0] +
+					Math.random() *
+						(this.LETTER_FADE_DURATION[1] - this.LETTER_FADE_DURATION[0]);
+
+				this.letterInstances.push({
+					x: letter.x,
+					y: letter.y,
+					letter: letter.letter,
+					timestamp: now,
+					fadeout: now + animLength * 1000,
+				});
+			}
+		} else {
+			this.overlayCtx.clearRect(
+				0,
+				0,
+				this.overlayCanvas.width,
+				this.overlayCanvas.height,
+			);
 		}
 
-		// Make the base canvas visible
 		this.baseCanvas.style.opacity = "1";
+
+		if (!this.reducedMotion) {
+			this.scheduleNextFrame();
+		}
 	};
 
-	/**
-	 * Simple sine easing function. Used for fading in and out letters.
-	 * @param timestamp - The current timestamp.
-	 * @param start - The start timestamp of a letter.
-	 * @param end - The end timestamp of a letter.
-	 */
 	private easeInOutSine = (timestamp: number, start: number, end: number) => {
 		const totalDuration = end - start;
 
-		// If the current timestamp is before the start, return 0
 		if (timestamp < start) {
 			return 0;
 		}
 
-		// If the current timestamp is after the end, return 0
 		if (timestamp > end) {
 			const elapsedAfterEnd = timestamp - end;
 			const progressAfterEnd = elapsedAfterEnd / (totalDuration / 2);
@@ -165,22 +236,15 @@ class PageBackground {
 		return Math.max(0, 0.5 - 0.5 * Math.cos(progress * Math.PI));
 	};
 
-	/**
-	 * Grabs n random elements from an array.
-	 * @param arr - The array to grab elements from.
-	 * @param n - The number of elements to grab.
-	 * @returns - An array of n elements.
-	 */
-	private getRandomAmountFromArray = <T>(arr: Array<T>, n = 20): Array<T> => {
+	private pickRandomItems = <T>(arr: Array<T>, n = 20): Array<T> => {
 		let len = arr.length;
 
-		// Initialize arrays beforehand
 		const result = new Array(n);
 		const taken = new Array(len);
 
 		if (n > len) {
 			throw new AstroError(
-				"getRandomAmountFromArray: more elements taken than available",
+				"pickRandomItems: requested more elements than available",
 			);
 		}
 
@@ -193,11 +257,76 @@ class PageBackground {
 		return result;
 	};
 
-	/**
-	 * Redraws the overlay canvas and animates the letters.
-	 */
+	private setReducedMotion = (shouldReduceMotion: boolean) => {
+		this.reducedMotion = shouldReduceMotion;
+		this.cancelAnimationFrame();
+
+		if (this.reducedMotion) {
+			this.overlayCtx.clearRect(
+				0,
+				0,
+				this.overlayCanvas.width,
+				this.overlayCanvas.height,
+			);
+			return;
+		}
+
+		if (this.letterInstances.length === 0 && this.letterPositions.length > 0) {
+			this.initBackground();
+			return;
+		}
+
+		this.scheduleNextFrame();
+	};
+
+	private scheduleNextFrame = () => {
+		if (this.reducedMotion || this.animationFrameId != null) {
+			return;
+		}
+
+		this.animationFrameId = requestAnimationFrame(this.redrawBackground);
+	};
+
+	private cancelAnimationFrame = () => {
+		if (this.animationFrameId == null) {
+			return;
+		}
+
+		window.cancelAnimationFrame(this.animationFrameId);
+		this.animationFrameId = null;
+	};
+
+	public scheduleResize = () => {
+		if (this.resizeRequested) {
+			return;
+		}
+
+		this.resizeRequested = true;
+		window.requestAnimationFrame(() => {
+			this.resizeRequested = false;
+			this.resizeBackground();
+		});
+	};
+
 	private redrawBackground = () => {
-		// Clear the overlay canvas
+		this.animationFrameId = null;
+
+		if (this.reducedMotion) {
+			return;
+		}
+
+		const now = Date.now();
+		if (
+			this.targetFrameIntervalMs > 16.7 &&
+			this.lastRenderedAt > 0 &&
+			now - this.lastRenderedAt < this.targetFrameIntervalMs
+		) {
+			this.scheduleNextFrame();
+			return;
+		}
+
+		this.lastRenderedAt = now;
+
 		this.overlayCtx.clearRect(
 			0,
 			0,
@@ -208,52 +337,59 @@ class PageBackground {
 		this.overlayCtx.font = "bold 28px Geist Mono";
 		this.overlayCtx.textAlign = "start";
 		this.overlayCtx.textBaseline = "top";
-		this.overlayCtx.shadowBlur = 16;
+		this.overlayCtx.shadowBlur = this.targetFrameIntervalMs > 24 ? 12 : 16;
+
+		const nextInstances: LetterInstance[] = [];
 
 		for (const letter of this.letterInstances) {
-			if (letter.fadeout > Date.now()) continue;
+			if (letter.fadeout > now) {
+				nextInstances.push(letter);
+				continue;
+			}
 
-			const alpha = this.easeInOutSine(
-				Date.now(),
-				letter.timestamp,
-				letter.fadeout,
-			);
-
-			if (alpha <= 0 && Date.now() > letter.fadeout) {
-				this.letterInstances.splice(this.letterInstances.indexOf(letter), 1);
-				const randomLetter = this.getRandomAmountFromArray<LetterPosition>(
+			const alpha = this.easeInOutSine(now, letter.timestamp, letter.fadeout);
+			if (alpha <= 0) {
+				const randomLetter = this.pickRandomItems<LetterPosition>(
 					this.letterPositions,
 					1,
-				);
+				)[0];
+				const replacementTimestamp = now;
+				const replacementFadeout =
+					replacementTimestamp +
+					(this.LETTER_FADE_DURATION[0] +
+						Math.random() *
+							(this.LETTER_FADE_DURATION[1] - this.LETTER_FADE_DURATION[0])) *
+						1000;
 
-				this.letterInstances.push({
-					x: randomLetter[0].x,
-					y: randomLetter[0].y,
-					letter: randomLetter[0].letter,
-					timestamp: Date.now(),
-					fadeout:
-						Date.now() +
-						(this.LETTER_FADE_DURATION[0] +
-							Math.random() *
-								(this.LETTER_FADE_DURATION[1] - this.LETTER_FADE_DURATION[0])) *
-							1000,
+				nextInstances.push({
+					x: randomLetter.x,
+					y: randomLetter.y,
+					letter: randomLetter.letter,
+					timestamp: replacementTimestamp,
+					fadeout: replacementFadeout,
 				});
+				continue;
 			}
 
 			this.overlayCtx.fillStyle = `rgba(${this.primaryRgb}, ${alpha})`;
 			this.overlayCtx.shadowColor = `rgba(${this.primaryRgb}, ${alpha})`;
 			this.overlayCtx.fillText(letter.letter, letter.x, letter.y);
+			nextInstances.push(letter);
 		}
 
-		requestAnimationFrame(this.redrawBackground);
+		this.letterInstances = nextInstances;
+
+		this.scheduleNextFrame();
 	};
 
-	/**
-	 * Resizes the background canvases.
-	 */
 	public resizeBackground = () => {
+		this.cancelAnimationFrame();
+		this.resizeRequested = false;
+
 		this.width = window.innerWidth;
 		this.height = window.innerHeight;
+
+		this.refreshAnimationProfile();
 
 		this.baseCanvas.width = this.width;
 		this.baseCanvas.height = this.height;
@@ -276,9 +412,6 @@ class PageBackground {
 	};
 }
 
-/**
- * Loads the Geist Mono font. We have to do this asynchronously because the font is not preloaded.
- */
 async function loadFont() {
 	const font = new FontFace("Geist Mono", "url(/fonts/GeistMono.woff2)");
 
@@ -287,10 +420,7 @@ async function loadFont() {
 	document.fonts.add(font);
 }
 
-/**
- * First loads the Geist Mono font, then initializes the background.
- */
-async function initializeBackground() {
+async function initialiseBackground() {
 	await loadFont();
 
 	const canvas = document.getElementById("bg-canvas") as HTMLCanvasElement;
@@ -301,8 +431,8 @@ async function initializeBackground() {
 	const background = new PageBackground(canvas, overlayCanvas);
 
 	window.addEventListener("resize", () => {
-		background.resizeBackground();
+		background.scheduleResize();
 	});
 }
 
-initializeBackground();
+initialiseBackground();

@@ -7,196 +7,330 @@ const isHome = path === "/" || path === "";
 const isProjects = path.startsWith("/projects");
 const isContact = path === "/contact" || path.startsWith("/contact/");
 ---
-<nav>
+<nav aria-label="Primary">
   <a class="site-title" href="/">{name}</a>
-  <ul>
+  <ul id="primary-navigation">
     <li>
-      <a href="/" class:list={{ active: isHome }}>Home</a>
+      <a href="/" class:list={{ active: isHome }} aria-current={isHome ? "page" : undefined}>Home</a>
     </li>
-    <li class="nav-separator">/</li>
+    <li class="nav-separator" aria-hidden="true">/</li>
     <li>
-      <a href="/projects" class:list={{ active: isProjects }}>Projects</a>
+      <a href="/projects" class:list={{ active: isProjects }} aria-current={isProjects ? "page" : undefined}>Projects</a>
     </li>
-    <li class="nav-separator">/</li>
+    <li class="nav-separator" aria-hidden="true">/</li>
     <li>
-      <a href="/contact" class:list={{ active: isContact }}>Contact</a>
+      <a href="/contact" class:list={{ active: isContact }} aria-current={isContact ? "page" : undefined}>Contact</a>
     </li>
-    <li class="nav-separator">/</li>
+    <li class="nav-separator" aria-hidden="true">/</li>
     <li>
-      <input id="search" type="text" placeholder="Search (Ctrl+K)" />
-      <div id="search-results"></div>
+      <label class="sr-only" for="search">Search the site</label>
+      <input id="search" type="text" placeholder="Search (Ctrl+K)" autocomplete="off" />
+      <div id="search-results" aria-live="polite" aria-label="Search results"></div>
     </li>
-    <li class="nav-separator">/</li>
+    <li class="nav-separator" aria-hidden="true">/</li>
     <li>
       <button type="button" id="theme-toggle" aria-label="Toggle theme"><span class="theme-toggle-icons"><Icon type="lucide" name="sun" width={16} height={16} class="theme-icon" /><Icon type="lucide" name="moon" width={16} height={16} class="theme-icon" /></span></button>
     </li>
   </ul>
-  <button class="mobile-nav-toggle" aria-label="Mobile menu trigger">
+  <button class="mobile-nav-toggle" type="button" aria-label="Open navigation menu" aria-controls="primary-navigation" aria-expanded="false">
     <Icon type="lucide" name="menu" width={24} height={24} class="menu-closed" />
     <Icon type="lucide" name="x" width={24} height={24} class="menu-open" />
   </button>
 </nav>
 <script is:inline>
-  const themeToggle = document.getElementById('theme-toggle');
-  
-  // Check for saved theme preference or default to dark
-  const savedTheme = localStorage.getItem('theme');
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const theme = savedTheme || (prefersDark ? 'dark' : 'light');
-  
-  document.documentElement.setAttribute('data-theme', theme);
-  
-  function updateThemeIcon() {
-    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-    const icons = themeToggle?.querySelectorAll('.theme-icon');
-    const sun = icons?.[0];
-    const moon = icons?.[1];
-    sun?.classList.toggle('hidden', isDark);
-    moon?.classList.toggle('hidden', !isDark);
+(() => {
+  const themeToggle = document.getElementById("theme-toggle");
+  const nav = document.querySelector("nav");
+  const navToggle = document.querySelector(".mobile-nav-toggle");
+  const searchElement = document.querySelector("#search");
+  const searchResults = document.querySelector("#search-results");
+  const navLinks = document.querySelectorAll('nav a[href="/"], nav a[href="/projects"], nav a[href="/contact"]');
+
+  if (!themeToggle || !nav || !navToggle || !searchElement || !searchResults) {
+    console.warn("Navbar skipped initialisation because expected nodes were missing.");
+    return;
   }
-  
+
+  const searchEndpoint = "/pagefind/pagefind.js";
+  const mobileQuery = window.matchMedia("(max-width: 640px)");
+  const themeStorageKey = "theme";
+  let pagefindModule = null;
+  let searchDebounceId;
+  let searchRequestId = 0;
+  let currentFocusIndex = -1;
+
+  const getStoredTheme = () => {
+    try {
+      return localStorage.getItem(themeStorageKey);
+    } catch {
+      return null;
+    }
+  };
+
+  const setStoredTheme = (theme) => {
+    try {
+      localStorage.setItem(themeStorageKey, theme);
+    } catch {
+      // Keep the UI working even when storage is unavailable.
+    }
+  };
+
+  const savedTheme = getStoredTheme();
+  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const initialTheme = savedTheme ?? (prefersDark ? "dark" : "light");
+
+  document.documentElement.setAttribute("data-theme", initialTheme);
+
+  const setThemeToggleLabel = () => {
+    const isDark = document.documentElement.getAttribute("data-theme") === "dark";
+    themeToggle.setAttribute("aria-label", isDark ? "Switch to light theme" : "Switch to dark theme");
+  };
+
+  const updateThemeIcon = () => {
+    const isDark = document.documentElement.getAttribute("data-theme") === "dark";
+    const icons = themeToggle.querySelectorAll(".theme-icon");
+    const sun = icons[0];
+    const moon = icons[1];
+    sun?.classList.toggle("hidden", isDark);
+    moon?.classList.toggle("hidden", !isDark);
+    setThemeToggleLabel();
+  };
+
+  const createSearchResult = (data) => {
+    const link = document.createElement("a");
+    link.href = data.url;
+
+    const title = document.createElement("h3");
+    title.className = "no-mt";
+    title.textContent = data?.meta?.title ?? "Untitled result";
+
+    const excerpt = document.createElement("p");
+    excerpt.textContent = String(data?.excerpt ?? "").replace(/<[^>]*>/g, "");
+
+    link.append(title, excerpt);
+    return link;
+  };
+
+  const renderSearchResults = (items, query) => {
+    searchResults.replaceChildren();
+
+    if (query.length > 0 && items.length === 0) {
+      const empty = document.createElement("p");
+      empty.style.marginTop = "0";
+      empty.textContent = "No results found";
+      searchResults.append(empty);
+      searchResults.classList.add("active");
+      return;
+    }
+
+    const fragment = document.createDocumentFragment();
+    items.forEach((item, index) => {
+      fragment.append(createSearchResult(item));
+      if (index < items.length - 1) {
+        const separator = document.createElement("hr");
+        separator.className = "separator";
+        separator.setAttribute("aria-hidden", "true");
+        fragment.append(separator);
+      }
+    });
+
+    searchResults.append(fragment);
+    searchResults.classList.add("active");
+  };
+
+  const setMobileNavOpen = (open) => {
+    nav.classList.toggle("active", open);
+    navToggle.classList.toggle("active", open);
+    navToggle.setAttribute("aria-expanded", String(open));
+    navToggle.setAttribute("aria-label", open ? "Close navigation menu" : "Open navigation menu");
+  };
+
+  const updateSearchPlaceholder = () => {
+    searchElement.placeholder = mobileQuery.matches ? "Search" : "Search (Ctrl+K)";
+  };
+
+  const closeSearchResults = () => {
+    searchResults.classList.remove("active");
+    currentFocusIndex = -1;
+  };
+
+  const getResultLinks = () => searchResults.querySelectorAll("a");
+
+  const isSearchContextActive = () => {
+    const activeElement = document.activeElement;
+
+    return (
+      searchResults.classList.contains("active") &&
+      (activeElement === searchElement || searchResults.contains(activeElement))
+    );
+  };
+
+  const getSearchApi = async () => {
+    if (pagefindModule) {
+      return pagefindModule;
+    }
+
+    try {
+      pagefindModule = await import(searchEndpoint);
+      if (typeof pagefindModule.init === "function") {
+        await pagefindModule.init();
+      }
+      return pagefindModule;
+    } catch (error) {
+      console.error("Failed to initialise Pagefind:", error);
+      return null;
+    }
+  };
+
+  const runSearch = async (query, requestId) => {
+    const api = await getSearchApi();
+    if (!api || typeof api.search !== "function" || requestId !== searchRequestId) {
+      return;
+    }
+
+    const search = await api.search(query);
+    if (requestId !== searchRequestId) {
+      return;
+    }
+
+    const items = [];
+    for (const result of search.results ?? []) {
+      items.push(await result.data());
+      if (requestId !== searchRequestId) {
+        return;
+      }
+    }
+
+    renderSearchResults(items, query);
+  };
+
+  const scheduleSearch = (query) => {
+    clearTimeout(searchDebounceId);
+    searchRequestId += 1;
+    const requestId = searchRequestId;
+
+    if (!query.trim()) {
+      closeSearchResults();
+      searchResults.replaceChildren();
+      return;
+    }
+
+    searchDebounceId = window.setTimeout(() => {
+      void runSearch(query, requestId);
+    }, 180);
+  };
+
+  const moveSearchFocus = (step) => {
+    if (!isSearchContextActive()) {
+      return false;
+    }
+
+    const links = getResultLinks();
+    if (!links.length) {
+      return false;
+    }
+
+    currentFocusIndex = (currentFocusIndex + step + links.length) % links.length;
+    links[currentFocusIndex]?.focus();
+    return true;
+  };
+
   updateThemeIcon();
-  
-  themeToggle?.addEventListener('click', () => {
-    const currentTheme = document.documentElement.getAttribute('data-theme');
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
+  updateSearchPlaceholder();
+  setMobileNavOpen(false);
+
+  themeToggle.addEventListener("click", () => {
+    const currentTheme = document.documentElement.getAttribute("data-theme");
+    const nextTheme = currentTheme === "dark" ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", nextTheme);
+    setStoredTheme(nextTheme);
     updateThemeIcon();
   });
 
-  const searchElement = document.querySelector('#search');
-  const results = document.querySelector('#search-results');
-  const navToggle = document.querySelector('.mobile-nav-toggle');
-
-  let focusIndex = -1;
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'k' && e.ctrlKey) {
-      searchElement.focus();
-    }
-
-    if (e.key === 'Escape') {
-      searchElement.blur();
-      results.classList.remove('active');
-      focusIndex = -1;
-    }
-
-    if (e.key === 'ArrowDown') {
-      e.preventDefault();
-
-      focusIndex++;
-      const results = document.querySelectorAll('#search-results a');
-
-      if (focusIndex >= results.length) {
-        focusIndex = 0;
-      }
-
-      results[focusIndex]?.focus();
-    }
-
-    if (e.key === 'ArrowUp') {
-      e.preventDefault();
-
-      focusIndex--;
-      const results = document.querySelectorAll('#search-results a');
-
-      if (focusIndex < 0) {
-        focusIndex = results.length - 1;
-      }
-
-      results[focusIndex]?.focus();
-    }
+  navToggle.addEventListener("click", () => {
+    const nextOpen = navToggle.getAttribute("aria-expanded") !== "true";
+    setMobileNavOpen(nextOpen);
   });
 
-  let pagefindInitialized = false;
-
-  searchElement?.addEventListener('focus', async () => {
-    searchElement.placeholder = '';
-    results.classList.add('active');
-    
-    // initialize pagefind on first focus
-    if (!pagefindInitialized) {
-      try {
-        window.pagefind = await import("/pagefind/pagefind.js");
-        await window.pagefind.init();
-        pagefindInitialized = true;
-      } catch (error) {
-        console.error('Failed to initialize Pagefind:', error);
-      }
-    }
+  searchElement.addEventListener("focus", async () => {
+    searchElement.placeholder = "";
+    searchResults.classList.add("active");
+    void getSearchApi();
   });
-  
-  searchElement?.addEventListener('blur', () => {
-    handleTabletChange();
-    setTimeout(() => {
-      if (!document.activeElement?.closest('#search-results')) {
-        results.classList.remove('active');
-        focusIndex = -1;
+
+  searchElement.addEventListener("blur", () => {
+    updateSearchPlaceholder();
+    window.setTimeout(() => {
+      if (!document.activeElement?.closest("#search-results")) {
+        closeSearchResults();
       }
     }, 1);
   });
 
-  results?.addEventListener('focusout', (e) => {
-    if (!e.relatedTarget?.closest('#search-results')) {
-      results.classList.remove('active');
-      focusIndex = -1;
+  searchResults.addEventListener("focusout", (event) => {
+    if (!event.relatedTarget?.closest("#search-results")) {
+      closeSearchResults();
     }
   });
 
-  searchElement?.addEventListener('input', async (e) => {
-    // only search if Pagefind is ready
-    if (!pagefindInitialized) {
+  searchElement.addEventListener("input", () => {
+    scheduleSearch(searchElement.value);
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.ctrlKey && event.key === "k") {
+      event.preventDefault();
+      searchElement.focus();
+      searchElement.select();
       return;
     }
 
-    results.innerHTML = '';
-    let searchResultHtml = '';
-
-    const search = await window.pagefind.search(e.target.value);
-
-    let i = 0;
-    for (const result of search.results) {
-      i++;
-
-      const data = await result.data();
-      
-      searchResultHtml += `
-        <a href="${data.url}">
-          <h3 class="no-mt">${data.meta.title}</h3>
-          <p>${data.excerpt}</p>
-        </a>
-        ${i < search.results.length ? '<hr class="separator">' : ''}
-      `;
+    if (event.key === "Escape") {
+      closeSearchResults();
+      setMobileNavOpen(false);
+      searchElement.blur();
+      return;
     }
 
-    if (search.results.length === 0 && e.target.value.length > 0) {
-      results.innerHTML = '<p style="margin-top: 0;">No results found</p>';
-    } else {
-      results.innerHTML = searchResultHtml;
+    if (event.key === "ArrowDown" && moveSearchFocus(1)) {
+      event.preventDefault();
+      return;
     }
 
-    results.classList.add('active');
+    if (event.key === "ArrowUp" && moveSearchFocus(-1)) {
+      event.preventDefault();
+      return;
+    }
   });
 
-  navToggle?.addEventListener('click', () => {
-    navToggle.classList.toggle('active');
-    document.querySelector('nav').classList.toggle('active');
+  mobileQuery.addEventListener("change", updateSearchPlaceholder);
+  window.addEventListener("resize", updateSearchPlaceholder);
+
+  navLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      if (mobileQuery.matches) {
+        setMobileNavOpen(false);
+      }
+    });
   });
-
-  const handleTabletChange = () => {
-    if (window.matchMedia('(max-width: 640px)').matches) {
-      searchElement.placeholder = 'Search';
-    } else {
-      searchElement.placeholder = 'Search (Ctrl+K)';
-    }
-  }
-
-  document.addEventListener('DOMContentLoaded', handleTabletChange);
-  document.addEventListener('resize', handleTabletChange);
+})();
 </script>
 <style>
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+
   nav {
+    --nav-mobile-trigger-size: 40px;
+    --nav-mobile-panel-offset: calc(1rem + var(--nav-mobile-trigger-size));
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -367,6 +501,7 @@ const isContact = path === "/contact" || path.startsWith("/contact/");
 
   @media screen and (max-width: 640px) {
     nav {
+      --nav-mobile-trigger-size: 44px;
       padding: 0 1rem;
       padding-top: 1rem;
       transition: all .25s ease;
@@ -385,7 +520,7 @@ const isContact = path === "/contact" || path.startsWith("/contact/");
       gap: 0;
       position: absolute;
       width: 100%;
-      top: calc(1rem + 40px);
+      top: var(--nav-mobile-panel-offset);
       right: 0;
       padding: 1rem;
       z-index: 1;
@@ -393,7 +528,7 @@ const isContact = path === "/contact" || path.startsWith("/contact/");
       pointer-events: none;
       transition: all .25s ease;
       user-select: none;
-      height: calc(100vh - 1rem - 40px);
+      height: calc(100vh - var(--nav-mobile-panel-offset));
       align-items: start;
     }
 
@@ -420,7 +555,8 @@ const isContact = path === "/contact" || path.startsWith("/contact/");
   
     nav ul li a {
       display: block;
-      padding: .75rem 0;
+      min-height: 44px;
+      padding: .875rem 0;
       width: 100%;
       padding-left: 1rem;
     }
@@ -437,13 +573,22 @@ const isContact = path === "/contact" || path.startsWith("/contact/");
       width: 100%;
       max-width: none;
       min-width: 0;
-      padding: .75rem 1rem;
+      min-height: 44px;
+      padding: .875rem 1rem;
     }
 
     #search-results {
       width: 100%;
       top: 100%;
       font-size: var(--text-size-sm);
+    }
+
+    #theme-toggle,
+    .mobile-nav-toggle {
+      width: var(--nav-mobile-trigger-size);
+      height: var(--nav-mobile-trigger-size);
+      min-width: var(--nav-mobile-trigger-size);
+      min-height: var(--nav-mobile-trigger-size);
     }
   }
 </style>
