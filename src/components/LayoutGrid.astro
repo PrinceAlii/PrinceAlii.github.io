@@ -11,7 +11,7 @@
     align-items: start;
     align-content: stretch;
     display: grid;
-    gap: 2rem;
+    gap: var(--space-section);
     grid-template-columns: minmax(18.5rem, 2fr) 5fr;
     grid-template-rows: auto;
   }
@@ -25,7 +25,7 @@
   @media screen and (max-width: 640px) {
     .layout-grid {
       margin: 0 1rem;
-      gap: 1rem;
+      gap: var(--space-md);
     }
   }
 </style>

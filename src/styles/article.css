@@ -7,9 +7,28 @@ article h4 {
 }
 
 article {
+	--article-overlay-bg: var(--text-on-primary);
+	--article-overlay-fg: var(--bg-color);
+	--article-inline-code-bg: var(--border-color);
+	--article-inline-code-fg: var(--text-color);
+	--article-inline-code-border: transparent;
+	--article-toc-hover-bg: var(--primary);
+	--article-toc-hover-fg: var(--text-on-primary);
 	font-size: var(--text-size-body);
 	line-height: var(--text-leading-body);
 	min-width: 0;
+}
+
+[data-theme="light"] article {
+	--article-overlay-bg: var(--card-bg);
+	--article-overlay-fg: var(--text-color);
+	--article-inline-code-bg: color-mix(
+		in srgb,
+		var(--card-bg) 88%,
+		var(--primary) 12%
+	);
+	--article-inline-code-fg: var(--text-color);
+	--article-inline-code-border: var(--border-color);
 }
 
 article :where(p, li) {
@@ -60,7 +79,14 @@ p img {
 }
 
 .toc-card ol li a:hover {
-	color: white;
+	background: var(--article-toc-hover-bg);
+	color: var(--article-toc-hover-fg);
+	text-decoration: none;
+}
+
+.toc-card ol li a:focus-visible {
+	background: var(--article-toc-hover-bg);
+	color: var(--article-toc-hover-fg);
 	text-decoration: none;
 }
 
@@ -112,7 +138,7 @@ ol li a.active {
 .article-h1 {
 	margin-bottom: 0;
 	font-size: clamp(1.65rem, 1.3rem + 1.4vw, 2.4rem);
-	background: #ffffff;
+	background: var(--article-overlay-bg);
 	padding: 0.25rem 0.675rem;
 	box-decoration-break: clone;
 	-webkit-box-decoration-break: clone;
@@ -121,7 +147,7 @@ ol li a.active {
 	letter-spacing: var(--text-tracking-display);
 	font-weight: var(--text-weight-display);
 	display: inline;
-	color: #000000;
+	color: var(--article-overlay-fg);
 }
 
 .article-info {
@@ -131,8 +157,8 @@ ol li a.active {
 	font-family: "Geist Mono", "Courier New", Courier, monospace;
 	font-size: var(--text-size-sm);
 	line-height: var(--text-leading-meta);
-	background: #ffffff;
-	color: #000000;
+	background: var(--article-overlay-bg);
+	color: var(--article-overlay-fg);
 	box-decoration-break: clone;
 	-webkit-box-decoration-break: clone;
 	padding: 0 0.75rem;
@@ -155,20 +181,22 @@ ol li a.active {
 		display: inline;
 		background-color: transparent;
 		padding: 0;
-		color: var(--text-on-primary);
+		color: var(--text-color);
 	}
 
 	.article-info {
 		display: block;
 		background-color: transparent;
 		padding: 0;
-		color: var(--text-on-primary);
+		color: var(--text-color);
 	}
 }
 
 code:not(.astro-code code) {
-	background-color: #353535;
+	background-color: var(--article-inline-code-bg);
+	color: var(--article-inline-code-fg);
 	padding: 0.125rem 0.25rem;
+	border: 1px solid var(--article-inline-code-border);
 	font-size: var(--text-size-sm);
 }
 
@@ -191,7 +219,7 @@ blockquote {
 	border-left: 2px solid var(--primary);
 	padding: 0.75rem 1rem;
 	margin-left: 0;
-	background-color: rgba(var(--primary-rgb), 0.25);
+	background-color: var(--surface-accent-soft);
 	width: 100%;
 }
 
