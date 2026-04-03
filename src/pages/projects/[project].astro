@@ -8,7 +8,6 @@ import { getCollection, render } from "astro:content";
 import type { GetStaticPaths } from "astro";
 import Card from "../../components/Card.astro";
 import Icon from "../../components/Icon.astro";
-import ImageGlow from "../../components/ImageGlow.astro";
 import Layout from "../../layouts/Layout.astro";
 
 interface Props {
@@ -66,16 +65,6 @@ const { Content } = await render(project);
 	<article slot="right" data-pagefind-body>
 		<Card>
 			<div class="article-header" id="_top" data-pagefind-ignore>
-				{
-					project.data.image && (
-						<ImageGlow
-							quality={100}
-							class="article-image"
-							src={project.data.image}
-							alt={project.data.title}
-						/>
-					)
-				}
 				<div class="header">
 					<div>
 						<h1 class="no-mt article-h1">{project.data.title}</h1>
