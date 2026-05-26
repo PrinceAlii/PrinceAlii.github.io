@@ -1,0 +1,43 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const writing = (await getCollection("writing", ({ data }) => !data.draft)).sort(
+	(a, b) => b.data.publishedDate.getTime() - a.data.publishedDate.getTime(),
+);
+---
+
+<BaseLayout title="Writing" description="Writing by Ali Bonagdaran.">
+	<header class="page-head">
+		<h1>Writing</h1>
+		<p class="lede">Notes will live here when they are worth publishing.</p>
+	</header>
+
+	{
+		writing.length > 0 ? (
+			<section class="writing-list" aria-label="Writing">
+				{writing.map((entry) => (
+					<article class="writing-item">
+						<div class="meta">
+							<p>
+								{new Intl.DateTimeFormat("en-AU", {
+									day: "numeric",
+									month: "long",
+									year: "numeric",
+								}).format(entry.data.publishedDate)}
+							</p>
+						</div>
+						<div>
+							<h3>{entry.data.title}</h3>
+							<p>{entry.data.description}</p>
+						</div>
+					</article>
+				))}
+			</section>
+		) : (
+			<section class="empty-state">
+				<p>No public notes yet.</p>
+			</section>
+		)
+	}
+</BaseLayout>
