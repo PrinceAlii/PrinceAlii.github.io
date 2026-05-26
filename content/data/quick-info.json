@@ -1,0 +1,22 @@
+[
+	{
+		"id": 1,
+		"icon": {
+			"type": "lucide",
+			"name": "map-pin"
+		},
+		"text": "Sydney, Australia"
+	},
+	{
+		"id": 2,
+		"icon": {
+			"type": "lucide",
+			"name": "graduation-cap"
+		},
+		"lines": [
+			"Bachelor of Information Technology",
+			"University of Technology Sydney",
+			"2023-2025"
+		]
+	}
+]
