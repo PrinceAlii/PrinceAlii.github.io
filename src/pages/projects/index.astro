@@ -1,0 +1,27 @@
+---
+import { getCollection } from "astro:content";
+import ProjectSummary from "../../components/ProjectSummary.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const projects = (await getCollection("projects")).sort((a, b) => {
+	const featured = Number(b.data.featured) - Number(a.data.featured);
+	return featured || a.data.title.localeCompare(b.data.title);
+});
+---
+
+<BaseLayout
+	title="Projects"
+	description="Selected projects by Ali Bonagdaran, including Reward Seat Finder and this Astro portfolio."
+>
+	<header class="page-head">
+		<h1>Projects</h1>
+		<p class="lede">
+			Selected builds with a focus on practical problems, durable architecture, and
+			clear technical tradeoffs.
+		</p>
+	</header>
+
+	<section class="project-list" aria-label="Selected projects">
+		{projects.map((project) => <ProjectSummary project={project} />)}
+	</section>
+</BaseLayout>

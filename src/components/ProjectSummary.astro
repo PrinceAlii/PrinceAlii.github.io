@@ -1,0 +1,39 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+type Props = {
+	project: CollectionEntry<"projects">;
+};
+
+const { project } = Astro.props;
+const slug = project.id.replace(/\.(md|mdx)$/, "");
+---
+
+<article class="project-summary">
+	<div class="meta">
+		<p>{project.data.techStack.join(", ")}</p>
+	</div>
+	<div class="summary-body">
+		<div>
+			<h3><a href={`/projects/${slug}`}>{project.data.title}</a></h3>
+			<p>{project.data.description}</p>
+		</div>
+		<div class="inline-links">
+			<a href={`/projects/${slug}`}>Read case study</a>
+			{
+				project.data.liveLink && (
+					<a href={project.data.liveLink} target="_blank" rel="noreferrer">
+						Live
+					</a>
+				)
+			}
+			{
+				project.data.githubLink && (
+					<a href={project.data.githubLink} target="_blank" rel="noreferrer">
+						Source
+					</a>
+				)
+			}
+		</div>
+	</div>
+</article>

@@ -1,0 +1,49 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export async function getStaticPaths() {
+	const projects = await getCollection("projects");
+
+	return projects.map((project) => ({
+		params: { slug: project.id.replace(/\.(md|mdx)$/, "") },
+		props: { project },
+	}));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+---
+
+<BaseLayout title={project.data.title} description={project.data.description}>
+	<header class="page-head">
+		<a class="back-link" href="/projects">Back to projects</a>
+		<h1>{project.data.title}</h1>
+		<p class="lede">{project.data.description}</p>
+	</header>
+
+	<article class="project-detail">
+		<aside class="meta" aria-label="Project details">
+			<p>{project.data.techStack.join(", ")}</p>
+			<div class="inline-links">
+				{
+					project.data.liveLink && (
+						<a href={project.data.liveLink} target="_blank" rel="noreferrer">
+							Live
+						</a>
+					)
+				}
+				{
+					project.data.githubLink && (
+						<a href={project.data.githubLink} target="_blank" rel="noreferrer">
+							Source
+						</a>
+					)
+				}
+			</div>
+		</aside>
+		<div class="prose">
+			<Content />
+		</div>
+	</article>
+</BaseLayout>
