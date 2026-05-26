@@ -163,10 +163,13 @@ main {
 	text-decoration: none;
 }
 
-.site-nav a[aria-current="page"],
+.site-nav a[aria-current="page"] {
+	color: var(--color-text);
+}
+
 .site-nav a:hover,
 .header-links a:hover {
-	color: var(--color-text);
+	color: var(--color-accent-soft);
 }
 
 .site-footer {
@@ -265,6 +268,12 @@ main {
 .text-link {
 	color: var(--color-text);
 	font-weight: 600;
+}
+
+.contact-links a:hover,
+.inline-links a:hover,
+.text-link:hover {
+	color: var(--color-accent-soft);
 }
 
 .project-list,
