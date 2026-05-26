@@ -449,6 +449,14 @@ main {
 
 	.site-nav {
 		justify-content: flex-start;
+		flex-wrap: nowrap;
+		width: 100%;
+		padding-bottom: 0.25rem;
+		overflow-x: auto;
+		overflow-y: hidden;
+		scrollbar-width: none;
+		white-space: nowrap;
+		-webkit-overflow-scrolling: touch;
 	}
 
 	.hero-aside {
@@ -460,7 +468,13 @@ main {
 
 	.site-nav a,
 	.header-links a {
+		padding-inline: 0.125rem;
+		font-size: 0.82rem;
 		min-height: 44px;
+	}
+
+	.site-nav::-webkit-scrollbar {
+		display: none;
 	}
 
 	.project-summary,
