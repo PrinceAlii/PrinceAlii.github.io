@@ -2,9 +2,15 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
-const writing = (await getCollection("writing", ({ data }) => !data.draft)).sort(
-	(a, b) => b.data.publishedDate.getTime() - a.data.publishedDate.getTime(),
-);
+const writing = await (async () => {
+	try {
+		return (await getCollection("writing", ({ data }) => !data.draft)).sort(
+			(a, b) => b.data.publishedDate.getTime() - a.data.publishedDate.getTime(),
+		);
+	} catch {
+		return [];
+	}
+})();
 ---
 
 <BaseLayout title="Writing" description="Writing by Ali Bonagdaran.">

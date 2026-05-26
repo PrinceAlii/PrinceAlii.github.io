@@ -3,8 +3,14 @@ import { getCollection } from "astro:content";
 import ContactLinks from "./ContactLinks.astro";
 
 const pathname = Astro.url.pathname;
-const writing = await getCollection("writing", ({ data }) => !data.draft);
-const showWriting = writing.length > 0;
+
+let showWriting = false;
+try {
+	const writing = await getCollection("writing", ({ data }) => !data.draft);
+	showWriting = writing.length > 0;
+} catch {
+	showWriting = false;
+}
 
 const navItems = [
 	{ label: "Home", href: "/" },
