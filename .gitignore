@@ -1,0 +1,8 @@
+AGENTS.md
+.impeccable.md
+.astro/
+dist/
+node_modules/
+.DS_Store
+*.log
+coverage/
