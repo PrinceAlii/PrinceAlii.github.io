@@ -3,7 +3,7 @@
 	--color-bg: #0f172a;
 	--color-surface: #111827;
 	--color-surface-soft: #101827;
-	--color-text: #f8fafc;
+	--color-text: #eeece7;
 	--color-body: #cbd5e1;
 	--color-muted: #94a3b8;
 	--color-border: rgba(148, 163, 184, 0.24);
@@ -289,6 +289,12 @@ main {
 .experience-item h3,
 .writing-item h3 {
 	margin-bottom: 0.55rem;
+}
+
+.project-title {
+	text-decoration: none;
+	font-size: clamp(1.25rem, 2.8vw, 1.6rem);
+	font-weight: 700;
 }
 
 .meta {

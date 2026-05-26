@@ -15,7 +15,7 @@ const slug = project.id.replace(/\.(md|mdx)$/, "");
 	</div>
 	<div class="summary-body">
 		<div>
-			<h3><a href={`/projects/${slug}`}>{project.data.title}</a></h3>
+			<h3><a class="project-title" href={`/projects/${slug}`}>{project.data.title}</a></h3>
 			<p>{project.data.description}</p>
 		</div>
 		<div class="inline-links">
@@ -23,7 +23,7 @@ const slug = project.id.replace(/\.(md|mdx)$/, "");
 			{
 				project.data.liveLink && (
 					<a href={project.data.liveLink} target="_blank" rel="noreferrer">
-						Live
+						Live ↗
 					</a>
 				)
 			}
