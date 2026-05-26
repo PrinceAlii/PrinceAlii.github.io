@@ -15,7 +15,7 @@ const links = [
 		links.map((link) => (
 			<a
 				href={link.href}
-				rel={link.external ? "noreferrer" : undefined}
+				rel={link.external ? "noopener noreferrer" : undefined}
 				target={link.external ? "_blank" : undefined}
 			>
 				{link.label}

@@ -22,14 +22,14 @@ const slug = project.id.replace(/\.(md|mdx)$/, "");
 			<a href={`/projects/${slug}`}>Read case study</a>
 			{
 				project.data.liveLink && (
-					<a href={project.data.liveLink} target="_blank" rel="noreferrer">
+					<a href={project.data.liveLink} target="_blank" rel="noopener noreferrer">
 						Live ↗
 					</a>
 				)
 			}
 			{
 				project.data.githubLink && (
-					<a href={project.data.githubLink} target="_blank" rel="noreferrer">
+					<a href={project.data.githubLink} target="_blank" rel="noopener noreferrer">
 						Source
 					</a>
 				)
