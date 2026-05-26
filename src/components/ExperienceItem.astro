@@ -1,0 +1,43 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { render } from "astro:content";
+
+type Props = {
+	entry: CollectionEntry<"experience">;
+};
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+const dateFormat = new Intl.DateTimeFormat("en-AU", {
+	month: "short",
+	year: "numeric",
+});
+
+const formatDate = (date: Date | "Present") => (date === "Present" ? date : dateFormat.format(date));
+---
+
+<article class="experience-item">
+	<div class="meta">
+		<p>{formatDate(entry.data.startDate)} - {formatDate(entry.data.endDate)}</p>
+		<p>{entry.data.location}</p>
+	</div>
+	<div class="summary-body">
+		<div>
+			<h3>{entry.data.title}</h3>
+			<p class="meta">{entry.data.company}</p>
+		</div>
+		<div class="prose">
+			<Content />
+		</div>
+		{
+			entry.data.skills.length > 0 && (
+				<ul class="skill-list" aria-label={`${entry.data.title} skills`}>
+					{entry.data.skills.map((skill) => (
+						<li>{skill}</li>
+					))}
+				</ul>
+			)
+		}
+	</div>
+</article>

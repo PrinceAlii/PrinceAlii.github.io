@@ -1,0 +1,26 @@
+---
+import { getCollection } from "astro:content";
+import ExperienceItem from "../components/ExperienceItem.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const experience = (await getCollection("experience")).sort(
+	(a, b) => b.data.startDate.getTime() - a.data.startDate.getTime(),
+);
+---
+
+<BaseLayout
+	title="Experience"
+	description="A chronological overview of Ali Bonagdaran's DevOps, banking, public sector, and service experience."
+>
+	<header class="page-head">
+		<h1>Experience</h1>
+		<p class="lede">
+			A compact record of platform engineering work, customer-facing roles, and the
+			operational judgement that connects them.
+		</p>
+	</header>
+
+	<section class="experience-list" aria-label="Work experience">
+		{experience.map((entry) => <ExperienceItem entry={entry} />)}
+	</section>
+</BaseLayout>
