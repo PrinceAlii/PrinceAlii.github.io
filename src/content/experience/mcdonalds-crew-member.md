@@ -11,4 +11,4 @@ skills:
   - Reliability
 ---
 
-Worked in a fast-paced service environment with a focus on consistency, teamwork, and reliability across busy shifts.
+Worked in a fast paced service environment with a focus on consistency, teamwork, and reliability across busy shifts.

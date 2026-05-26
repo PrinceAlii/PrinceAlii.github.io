@@ -11,6 +11,6 @@ skills:
   - Problem Solving
 ---
 
-Helped customers navigate digital and in-person government services, balancing procedural accuracy with calm, direct communication.
+Helped customers navigate digital and in person government services, balancing procedural accuracy with calm, direct communication.
 
 The experience built a strong service baseline for triage, stakeholder support, and working through ambiguous problems.

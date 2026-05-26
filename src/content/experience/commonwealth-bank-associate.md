@@ -11,6 +11,6 @@ skills:
   - Communication
 ---
 
-Supported business banking customers in a high-trust environment where accuracy, clear communication, and reliable service were critical.
+Supported business banking customers in a high trust environment where accuracy, clear communication, and reliable service were critical.
 
-The role strengthened customer-facing judgement, escalation habits, and the ability to explain complex operational issues clearly.
+The role strengthened customer facing judgement, escalation habits, and the ability to explain complex operational issues clearly.

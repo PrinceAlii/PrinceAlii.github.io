@@ -1,6 +1,6 @@
 ---
 title: "Reward Seat Finder"
-description: "An Australian-market tool for finding frequent flyer reward seats on Qantas and Velocity."
+description: "An Australian market tool for finding frequent flyer reward seats on Qantas and Velocity."
 techStack:
   - Next.js
   - Playwright
@@ -20,13 +20,13 @@ Finding reward flights on Qantas and Velocity is slow. I wanted a fast, utilitar
 
 The app uses a Next.js frontend backed by PostgreSQL, Prisma, and Redis. The heavy lifting happens in a separate Node.js worker running Playwright and Chromium.
 
-It is deployed on AWS using Terraform and runs on a Graviton2 ARM64 instance. CI/CD pushes multi-platform Docker images to ECR, and Docker Compose handles orchestration through AWS SSM.
+It is deployed on AWS using Terraform and runs on a Graviton2 ARM64 instance. CI/CD pushes multi platform Docker images to ECR, and Docker Compose handles orchestration through AWS SSM.
 
 ## Technical decisions
 
-Scraping airlines headless means dealing with anti-bot systems, transient network drops, and page state changing underneath the worker.
+Scraping airlines headless means dealing with anti bot systems, transient network drops, and page state changing underneath the worker.
 
-For Velocity, I guarded `page.evaluate` calls against SPA navigations, handled transient Chromium timeouts, and managed browser user agents to reduce Imperva blocks. For Qantas, I built region-mode fanout that respects rate limits by serializing source calls. When broad month-view lookups started returning 403s, I added fallback logic to pivot into single-page, day-by-day probes.
+For Velocity, I guarded `page.evaluate` calls against SPA navigations, handled transient Chromium timeouts, and managed browser user agents to reduce Imperva blocks. For Qantas, I built region mode fanout that respects rate limits by serializing source calls. When broad month view lookups started returning 403s, I added fallback logic to pivot into single page, day by day probes.
 
 ## Outcome
 

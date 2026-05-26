@@ -12,4 +12,4 @@ skills:
   - Developer Tooling
 ---
 
-Worked across cloud platform support, DevOps workflows, and internal developer tooling while building deeper experience with production infrastructure and team-facing engineering systems.
+Worked across cloud platform support, DevOps workflows, and internal developer tooling while building deeper experience with production infrastructure and team facing engineering systems.
