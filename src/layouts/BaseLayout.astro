@@ -1,0 +1,42 @@
+---
+import SiteFooter from "../components/SiteFooter.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import "../styles/global.css";
+
+type Props = {
+	title: string;
+	description?: string;
+};
+
+const {
+	title,
+	description = "Ali Bonagdaran is a Sydney-based DevOps engineer focused on cloud platforms, developer tooling, and reliable engineering workflows.",
+} = Astro.props;
+
+const siteUrl = Astro.site ?? new URL("https://princealii.github.io");
+const canonical = new URL(Astro.url.pathname, siteUrl);
+const pageTitle = `${title} | Ali Bonagdaran`;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>{pageTitle}</title>
+		<meta name="description" content={description} />
+		<meta name="theme-color" content="#0f172a" />
+		<link rel="canonical" href={canonical.href} />
+		<meta property="og:title" content={pageTitle} />
+		<meta property="og:description" content={description} />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={canonical.href} />
+	</head>
+	<body>
+		<SiteHeader />
+		<main>
+			<slot />
+		</main>
+		<SiteFooter />
+	</body>
+</html>
