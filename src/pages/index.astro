@@ -1,6 +1,6 @@
 ---
 import { getCollection } from "astro:content";
-import ContactLinks from "../components/ContactLinks.astro";
+
 import ProjectSummary from "../components/ProjectSummary.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
@@ -20,7 +20,11 @@ const featuredProjects = projects
 				Sydney based DevOps engineer focused on cloud platforms, developer tooling, and
 				reliable engineering workflows.
 			</p>
-			<ContactLinks />
+			<div class="contact-links">
+				<a href="https://www.linkedin.com/in/alibonagdaran/" target="_blank" rel="noreferrer">LinkedIn</a>
+				<a href="https://github.com/PrinceAlii" target="_blank" rel="noreferrer">GitHub</a>
+				<a href="/resume.pdf">Resume</a>
+			</div>
 		</div>
 
 		<aside class="hero-aside" aria-label="Quick facts">
@@ -44,26 +48,24 @@ const featuredProjects = projects
 	<section class="section" aria-labelledby="work-heading">
 		<div class="section-heading">
 			<h2 id="work-heading">Current work</h2>
-			<p>
-				At the ABS, I support a Coder cloud development environment on AWS used by around
-				250 daily users, maintain platform services on Kubernetes/EKS, and help teams
-				with CI/CD troubleshooting and migration work.
-			</p>
+			<div>
+				<p>
+					At the ABS, I support a Coder cloud development environment on AWS used by
+					around 250 daily users, maintain platform services on Kubernetes/EKS, and
+					help teams with CI/CD troubleshooting and migration work.
+				</p>
+				<p>
+					I bring a mix of platform engineering and customer facing experience across
+					government and banking, where clear communication, incident triage, and
+					service quality were critical.
+				</p>
+			</div>
 		</div>
-		<p class="prose">
-			I bring a mix of platform engineering and customer facing experience across
-			government and banking, where clear communication, incident triage, and service
-			quality were critical.
-		</p>
 	</section>
 
 	<section class="section" aria-labelledby="projects-heading">
 		<div class="section-heading">
 			<h2 id="projects-heading">Projects</h2>
-			<p>
-				Two recent builds: one practical flight search tool, and this portfolio as a
-				fast content system for ongoing work.
-			</p>
 		</div>
 		<div class="project-list">
 			{featuredProjects.map((project) => <ProjectSummary project={project} />)}

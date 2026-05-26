@@ -10,7 +10,6 @@ const navItems = [
 	{ label: "Home", href: "/" },
 	{ label: "Experience", href: "/experience" },
 	{ label: "Projects", href: "/projects" },
-	{ label: "Contact", href: "/contact" },
 	...(showWriting ? [{ label: "Writing", href: "/writing" }] : []),
 ];
 
@@ -29,5 +28,8 @@ const isActive = (href: string) =>
 			))
 		}
 		<ContactLinks class="header-links" />
+		<a href="/contact" aria-current={isActive("/contact") ? "page" : undefined}>
+			Contact
+		</a>
 	</nav>
 </header>
