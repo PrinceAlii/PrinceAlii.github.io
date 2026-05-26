@@ -16,6 +16,7 @@ const {
 const siteUrl = Astro.site ?? new URL("https://princealii.github.io");
 const canonical = new URL(Astro.url.pathname, siteUrl);
 const pageTitle = `${title} | Ali Bonagdaran`;
+const ogImage = new URL("/social-card.svg", siteUrl);
 ---
 
 <!doctype html>
@@ -31,10 +32,16 @@ const pageTitle = `${title} | Ali Bonagdaran`;
 		<meta property="og:description" content={description} />
 		<meta property="og:type" content="website" />
 		<meta property="og:url" content={canonical.href} />
+		<meta property="og:image" content={ogImage.href} />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta property="og:image:alt" content="Ali Bonagdaran — DevOps Engineer" />
+		<meta name="twitter:card" content="summary_large_image" />
 	</head>
 	<body>
+		<a class="skip-link" href="#main-content">Skip to content</a>
 		<SiteHeader />
-		<main>
+		<main id="main-content" tabindex="-1">
 			<slot />
 		</main>
 		<SiteFooter />

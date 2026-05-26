@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="Ali Bonagdaran — DevOps Engineer">
+	<rect width="1200" height="630" fill="#0f172a"/>
+	<path d="M396 464 508 184h48l96 280h-48l-24-72H468l-24 72h-48Zm96-112h64l-32-88-32 88Z" fill="#f8fafc"/>
+	<path d="M404 512h224" stroke="#2563eb" stroke-width="32" stroke-linecap="square"/>
+	<text x="600" y="380" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="32" font-weight="600" text-anchor="middle">DevOps Engineer — Sydney, Australia</text>
+</svg>
