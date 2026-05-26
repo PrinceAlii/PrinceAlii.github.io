@@ -1,0 +1,27 @@
+---
+type Props = {
+	class?: string;
+};
+
+const className = Astro.props.class ?? "contact-links";
+
+const links = [
+	{ label: "LinkedIn", href: "https://www.linkedin.com/in/alibonagdaran/", external: true },
+	{ label: "GitHub", href: "https://github.com/PrinceAlii", external: true },
+	{ label: "Resume", href: "/resume.pdf", external: false },
+];
+---
+
+<div class={className}>
+	{
+		links.map((link) => (
+			<a
+				href={link.href}
+				rel={link.external ? "noreferrer" : undefined}
+				target={link.external ? "_blank" : undefined}
+			>
+				{link.label}
+			</a>
+		))
+	}
+</div>

@@ -1,0 +1,32 @@
+---
+import { getCollection } from "astro:content";
+import ContactLinks from "./ContactLinks.astro";
+
+const pathname = Astro.url.pathname;
+const writing = await getCollection("writing", ({ data }) => !data.draft);
+const showWriting = writing.length > 0;
+
+const navItems = [
+	{ label: "Home", href: "/" },
+	{ label: "Experience", href: "/experience" },
+	{ label: "Projects", href: "/projects" },
+	...(showWriting ? [{ label: "Writing", href: "/writing" }] : []),
+];
+
+const isActive = (href: string) =>
+	href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);
+---
+
+<header class="site-header">
+	<a class="site-mark" href="/">Ali Bonagdaran</a>
+	<nav class="site-nav" aria-label="Primary navigation">
+		{
+			navItems.map((item) => (
+				<a href={item.href} aria-current={isActive(item.href) ? "page" : undefined}>
+					{item.label}
+				</a>
+			))
+		}
+		<ContactLinks class="header-links" />
+	</nav>
+</header>
