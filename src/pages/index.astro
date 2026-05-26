@@ -1,0 +1,73 @@
+---
+import { getCollection } from "astro:content";
+import ContactLinks from "../components/ContactLinks.astro";
+import ProjectSummary from "../components/ProjectSummary.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const projects = await getCollection("projects");
+const featuredProjects = projects
+	.sort((a, b) => Number(b.data.featured) - Number(a.data.featured))
+	.slice(0, 2);
+---
+
+<BaseLayout title="Home">
+	<section class="hero" aria-labelledby="home-title">
+		<div class="hero-copy">
+			<div class="hero-title">
+				<p class="role">Graduate DevOps Engineer</p>
+				<h1 id="home-title">Ali Bonagdaran</h1>
+			</div>
+			<p class="lede">
+				Sydney-based DevOps engineer focused on cloud platforms, developer tooling, and
+				reliable engineering workflows.
+			</p>
+			<ContactLinks />
+		</div>
+
+		<aside class="hero-aside" aria-label="Quick facts">
+			<dl class="facts">
+				<div>
+					<dt>Current</dt>
+					<dd>Australian Bureau of Statistics</dd>
+				</div>
+				<div>
+					<dt>Focus</dt>
+					<dd>AWS, Kubernetes, CI/CD, platform support</dd>
+				</div>
+				<div>
+					<dt>Education</dt>
+					<dd>Bachelor of Information Technology, UTS</dd>
+				</div>
+			</dl>
+		</aside>
+	</section>
+
+	<section class="section" aria-labelledby="work-heading">
+		<div class="section-heading">
+			<h2 id="work-heading">Current work</h2>
+			<p>
+				At the ABS, I support a Coder cloud development environment on AWS used by around
+				250 daily users, maintain platform services on Kubernetes/EKS, and help teams
+				with CI/CD troubleshooting and migration work.
+			</p>
+		</div>
+		<p class="prose">
+			I bring a mix of platform engineering and customer-facing experience across
+			government and banking, where clear communication, incident triage, and service
+			quality were critical.
+		</p>
+	</section>
+
+	<section class="section" aria-labelledby="projects-heading">
+		<div class="section-heading">
+			<h2 id="projects-heading">Projects</h2>
+			<p>
+				Two recent builds: one practical flight-search tool, and this portfolio as a
+				fast content system for ongoing work.
+			</p>
+		</div>
+		<div class="project-list">
+			{featuredProjects.map((project) => <ProjectSummary project={project} />)}
+		</div>
+	</section>
+</BaseLayout>
