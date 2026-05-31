@@ -1,6 +1,5 @@
 ---
 import { getCollection } from "astro:content";
-import ContactLinks from "./ContactLinks.astro";
 
 const pathname = Astro.url.pathname;
 
@@ -17,6 +16,7 @@ const navItems = [
 	{ label: "Experience", href: "/experience" },
 	{ label: "Projects", href: "/projects" },
 	...(showWriting ? [{ label: "Writing", href: "/writing" }] : []),
+	{ label: "Contact", href: "/contact" },
 ];
 
 const isActive = (href: string) =>
@@ -33,9 +33,5 @@ const isActive = (href: string) =>
 				</a>
 			))
 		}
-		<ContactLinks class="header-links" />
-		<a href="/contact" aria-current={isActive("/contact") ? "page" : undefined}>
-			Contact
-		</a>
 	</nav>
 </header>
