@@ -1,6 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="Ali Bonagdaran — DevOps Engineer">
-	<rect width="1200" height="630" fill="#0f172a"/>
-	<path d="M396 464 508 184h48l96 280h-48l-24-72H468l-24 72h-48Zm96-112h64l-32-88-32 88Z" fill="#f8fafc"/>
-	<path d="M404 512h224" stroke="#2563eb" stroke-width="32" stroke-linecap="square"/>
-	<text x="600" y="380" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="32" font-weight="600" text-anchor="middle">DevOps Engineer — Sydney, Australia</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="Ali Bonagdaran, DevOps Engineer">
+	<rect width="1200" height="630" fill="#17231e"/>
+	<path d="M86 86h1028" stroke="#52665a" stroke-width="1"/>
+	<path d="M86 544h1028" stroke="#52665a" stroke-width="1"/>
+	<text x="86" y="150" fill="#d2c9b8" font-family="Schibsted Grotesk, Helvetica Neue, Arial, sans-serif" font-size="24" font-weight="600" letter-spacing="5">ALI BONAGDARAN</text>
+	<text x="86" y="350" fill="#eee9dc" font-family="Schibsted Grotesk, Helvetica Neue, Arial, sans-serif" font-size="112" font-weight="700" letter-spacing="-5">DevOps Engineer</text>
+	<text x="86" y="420" fill="#d2c9b8" font-family="Source Serif 4, Georgia, serif" font-size="36">Cloud platforms · developer tooling · reliable workflows</text>
+	<path d="M86 486h180" stroke="#b55f4e" stroke-width="12" stroke-linecap="square"/>
+	<text x="1114" y="496" fill="#b55f4e" font-family="Schibsted Grotesk, Helvetica Neue, Arial, sans-serif" font-size="24" font-weight="600" text-anchor="end">SYDNEY, NSW</text>
 </svg>

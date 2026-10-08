@@ -1,0 +1,56 @@
+{
+	"title": "Choose Ali’s portfolio visual world",
+	"question": "A replacement visual world is ready. Keep the assigned direction, take an alternate, or re-roll it with a short steer.",
+	"options": [
+		{
+			"id": "assigned-calibration-ledger",
+			"label": "The Calibration Ledger",
+			"kicker": "ASSIGNED DIRECTION",
+			"lineage": "precision instrument panels, commissioning certificates, and engineers’ field records",
+			"thesis": "A portfolio read as an instrument of evidence: measured, durable, and immediately legible.",
+			"palette": ["#171917", "#d6d3c8", "#7d8480", "#8195a0"],
+			"materials": ["matte graphite", "engraved alloy labels", "faint grid registration"],
+			"viewport": "Ali’s name occupies the upper field; role, city, and three verified evidence points lock into a calibrated lower register beside a direct resume contact path.",
+			"risk": "It must stay editorial and human, or evidence notation can become a sterile dashboard.",
+			"sketch": ".impeccable/sketches/calibration-ledger.webp",
+			"hero": "https://impeccable.style/worlds/cards/signals-instruments-nixie-laboratory-counter-hero.webp",
+			"board": "https://impeccable.style/worlds/cards/signals-instruments-nixie-laboratory-counter.webp"
+		},
+		{
+			"id": "challenger-nixie-counter",
+			"label": "Nixie Laboratory Counter",
+			"lineage": "mid-century laboratory counters and visible numerical apparatus",
+			"thesis": "Professional evidence is shown as a small bank of physical, changing readings.",
+			"case": "Partial fit: the instrument grammar matches systems work, but literal glowing digits risk DevOps cosplay and may outshine the actual work.",
+			"sketch": ".impeccable/sketches/nixie-counter.webp",
+			"hero": "https://impeccable.style/worlds/cards/signals-instruments-nixie-laboratory-counter-hero.webp"
+		},
+		{
+			"id": "challenger-night-city",
+			"label": "Rain-Dark City Grid",
+			"lineage": "urban nocturne, public infrastructure maps, and blue-hour transit systems",
+			"thesis": "Platform work is framed as calm, dependable infrastructure quietly holding a city together.",
+			"case": "Audience recognition is strong, but it fuses poorly because scenic atmosphere would dilute the factual evidence recruiters need.",
+			"sketch": ".impeccable/sketches/night-city.webp",
+			"hero": "https://impeccable.style/worlds/cards/light-shadow-caustics-rain-night-cityscape-hero.webp"
+		},
+		{
+			"id": "challenger-technical-zine",
+			"label": "Hand-Drawn Technical Zine",
+			"lineage": "annotated engineering zines, whiteboard diagrams, and friendly explainers",
+			"thesis": "Complex systems are made approachable through direct annotation and visual explanation.",
+			"case": "Product clarity survives, but it fuses poorly with the desired professional status and would make this portfolio feel less senior.",
+			"sketch": ".impeccable/sketches/technical-zine.png",
+			"hero": "https://impeccable.style/worlds/cards/hand-drawn-zine-explainer-hero.webp"
+		}
+	],
+	"reroll": true,
+	"canon": true,
+	"canonCard": {
+		"label": "The category standard",
+		"thesis": "A high-craft conventional engineering portfolio: dark shell, simple hero, project cards, and standard chronology.",
+		"viewport": "A clear headline, role summary, and featured projects in the arrangement visitors already expect.",
+		"sketch": ".impeccable/sketches/category-standard.png"
+	},
+	"steer": true
+}

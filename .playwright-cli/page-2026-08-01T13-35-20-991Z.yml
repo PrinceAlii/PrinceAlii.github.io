@@ -1,0 +1,79 @@
+- generic [active] [ref=e1]:
+  - link "Skip to content" [ref=e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - banner [ref=e3]:
+    - link "Ali Bonagdaran home" [ref=e4] [cursor=pointer]:
+      - /url: /
+      - generic [ref=e5]: AB
+      - generic [ref=e6]: Ali Bonagdaran
+    - navigation "Primary navigation" [ref=e7]:
+      - link "Home" [ref=e8] [cursor=pointer]:
+        - /url: /
+      - link "Projects" [ref=e9] [cursor=pointer]:
+        - /url: /projects
+      - link "Experience" [ref=e10] [cursor=pointer]:
+        - /url: /experience
+      - link "Contact" [ref=e11] [cursor=pointer]:
+        - /url: /contact
+  - main [ref=e12]:
+    - region [ref=e13]:
+      - generic [ref=e14]:
+        - heading "Ali Bonagdaran" [level=1] [ref=e15]
+        - paragraph [ref=e16]: Graduate DevOps Engineer at the Australian Bureau of Statistics.
+        - paragraph [ref=e17]: I support cloud platforms and developer tooling at the Australian Bureau of Statistics.
+        - navigation "Links" [ref=e18]:
+          - link "Open resume" [ref=e19] [cursor=pointer]:
+            - /url: /resume.pdf
+            - text: Open resume
+            - generic [ref=e20]: ↗
+          - link "Contact Me" [ref=e21] [cursor=pointer]:
+            - /url: /contact
+    - region [ref=e22]:
+      - generic [ref=e23]:
+        - heading "Work history" [level=2] [ref=e24]
+        - paragraph [ref=e25]: 2019 — Present
+      - generic [ref=e26]:
+        - generic [ref=e27]:
+          - paragraph [ref=e28]: 2026 — now
+          - paragraph [ref=e29]: Graduate - DevOps Engineer, Australian Bureau of Statistics
+        - generic [ref=e30]:
+          - paragraph [ref=e31]: 2025 — 2026
+          - paragraph [ref=e32]: Cadet - DevOps, Australian Bureau of Statistics
+        - generic [ref=e33]:
+          - paragraph [ref=e34]: 2024 — 2025
+          - paragraph [ref=e35]: Business Banking Associate, Commonwealth Bank of Australia
+        - generic [ref=e36]:
+          - paragraph [ref=e37]: 2023 — 2024
+          - paragraph [ref=e38]: Customer & Digital Service Representative, Service NSW
+        - generic [ref=e39]:
+          - paragraph [ref=e40]: 2019 — 2023
+          - paragraph [ref=e41]: Crew Member, McDonald's
+      - link "View experience" [ref=e42] [cursor=pointer]:
+        - /url: /experience
+    - region [ref=e43]:
+      - heading "Contact" [level=2] [ref=e44]
+      - generic [ref=e45]:
+        - paragraph [ref=e46]:
+          - link "alibonagdaran@gmail.com" [ref=e47] [cursor=pointer]:
+            - /url: mailto:alibonagdaran@gmail.com
+        - navigation "Social links" [ref=e48]:
+          - link "LinkedIn" [ref=e49] [cursor=pointer]:
+            - /url: https://www.linkedin.com/in/alibonagdaran/
+            - generic [ref=e53]: ↗
+          - link "GitHub" [ref=e54] [cursor=pointer]:
+            - /url: https://github.com/PrinceAlii
+            - generic [ref=e58]: ↗
+        - generic [ref=e59]:
+          - link "All contact details" [ref=e60] [cursor=pointer]:
+            - /url: /contact
+          - link "Resume" [ref=e61] [cursor=pointer]:
+            - /url: /resume.pdf
+            - text: Resume
+            - generic [ref=e62]: ↗
+  - contentinfo [ref=e63]:
+    - paragraph [ref=e64]: © 2026 Ali Bonagdaran
+  - generic [ref=e67]:
+    - button [ref=e68]
+    - button [ref=e74]
+    - button [ref=e78]
+    - button [ref=e86]

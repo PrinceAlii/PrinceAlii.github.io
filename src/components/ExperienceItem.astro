@@ -8,6 +8,7 @@ type Props = {
 
 const { entry } = Astro.props;
 const { Content } = await render(entry);
+const isCurrent = entry.data.endDate === "Present";
 
 const dateFormat = new Intl.DateTimeFormat("en-AU", {
 	month: "short",
@@ -15,27 +16,27 @@ const dateFormat = new Intl.DateTimeFormat("en-AU", {
 });
 
 const formatDate = (date: Date | "Present") => (date === "Present" ? date : dateFormat.format(date));
+const titleId = `experience-${entry.id.replace(/[^a-z0-9]+/gi, "-")}`;
 ---
 
-<article class="experience-item">
-	<div class="meta">
-		<p>{formatDate(entry.data.startDate)} - {formatDate(entry.data.endDate)}</p>
+<article class:list={["experience-entry", isCurrent && "is-current"]} aria-labelledby={titleId}>
+	<div class="experience-dates">
+		{isCurrent && <span class="entry-status">Current role</span>}
+		<p>{formatDate(entry.data.startDate)} to {formatDate(entry.data.endDate)}</p>
 		<p>{entry.data.location}</p>
 	</div>
-	<div class="summary-body">
-		<div>
-			<h3>{entry.data.title}</h3>
-			<p class="meta">{entry.data.company}</p>
+	<div class="experience-entry-main">
+		<div class="experience-heading">
+			<h2 id={titleId}>{entry.data.title}</h2>
+			<p class="experience-company">{entry.data.company}</p>
 		</div>
 		<div class="prose">
 			<Content />
 		</div>
 		{
 			entry.data.skills.length > 0 && (
-				<ul class="skill-list" aria-label={`${entry.data.title} skills`}>
-					{entry.data.skills.map((skill) => (
-						<li>{skill}</li>
-					))}
+				<ul class="experience-skills" aria-label={`${entry.data.title} areas of work`}>
+					{entry.data.skills.map((skill) => <li>{skill}</li>)}
 				</ul>
 			)
 		}

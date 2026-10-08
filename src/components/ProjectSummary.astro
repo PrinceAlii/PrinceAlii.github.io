@@ -3,34 +3,35 @@ import type { CollectionEntry } from "astro:content";
 
 type Props = {
 	project: CollectionEntry<"projects">;
+	index: number;
 };
 
-const { project } = Astro.props;
+const { project, index } = Astro.props;
 const slug = project.id.replace(/\.(md|mdx)$/, "");
+const titleId = `project-${slug.replace(/[^a-z0-9]+/gi, "-")}`;
 ---
 
-<article class="project-summary">
-	<div class="meta">
-		<p>{project.data.techStack.join(", ")}</p>
-	</div>
-	<div class="summary-body">
-		<div>
-			<h3><a class="project-title" href={`/projects/${slug}`}>{project.data.title}</a></h3>
-			<p>{project.data.description}</p>
+<article class="project-entry" aria-labelledby={titleId}>
+	<div class="entry-index" aria-hidden="true">{String(index + 1).padStart(2, "0")}</div>
+	<div class="project-entry-main">
+		<div class="project-entry-heading">
+			<h2 id={titleId}><a href={`/projects/${slug}`}>{project.data.title}</a></h2>
+			<p class="project-stack">{project.data.techStack.join(" · ")}</p>
 		</div>
+		<p class="project-entry-description">{project.data.description}</p>
 		<div class="inline-links">
 			<a href={`/projects/${slug}`}>Read case study</a>
 			{
 				project.data.liveLink && (
 					<a href={project.data.liveLink} target="_blank" rel="noopener noreferrer">
-						Live ↗
+						Live <span class="external-mark" aria-hidden="true">↗</span>
 					</a>
 				)
 			}
 			{
 				project.data.githubLink && (
 					<a href={project.data.githubLink} target="_blank" rel="noopener noreferrer">
-						Source
+						Source <span class="external-mark" aria-hidden="true">↗</span>
 					</a>
 				)
 			}

@@ -1,0 +1,16 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "Impeccable Design Detector",
+      "trigger": "PreToolUse",
+      "description": "Before writing a UI file (fs_write/str_replace/fs_append), runs the Impeccable design detector on the file and asks for confirmation if anti-patterns are found, surfacing the findings.",
+      "matcher": "fs_write|str_replace|fs_append",
+      "action": {
+        "type": "command",
+        "command": "sh \"$HOME/.kiro/skills/impeccable/scripts/kiro-hook.sh\"",
+        "timeout": 60
+      }
+    }
+  ]
+}

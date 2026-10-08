@@ -5,12 +5,14 @@ location: "Redfern, NSW"
 startDate: "2024-11-01"
 endDate: "2025-06-01"
 skills:
-  - Customer Support
-  - Banking Operations
-  - Incident Triage
-  - Communication
+  - Banking Products
+  - Customer Experience
+  - Complaint Resolution
+  - Specialist Routing
 ---
 
-Supported business banking customers in a high trust environment where accuracy, clear communication, and reliable service were critical.
+Explained complex banking products clearly to customers with varying levels of financial literacy.
 
-The role strengthened customer facing judgement, escalation habits, and the ability to explain complex operational issues clearly.
+Consistently exceeded customer experience targets, including a Net Promoter Score (NPS) above +70 and a high post-call survey completion rate.
+
+Resolved escalated complaints and complex queries, routing issues to the right specialist teams and reducing incorrect call transfers.

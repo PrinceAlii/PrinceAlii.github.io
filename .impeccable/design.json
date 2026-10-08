@@ -1,0 +1,331 @@
+{
+	"schemaVersion": 2,
+	"generatedAt": "2026-08-01T10:23:32Z",
+	"title": "Design System: Ali Bonagdaran Portfolio",
+	"extensions": {
+		"colorMeta": {
+			"field": {
+				"role": "neutral",
+				"displayName": "Warm Graphite Field",
+				"canonical": "oklch(14.8% 0.018 155)",
+				"tonalRamp": [
+					"oklch(15% 0.018 155)",
+					"oklch(26% 0.018 155)",
+					"oklch(37% 0.018 155)",
+					"oklch(48% 0.018 155)",
+					"oklch(59% 0.018 155)",
+					"oklch(70% 0.018 155)",
+					"oklch(82% 0.018 155)",
+					"oklch(95% 0.018 155)"
+				]
+			},
+			"field-raised": {
+				"role": "neutral",
+				"displayName": "Raised Graphite",
+				"canonical": "oklch(18.2% 0.018 155)",
+				"tonalRamp": [
+					"oklch(15% 0.018 155)",
+					"oklch(26% 0.018 155)",
+					"oklch(37% 0.018 155)",
+					"oklch(48% 0.018 155)",
+					"oklch(59% 0.018 155)",
+					"oklch(70% 0.018 155)",
+					"oklch(82% 0.018 155)",
+					"oklch(95% 0.018 155)"
+				]
+			},
+			"ink": {
+				"role": "neutral",
+				"displayName": "Calcium Ink",
+				"canonical": "oklch(93.5% 0.014 102)",
+				"tonalRamp": [
+					"oklch(15% 0.014 102)",
+					"oklch(26% 0.014 102)",
+					"oklch(37% 0.014 102)",
+					"oklch(48% 0.014 102)",
+					"oklch(59% 0.014 102)",
+					"oklch(70% 0.014 102)",
+					"oklch(82% 0.014 102)",
+					"oklch(95% 0.014 102)"
+				]
+			},
+			"copy": {
+				"role": "neutral",
+				"displayName": "Weathered Copy",
+				"canonical": "oklch(79% 0.018 102)",
+				"tonalRamp": [
+					"oklch(15% 0.018 102)",
+					"oklch(26% 0.018 102)",
+					"oklch(37% 0.018 102)",
+					"oklch(48% 0.018 102)",
+					"oklch(59% 0.018 102)",
+					"oklch(70% 0.018 102)",
+					"oklch(82% 0.018 102)",
+					"oklch(95% 0.018 102)"
+				]
+			},
+			"stone": {
+				"role": "neutral",
+				"displayName": "Weathered Stone",
+				"canonical": "oklch(62% 0.018 115)",
+				"tonalRamp": [
+					"oklch(15% 0.018 115)",
+					"oklch(26% 0.018 115)",
+					"oklch(37% 0.018 115)",
+					"oklch(48% 0.018 115)",
+					"oklch(59% 0.018 115)",
+					"oklch(70% 0.018 115)",
+					"oklch(82% 0.018 115)",
+					"oklch(95% 0.018 115)"
+				]
+			},
+			"line": {
+				"role": "neutral",
+				"displayName": "Fine Rule",
+				"canonical": "oklch(33% 0.018 155)",
+				"tonalRamp": [
+					"oklch(15% 0.018 155)",
+					"oklch(26% 0.018 155)",
+					"oklch(37% 0.018 155)",
+					"oklch(48% 0.018 155)",
+					"oklch(59% 0.018 155)",
+					"oklch(70% 0.018 155)",
+					"oklch(82% 0.018 155)",
+					"oklch(95% 0.018 155)"
+				]
+			},
+			"line-strong": {
+				"role": "neutral",
+				"displayName": "Strong Rule",
+				"canonical": "oklch(47% 0.022 155)",
+				"tonalRamp": [
+					"oklch(15% 0.022 155)",
+					"oklch(26% 0.022 155)",
+					"oklch(37% 0.022 155)",
+					"oklch(48% 0.022 155)",
+					"oklch(59% 0.022 155)",
+					"oklch(70% 0.022 155)",
+					"oklch(82% 0.022 155)",
+					"oklch(95% 0.022 155)"
+				]
+			},
+			"signal": {
+				"role": "primary",
+				"displayName": "Oxidised Red Signal",
+				"canonical": "oklch(58% 0.105 28)",
+				"tonalRamp": [
+					"oklch(15% 0.105 28)",
+					"oklch(26% 0.105 28)",
+					"oklch(37% 0.105 28)",
+					"oklch(48% 0.105 28)",
+					"oklch(59% 0.105 28)",
+					"oklch(70% 0.105 28)",
+					"oklch(82% 0.105 28)",
+					"oklch(95% 0.105 28)"
+				]
+			},
+			"signal-light": {
+				"role": "primary",
+				"displayName": "Light Signal",
+				"canonical": "oklch(75% 0.075 32)",
+				"tonalRamp": [
+					"oklch(15% 0.075 32)",
+					"oklch(26% 0.075 32)",
+					"oklch(37% 0.075 32)",
+					"oklch(48% 0.075 32)",
+					"oklch(59% 0.075 32)",
+					"oklch(70% 0.075 32)",
+					"oklch(82% 0.075 32)",
+					"oklch(95% 0.075 32)"
+				]
+			}
+		},
+		"typographyMeta": {
+			"display": {
+				"displayName": "Architectural Display",
+				"purpose": "Oversized page and home titles; the first viewport's name is the primary expression."
+			},
+			"headline": {
+				"displayName": "Structural Headline",
+				"purpose": "Section headings and large evidence labels in the display/UI voice."
+			},
+			"title": {
+				"displayName": "Record Title",
+				"purpose": "Smaller semantic headings for entries and supporting structures."
+			},
+			"body": {
+				"displayName": "Reading Voice",
+				"purpose": "Default copy, experience evidence, and project case-study prose."
+			},
+			"label": {
+				"displayName": "Catalogue Label",
+				"purpose": "Navigation, dates, stacks, metadata, index labels, and current-role status."
+			}
+		},
+		"shadows": [
+			{
+				"name": "current-role-inset-boundary",
+				"value": "inset 0 1px 0 var(--color-line-strong), inset 0 -1px 0 var(--color-line-strong)",
+				"purpose": "Structural top and bottom boundaries for the current experience entry; it is not elevation."
+			}
+		],
+		"motion": [
+			{
+				"name": "ease-out-expo",
+				"value": "cubic-bezier(0.16, 1, 0.3, 1)",
+				"purpose": "Shared easing for entrance and link state transitions."
+			},
+			{
+				"name": "home-enter",
+				"value": "700ms var(--ease-out-expo)",
+				"purpose": "One-time upward entrance for the home hero."
+			},
+			{
+				"name": "page-enter",
+				"value": "650ms var(--ease-out-expo)",
+				"purpose": "One-time upward entrance for internal page introductions."
+			},
+			{
+				"name": "link-state",
+				"value": "180ms var(--ease-out-expo)",
+				"purpose": "Color and underline transitions on links."
+			},
+			{
+				"name": "reduced-motion",
+				"value": "@media (prefers-reduced-motion: reduce)",
+				"purpose": "Disables entrance animation, restores auto scrolling, and reduces link transition duration to 0.01ms."
+			}
+		],
+		"breakpoints": [
+			{
+				"name": "recompose",
+				"value": "60rem",
+				"purpose": "Collapse major asymmetric grids, make the project aside static, and stack the current-role record."
+			},
+			{
+				"name": "compact",
+				"value": "44rem",
+				"purpose": "Stack records and contact rows, recompose the header, and make the current role full bleed."
+			}
+		]
+	},
+	"components": [
+		{
+			"name": "Primary Navigation",
+			"kind": "nav",
+			"refersTo": "primary-navigation",
+			"description": "The four-link site navigation with a quiet default, a calcium current state, and a signal underline.",
+			"html": "<nav class=\"ds-nav\" aria-label=\"Primary navigation\"><a href=\"#\" aria-current=\"page\">Home</a><a href=\"#\">Projects</a><a href=\"#\">Experience</a><a href=\"#\">Contact</a></nav>",
+			"css": ".ds-nav { display: flex; align-items: center; justify-content: flex-end; flex-wrap: wrap; gap: 0.25rem clamp(0.8rem, 2.6vw, 2rem); } .ds-nav a { display: inline-flex; align-items: center; min-height: 44px; padding-block: 0.25rem; color: var(--color-stone); font-family: var(--font-ui); font-size: 0.8rem; font-weight: 600; letter-spacing: 0.04em; text-decoration: none; } .ds-nav a:hover, .ds-nav a[aria-current=\"page\"] { color: var(--color-ink); } .ds-nav a[aria-current=\"page\"] { text-decoration: underline; text-decoration-color: var(--color-signal); text-decoration-thickness: 2px; text-underline-offset: 0.45em; } .ds-nav a:focus-visible { outline: 2px solid var(--color-signal-light); outline-offset: 4px; }"
+		},
+		{
+			"name": "Text Link",
+			"kind": "custom",
+			"refersTo": "text-link",
+			"description": "The site's action primitive for resume, contact, case-study, and external routes.",
+			"html": "<a class=\"ds-text-link\" href=\"#\">Open resume <span class=\"ds-external-mark\" aria-hidden=\"true\">↗</span></a>",
+			"css": ".ds-text-link { display: inline-flex; align-items: center; min-height: 44px; color: var(--color-ink); font-family: var(--font-ui); font-size: 0.88rem; font-weight: 650; line-height: 1.25; text-decoration-color: var(--color-signal); text-decoration-thickness: 1px; text-underline-offset: 0.22em; transition: color 180ms var(--ease-out-expo), text-decoration-color 180ms var(--ease-out-expo); } .ds-text-link:hover { color: var(--color-signal-light); } .ds-text-link:focus-visible { outline: 2px solid var(--color-signal-light); outline-offset: 4px; } .ds-external-mark { margin-left: 0.2rem; color: var(--color-signal-light); font-size: 0.9em; }"
+		},
+		{
+			"name": "Site Footer",
+			"kind": "custom",
+			"refersTo": "text-link",
+			"description": "A quiet ruled close with only the year and name.",
+			"html": "<footer class=\"ds-footer\"><p class=\"ds-footer-copyright\">© 2026 Ali Bonagdaran</p></footer>",
+			"css": ".ds-footer { display: flex; align-items: end; margin-top: clamp(5rem, 12vw, 11rem); padding-block: 1.5rem max(2rem, env(safe-area-inset-bottom)); border-top: 1px solid var(--color-line); } .ds-footer-copyright { margin: 0; color: var(--color-stone); font-family: var(--font-ui); font-size: 0.78rem; letter-spacing: 0.03em; }"
+		},
+		{
+			"name": "Project Entry",
+			"kind": "custom",
+			"refersTo": "project-entry",
+			"description": "A ruled project record with a numbered index, stack, description, and direct evidence links.",
+			"html": "<article class=\"ds-project-entry\"><div class=\"ds-entry-index\" aria-hidden=\"true\">01</div><div class=\"ds-project-entry-main\"><div class=\"ds-project-entry-heading\"><h2><a href=\"#\">Reward Seat Finder</a></h2><p class=\"ds-project-stack\">Next.js · Playwright · AWS</p></div><p>An Australian market tool for finding frequent flyer reward seats.</p><div class=\"ds-inline-links\"><a href=\"#\">Read case study</a><a href=\"#\">Live ↗</a></div></div></article>",
+			"css": ".ds-project-entry { display: grid; grid-template-columns: minmax(4rem, 0.17fr) minmax(0, 1fr); gap: clamp(1rem, 5vw, 6rem); padding-block: clamp(2rem, 5vw, 4rem); border-bottom: 1px solid var(--color-line); color: var(--color-copy); } .ds-entry-index { color: var(--color-signal-light); font-family: var(--font-ui); font-size: clamp(1.1rem, 2vw, 1.45rem); font-weight: 700; letter-spacing: -0.03em; } .ds-project-entry-main { display: grid; gap: 1.25rem; } .ds-project-entry-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 2rem; } .ds-project-entry h2 { margin: 0; color: var(--color-ink); font-family: var(--font-ui); font-size: clamp(1.8rem, 4vw, 3.25rem); font-weight: 650; letter-spacing: -0.025em; line-height: 1; } .ds-project-entry a { color: var(--color-ink); text-decoration-color: var(--color-signal); text-underline-offset: 0.16em; } .ds-project-stack { margin: 0; max-width: 28ch; color: var(--color-stone); font-family: var(--font-ui); font-size: 0.78rem; font-weight: 550; line-height: 1.4; text-align: right; } .ds-inline-links { display: flex; flex-wrap: wrap; gap: 0.4rem 1.5rem; } .ds-inline-links a { min-height: 44px; font-family: var(--font-ui); font-size: 0.88rem; font-weight: 650; line-height: 1.25; }"
+		},
+		{
+			"name": "Current Experience Entry",
+			"kind": "custom",
+			"refersTo": "current-experience-entry",
+			"description": "The present role is marked by status text and a raised tonal field, not by a card or badge.",
+			"html": "<article class=\"ds-experience-entry ds-is-current\"><div class=\"ds-experience-dates\"><span class=\"ds-entry-status\">Current role</span><p>Feb 2026 — Present</p><p>Sydney, NSW</p></div><div><h2>Graduate - DevOps Engineer</h2><p class=\"ds-experience-company\">Australian Bureau of Statistics</p><p>Own the day-to-day operation and ongoing development of the Coder Cloud Development Environment on AWS.</p></div></article>",
+			"css": ".ds-experience-entry { display: grid; grid-template-columns: minmax(11rem, 0.33fr) minmax(0, 1fr); gap: clamp(2rem, 7vw, 8rem); padding-block: clamp(2.25rem, 5vw, 4.5rem); border-bottom: 1px solid var(--color-line); color: var(--color-copy); } .ds-experience-entry.ds-is-current { background: var(--color-field-raised); box-shadow: inset 0 1px 0 var(--color-line-strong), inset 0 -1px 0 var(--color-line-strong); } .ds-experience-dates { display: grid; align-content: start; gap: 0.25rem; color: var(--color-stone); font-family: var(--font-ui); font-size: 0.8rem; line-height: 1.45; } .ds-entry-status { color: var(--color-signal-light); font-family: var(--font-ui); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; } .ds-experience-entry h2 { margin: 0; color: var(--color-ink); font-family: var(--font-ui); font-size: clamp(1.65rem, 3vw, 2.6rem); font-weight: 650; letter-spacing: -0.025em; line-height: 1; } .ds-experience-company { color: var(--color-stone); font-family: var(--font-ui); font-size: 0.9rem; font-weight: 550; }"
+		},
+		{
+			"name": "Featured Work Band",
+			"kind": "custom",
+			"refersTo": "featured-work",
+			"description": "A full-bleed raised field for the selected Reward Seat Finder evidence on the home route.",
+			"html": "<section class=\"ds-feature\"><header class=\"ds-feature-heading\"><p class=\"ds-feature-number\" aria-hidden=\"true\">01</p><div><h2>Reward Seat Finder</h2><p>An Australian market tool for finding frequent flyer reward seats.</p></div></header><div class=\"ds-feature-grid\"><p class=\"ds-feature-label\">Selected project</p><div><p class=\"ds-feature-summary\">A direct tool for finding reward seats without waiting on airline interfaces.</p><a class=\"ds-text-link\" href=\"#\">Read the case study</a></div></div></section>",
+			"css": ".ds-feature { width: calc(100% + (var(--page-inline) * 2)); margin-inline: calc(var(--page-inline) * -1); padding: clamp(4rem, 9vw, 8rem) var(--page-inline); background: var(--color-field-raised); border-top: 1px solid var(--color-line-strong); border-bottom: 1px solid var(--color-line-strong); } .ds-feature-heading, .ds-feature-grid { display: grid; grid-template-columns: minmax(10rem, 0.38fr) minmax(0, 1fr); gap: clamp(2rem, 7vw, 8rem); align-items: start; } .ds-feature-heading { margin-bottom: clamp(3rem, 7vw, 6rem); } .ds-feature-number { color: var(--color-signal-light); font-family: var(--font-ui); font-size: clamp(1.1rem, 2vw, 1.45rem); font-weight: 700; } .ds-feature h2 { margin: 0; max-width: 12ch; color: var(--color-ink); font-family: var(--font-ui); font-size: clamp(3rem, 7vw, 5.25rem); font-weight: 700; letter-spacing: -0.045em; line-height: 1; } .ds-feature-heading p:last-child { max-width: 56ch; margin-top: 1.25rem; font-size: clamp(1.1rem, 1.8vw, 1.35rem); } .ds-feature-grid { padding-top: 1.25rem; border-top: 1px solid var(--color-line-strong); } .ds-feature-label { color: var(--color-stone); font-family: var(--font-ui); font-size: 0.75rem; font-weight: 650; letter-spacing: 0.12em; text-transform: uppercase; } .ds-feature-summary { max-width: 50ch; color: var(--color-ink); font-size: clamp(1.35rem, 2.5vw, 1.9rem); letter-spacing: -0.02em; line-height: 1.25; }"
+		},
+		{
+			"name": "Contact Directory Entry",
+			"kind": "nav",
+			"refersTo": "contact-directory-entry",
+			"description": "A full-width direct-contact row for email, LinkedIn, GitHub, or the resume PDF.",
+			"html": "<a class=\"ds-contact-entry\" href=\"#\"><span class=\"ds-contact-index\" aria-hidden=\"true\">01</span><span class=\"ds-contact-type\">Email</span><span class=\"ds-contact-value\">alibonagdaran@gmail.com</span></a>",
+			"css": ".ds-contact-entry { display: grid; grid-template-columns: minmax(3rem, 0.15fr) minmax(8rem, 0.28fr) minmax(0, 1fr); gap: 1rem 2rem; align-items: center; min-height: 6.5rem; padding-block: 1rem; border-bottom: 1px solid var(--color-line); color: var(--color-ink); text-decoration: none; } .ds-contact-entry:hover .ds-contact-value { color: var(--color-signal-light); } .ds-contact-index { color: var(--color-signal-light); font-family: var(--font-ui); font-size: clamp(1.1rem, 2vw, 1.45rem); font-weight: 700; letter-spacing: -0.03em; } .ds-contact-type { color: var(--color-ink); font-family: var(--font-ui); font-size: 0.78rem; font-weight: 650; letter-spacing: 0.12em; text-transform: uppercase; } .ds-contact-value { color: var(--color-ink); font-family: var(--font-ui); font-size: clamp(1.15rem, 2.5vw, 1.8rem); font-weight: 550; letter-spacing: -0.025em; overflow-wrap: anywhere; } .ds-contact-entry:focus-visible { outline: 2px solid var(--color-signal-light); outline-offset: 4px; }"
+		}
+	],
+	"narrative": {
+		"northStar": "Discipline & Signal",
+		"overview": "This is a contemporary technical exhibition catalogue for a platform engineer. It is authorial, exact, self-possessed, and materially technical: specific work and verified professional context make the credibility case, while the interface stays quiet enough for that evidence to lead. The root layout's direction contract is a warm green-black graphite field, calcium-white type, Source Serif 4 as the reading voice, Schibsted Grotesk as the display and UI voice, exact rules, and one oxidised-red signal.\n\nThe system is static, semantic Astro composition rather than a product UI. Desktop layouts use asymmetric columns, oversized type, long quiet fields, and thin rules; mobile deliberately recomposes those relationships into a readable single-column record. There is no image-led identity: the square AB favicon and typographic social card extend the same flat palette and rule language. Writing exists as an intentionally unlisted, empty route until there are real notes worth publishing.",
+		"keyCharacteristics": [
+			"Technical exhibition-catalogue pacing with proof close to the surface.",
+			"Warm graphite, calcium type, weathered stone, and one restrained red signal.",
+			"Typographic hierarchy and fine rules carry personality; imagery and effects do not.",
+			"Semantic lists, links, headings, and content collections keep the record durable.",
+			"Responsive recomposition, visible focus, and removable motion are part of the system."
+		],
+		"rules": [
+			{
+				"name": "The One Signal Rule",
+				"body": "The oxidised-red signal is sparse semantic punctuation, not a general decoration or a fill color for whole sections.",
+				"section": "colors"
+			},
+			{
+				"name": "The Tonal Field Rule",
+				"body": "Use `field-raised` only when a bounded reading band or current-role emphasis needs separation; do not turn tonal layering into a card system.",
+				"section": "colors"
+			},
+			{
+				"name": "The Two Voices Rule",
+				"body": "Use Schibsted Grotesk for display, navigation, metadata, context registers, and links; use Source Serif 4 for ordinary reading copy and case-study prose. Do not add a mono fallback to manufacture a technical mood.",
+				"section": "typography"
+			},
+			{
+				"name": "The Recomposition Rule",
+				"body": "Preserve hierarchy and reading order across breakpoints, but recompute columns, alignment, and emphasis for the available width.",
+				"section": "layout"
+			},
+			{
+				"name": "The Flat Field Rule",
+				"body": "Surfaces remain flat at rest. Tonal separation and rules should explain hierarchy before any shadow is considered.",
+				"section": "elevation"
+			},
+			{
+				"name": "The Square Edge Rule",
+				"body": "Keep recurring surfaces and interactive affordances rectangular, quiet, and governed by rules; do not soften the catalogue into rounded-card UI.",
+				"section": "shapes"
+			}
+		],
+		"dos": [
+			"Do use the normative graphite, calcium, stone, rule, and signal tokens from the frontmatter; keep the oxidised red rare and meaningful.",
+			"Do pair Schibsted Grotesk display/UI text with Source Serif 4 reading text, preserving the existing weight and tracking hierarchy.",
+			"Do use semantic, server-rendered Astro structures—headings, lists, definitions, navigation, articles, and direct anchors—when adding records or routes.",
+			"Do preserve the centered `84rem` shell, `clamp(1.25rem, 4vw, 4rem)` inline measure, ruled rows, readable `68ch` prose measure, and the `60rem` / `44rem` responsive recomposition behavior.",
+			"Do make focus visible, keep interactive links at least `44px` high, and ensure a state is not communicated by color or hover alone.",
+			"Do keep depth flat: use tonal fields, fine rules, quiet space, and the single current-role inset boundary to explain hierarchy.",
+			"Do keep the contact directory direct and the featured-work treatment evidence-led; only publish verified claims."
+		],
+		"donts": [
+			"Don't add portraits, stock imagery, generative imagery, synthetic visual assets, decorative diagrams, logo clouds, dashboards, skills bars, or faux-terminal treatments.",
+			"Don't introduce gradients, glass, blur, glow, blue-neon, cyan, purple, pure black/white, or a second accent color.",
+			"Don't turn sections or records into rounded cards, pills, chips, elevated panels, or generic button grids.",
+			"Don't invent a button, form, input, testimonial, client proof, metric, or public-writing breadth that the implementation does not contain.",
+			"Don't use mono typography as a shortcut for technical credibility; the display/UI voice is Schibsted Grotesk.",
+			"Don't make navigation or meaning depend on hover, animation, or the oxidised-red signal alone; keep semantic labels, underlines, and focus states intact.",
+			"Don't promote route-specific composition—such as the home feature band's exact grid—into a new global token or reusable card pattern."
+		]
+	}
+}

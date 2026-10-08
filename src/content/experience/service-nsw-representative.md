@@ -5,12 +5,11 @@ location: "Ryde, NSW"
 startDate: "2023-03-01"
 endDate: "2024-11-01"
 skills:
-  - Digital Service
-  - Public Sector
-  - Customer Support
-  - Problem Solving
+  - Multi-Agency Transactions
+  - Privacy Compliance
+  - Complaint Resolution
 ---
 
-Helped customers navigate digital and in person government services, balancing procedural accuracy with calm, direct communication.
+Delivered accurate advice across complex multi-agency transactions, maintaining strict compliance with privacy legislation.
 
-The experience built a strong service baseline for triage, stakeholder support, and working through ambiguous problems.
+Handled escalated complaints involving licensing and registration, ensuring issues were documented and resolved through appropriate channels.

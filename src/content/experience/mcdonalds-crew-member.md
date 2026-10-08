@@ -5,10 +5,14 @@ location: "Mount Colah, NSW"
 startDate: "2019-08-01"
 endDate: "2023-03-01"
 skills:
-  - Teamwork
-  - Operations
   - Customer Service
-  - Reliability
+  - Complaint Resolution
+  - Drive-Thru Flow
+  - Collaboration
 ---
 
-Worked in a fast paced service environment with a focus on consistency, teamwork, and reliability across busy shifts.
+Provided exceptional customer service, resolving customer complaints and concerns.
+
+Managed the flow of the drive-thru, ensuring cars had a total experience time of less than 140 seconds.
+
+Collaborated with fellow crew members to ensure the smooth operation of the restaurant.

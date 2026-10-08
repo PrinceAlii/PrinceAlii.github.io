@@ -1,74 +1,58 @@
 ---
 import { getCollection } from "astro:content";
 
-import ProjectSummary from "../components/ProjectSummary.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import SocialLinks from "../components/SocialLinks.astro";
 
-const projects = await getCollection("projects");
-const featuredProjects = projects
-	.sort((a, b) => Number(b.data.featured) - Number(a.data.featured))
-	.slice(0, 2);
+const experience = (await getCollection("experience")).sort(
+	(a, b) => b.data.startDate.getTime() - a.data.startDate.getTime(),
+);
+const formatYearRange = (entry: (typeof experience)[number]) =>
+	`${entry.data.startDate.getFullYear()} to ${entry.data.endDate === "Present" ? "Present" : entry.data.endDate.getFullYear()}`;
 ---
 
 <BaseLayout title="Home">
-	<section class="hero" aria-labelledby="home-title">
+	<section class="home-hero" aria-labelledby="home-title">
 		<div class="hero-copy">
-			<div class="hero-title">
-				<h1 id="home-title">Ali Bonagdaran</h1>
-			</div>
-			<p class="lede">
-				Sydney based DevOps engineer focused on cloud platforms, developer tooling, and
-				reliable engineering workflows.
+			<h1 id="home-title">Ali Bonagdaran</h1>
+			<p class="hero-role">Graduate DevOps Engineer at the Australian Bureau of Statistics.</p>
+			<p class="hero-standfirst">
+				I support cloud platforms and developer tooling at the Australian Bureau of Statistics.
 			</p>
-			<div class="contact-links">
-				<a href="https://www.linkedin.com/in/alibonagdaran/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-				<a href="https://github.com/PrinceAlii" target="_blank" rel="noopener noreferrer">GitHub</a>
-				<a href="/resume.pdf">Resume</a>
-			</div>
-		</div>
-
-		<aside class="hero-aside" aria-label="Quick facts">
-			<dl class="facts">
-				<div>
-					<dt>Current Role</dt>
-					<dd>Graduate @ Australian Bureau of Statistics</dd>
-				</div>
-				<div>
-					<dt>Focus</dt>
-					<dd>AWS, Kubernetes, CI/CD, platform support</dd>
-				</div>
-				<div>
-					<dt>Education</dt>
-					<dd>Bachelor of Information Technology, University of Technology Sydney</dd>
-				</div>
-			</dl>
-		</aside>
-	</section>
-
-	<section class="section" aria-labelledby="work-heading">
-		<div class="section-heading">
-			<h2 id="work-heading">Current work</h2>
-			<div>
-				<p>
-					At the ABS, I support a Coder cloud development environment on AWS used by
-					around 250 daily users, maintain platform services on Kubernetes/EKS, and
-					help teams with CI/CD troubleshooting and migration work.
-				</p>
-				<p>
-					I bring a mix of platform engineering and customer facing experience across
-					government and banking, where clear communication, incident triage, and
-					service quality were critical.
-				</p>
-			</div>
+			<nav class="hero-actions" aria-label="Links">
+				<a class="text-link" href="/resume.pdf">Open resume <span class="external-mark" aria-hidden="true">↗</span></a>
+				<a class="text-link" href="/contact">Contact Me</a>
+			</nav>
 		</div>
 	</section>
 
-	<section class="section" aria-labelledby="projects-heading">
-		<div class="section-heading">
-			<h2 id="projects-heading">Projects</h2>
+	<section class="section" aria-labelledby="work-history-title">
+		<header class="section-header">
+			<h2 id="work-history-title">Work history</h2>
+			<p>2019 to Present</p>
+		</header>
+		<div class="experience-index">
+			{
+				experience.map((entry) => (
+					<div class="experience-index-entry">
+						<p>{formatYearRange(entry)}</p>
+						<p>{entry.data.title}, {entry.data.company}</p>
+					</div>
+				))
+			}
 		</div>
-		<div class="project-list">
-			{featuredProjects.map((project) => <ProjectSummary project={project} />)}
+		<a class="text-link" href="/experience">View experience</a>
+	</section>
+
+	<section class="home-close" aria-labelledby="home-close-title">
+		<h2 id="home-close-title">Contact</h2>
+		<div class="home-close-copy">
+			<p><a class="text-link" href="mailto:alibonagdaran@gmail.com">alibonagdaran@gmail.com</a></p>
+			<SocialLinks />
+			<div class="inline-links">
+				<a class="text-link" href="/contact">All contact details</a>
+				<a class="text-link" href="/resume.pdf">Resume <span class="external-mark" aria-hidden="true">↗</span></a>
+			</div>
 		</div>
 	</section>
 </BaseLayout>

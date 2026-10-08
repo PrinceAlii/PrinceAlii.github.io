@@ -1,22 +1,97 @@
 ---
 import { getCollection } from "astro:content";
 import ExperienceItem from "../components/ExperienceItem.astro";
+import { achievements } from "../data/achievements";
+import { education } from "../data/education";
+import { skillCategories } from "../data/skills";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 const experience = (await getCollection("experience")).sort(
 	(a, b) => b.data.startDate.getTime() - a.data.startDate.getTime(),
 );
+
+const educationFacts = [
+	{ label: "Result", value: `${education.classification} average` },
+	{ label: "WAM", value: education.wam },
+	{ label: "GPA", value: education.gpa },
+	{ label: "Major", value: education.major },
+	{ label: "Sub-major", value: education.subMajor },
+];
 ---
 
 <BaseLayout
 	title="Experience"
-	description="A chronological overview of Ali Bonagdaran's DevOps, banking, public sector, and service experience."
+	description="Ali Bonagdaran's DevOps, banking, public sector, and service experience, with education, technical skills, and achievements."
 >
-	<header class="page-head">
+	<header class="page-intro">
 		<h1>Experience</h1>
+		<p class="page-deck">Graduate DevOps Engineer at the Australian Bureau of Statistics.</p>
 	</header>
 
 	<section class="experience-list" aria-label="Work experience">
 		{experience.map((entry) => <ExperienceItem entry={entry} />)}
+	</section>
+
+	<section class="record-section" aria-labelledby="education-title">
+		<h2 id="education-title">Education</h2>
+		<div class="record-section-main">
+			<div class="experience-heading">
+				<h3 class="record-title">{education.degree}</h3>
+				<p class="experience-company">
+					{education.institution}, {education.startYear} to {education.endYear}
+				</p>
+			</div>
+			<dl class="record-facts">
+				{
+					educationFacts.map((fact) => (
+						<div class="record-row">
+							<dt>{fact.label}</dt>
+							<dd>{fact.value}</dd>
+						</div>
+					))
+				}
+			</dl>
+		</div>
+	</section>
+
+	<section class="record-section" aria-labelledby="skills-title">
+		<h2 id="skills-title">Technical skills</h2>
+		<dl class="record-facts">
+			{
+				skillCategories.map((group) => (
+					<div class="record-row">
+						<dt>{group.category}</dt>
+						<dd>
+							<ul class="record-entries">
+								{group.entries.map((entry) => <li>{entry}</li>)}
+							</ul>
+						</dd>
+					</div>
+				))
+			}
+		</dl>
+	</section>
+
+	<section class="record-section" aria-labelledby="achievements-title">
+		<h2 id="achievements-title">Achievements</h2>
+		<ul class="record-facts">
+			{
+				achievements.map((item) =>
+					item.kind === "award" ? (
+						<li class="record-row">
+							<span class="record-label">{item.exam}</span>
+							<p>
+								{item.rank} for {item.subject}
+							</p>
+						</li>
+					) : (
+						<li class="record-row">
+							<span class="record-label entry-status">{item.status}</span>
+							<p>{item.name}</p>
+						</li>
+					),
+				)
+			}
+		</ul>
 	</section>
 </BaseLayout>

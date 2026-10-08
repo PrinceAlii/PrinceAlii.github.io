@@ -2,30 +2,37 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout
-	title="Contact"
-	description="Ways to reach Ali Bonagdaran."
->
-	<header class="page-head">
+<BaseLayout title="Contact" description="Direct ways to reach Ali Bonagdaran.">
+	<header class="page-intro">
 		<h1>Contact</h1>
+		<p class="page-deck">Email, website, LinkedIn, GitHub, and a PDF resume.</p>
 	</header>
 
-	<section class="contact-page">
-		<div class="contact-item">
-			<p class="meta">Email</p>
-			<a href="mailto:alibonagdaran@gmail.com" class="text-link">alibonagdaran@gmail.com</a>
-		</div>
-		<div class="contact-item">
-			<p class="meta">LinkedIn</p>
-			<a href="https://www.linkedin.com/in/alibonagdaran/" target="_blank" rel="noopener noreferrer" class="text-link">linkedin.com/in/alibonagdaran</a>
-		</div>
-		<div class="contact-item">
-			<p class="meta">GitHub</p>
-			<a href="https://github.com/PrinceAlii" target="_blank" rel="noopener noreferrer" class="text-link">github.com/PrinceAlii</a>
-		</div>
-		<div class="contact-item">
-			<p class="meta">Resume</p>
-			<a href="/resume.pdf" class="text-link">Download resume (PDF)</a>
-		</div>
-	</section>
+	<nav class="contact-directory" aria-label="Contact options">
+		<a class="contact-entry" href="mailto:alibonagdaran@gmail.com">
+			<span class="contact-index" aria-hidden="true">01</span>
+			<span class="contact-type">Email</span>
+			<span class="contact-value">alibonagdaran@gmail.com</span>
+		</a>
+		<a class="contact-entry" href="https://www.alibo.dev" target="_blank" rel="noopener noreferrer">
+			<span class="contact-index" aria-hidden="true">02</span>
+			<span class="contact-type">Website</span>
+			<span class="contact-value">alibo.dev <span class="external-mark" aria-hidden="true">↗</span></span>
+		</a>
+		<a class="contact-entry" href="https://www.linkedin.com/in/alibonagdaran/" target="_blank" rel="noopener noreferrer">
+			<span class="contact-index" aria-hidden="true">03</span>
+			<span class="contact-type">LinkedIn</span>
+			<span class="contact-value">linkedin.com/in/alibonagdaran <span class="external-mark" aria-hidden="true">↗</span></span>
+		</a>
+		<a class="contact-entry" href="https://github.com/PrinceAlii" target="_blank" rel="noopener noreferrer">
+			<span class="contact-index" aria-hidden="true">04</span>
+			<span class="contact-type">GitHub</span>
+			<span class="contact-value">github.com/PrinceAlii <span class="external-mark" aria-hidden="true">↗</span></span>
+		</a>
+		<a class="contact-entry" href="/resume.pdf">
+			<span class="contact-index" aria-hidden="true">05</span>
+			<span class="contact-type">Resume</span>
+			<span class="contact-value">Download the PDF <span class="external-mark" aria-hidden="true">↗</span></span>
+		</a>
+	</nav>
 </BaseLayout>
