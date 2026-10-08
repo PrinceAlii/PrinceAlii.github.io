@@ -24,14 +24,14 @@ const titleId = `project-${slug.replace(/[^a-z0-9]+/gi, "-")}`;
 			{
 				project.data.liveLink && (
 					<a href={project.data.liveLink} target="_blank" rel="noopener noreferrer">
-						Live <span class="external-mark" aria-hidden="true">↗</span>
+						<span class="link-label">Live</span> <span class="external-mark" aria-hidden="true">↗</span>
 					</a>
 				)
 			}
 			{
 				project.data.githubLink && (
 					<a href={project.data.githubLink} target="_blank" rel="noopener noreferrer">
-						Source <span class="external-mark" aria-hidden="true">↗</span>
+						<span class="link-label">Source</span> <span class="external-mark" aria-hidden="true">↗</span>
 					</a>
 				)
 			}

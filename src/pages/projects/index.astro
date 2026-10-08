@@ -11,14 +11,13 @@ const projects = (await getCollection("projects")).sort((a, b) => {
 
 <BaseLayout
 	title="Projects"
-	description="Selected projects by Ali Bonagdaran, including Reward Seat Finder and this Astro portfolio."
+	description="Projects and case studies by Ali Bonagdaran."
 >
 	<header class="page-intro">
-		<h1>Selected work</h1>
-		<p class="page-deck">Reward Seat Finder and this portfolio.</p>
+		<h1>Projects</h1>
 	</header>
 
-	<section class="project-list" aria-label="Selected projects">
+	<section class="project-list" aria-label="Projects">
 		{projects.map((project, index) => <ProjectSummary project={project} index={index} />)}
 	</section>
 </BaseLayout>

@@ -10,6 +10,6 @@ skills:
   - Complaint Resolution
 ---
 
-Delivered accurate advice across complex multi-agency transactions, maintaining strict compliance with privacy legislation.
+- Delivered accurate advice across complex multi-agency transactions, maintaining strict compliance with privacy legislation.
 
-Handled escalated complaints involving licensing and registration, ensuring issues were documented and resolved through appropriate channels.
+- Handled escalated complaints involving licensing and registration, ensuring issues were documented and resolved through appropriate channels.

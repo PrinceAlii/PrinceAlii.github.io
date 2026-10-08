@@ -260,6 +260,8 @@ Concrete guardrails for extending the shipped system:
 - **Do** make focus visible, keep interactive links at least `44px` high, and ensure a state is not communicated by color or hover alone.
 - **Do** keep depth flat: use tonal fields, fine rules, quiet space, and the single current-role inset boundary to explain hierarchy.
 - **Do** keep the contact directory direct and the featured-work treatment evidence-led; only publish verified claims.
+- **Do** use sentence case for labels, statuses, metadata, and contact types. Reserve uppercase for genuine acronyms, not as a default eyebrow treatment.
+- **Do** write direct, human copy that describes the work or next action.
 
 ### Don't:
 
@@ -270,3 +272,4 @@ Concrete guardrails for extending the shipped system:
 - **Don't** use mono typography as a shortcut for technical credibility; the display/UI voice is Schibsted Grotesk.
 - **Don't** make navigation or meaning depend on hover, animation, or the oxidised-red signal alone; keep semantic labels, underlines, and focus states intact.
 - **Don't** promote route-specific composition—such as the home feature band's exact grid—into a new global token or reusable card pattern.
+- **Don't** use prompt-spec copy such as "Selected work", "Reward Seat Finder and this portfolio", or other labels that sound like an instruction or inventory generated for a brief. Prefer plain, visitor-facing language.
