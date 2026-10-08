@@ -11,8 +11,8 @@ skills:
   - Collaboration
 ---
 
-Provided exceptional customer service, resolving customer complaints and concerns.
+- Provided exceptional customer service, resolving customer complaints and concerns.
 
-Managed the flow of the drive-thru, ensuring cars had a total experience time of less than 140 seconds.
+- Managed the flow of the drive-thru, ensuring cars had a total experience time of less than 140 seconds.
 
-Collaborated with fellow crew members to ensure the smooth operation of the restaurant.
+- Collaborated with fellow crew members to ensure the smooth operation of the restaurant.

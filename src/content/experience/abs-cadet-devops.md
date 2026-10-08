@@ -15,12 +15,12 @@ skills:
   - Sparx EA
 ---
 
-Administered Red Hat Enterprise Linux (RHEL) systems in a production on-premises environment, performing patching, configuration management, and routine maintenance.
+- Administered Red Hat Enterprise Linux (RHEL) systems in a production on-premises environment, performing patching, configuration management, and routine maintenance.
 
-Contributed to the migration of on-premises workloads to AWS and Azure, including environment setup and post-migration validation.
+- Contributed to the migration of on-premises workloads to AWS and Azure, including environment setup and post-migration validation.
 
-Performed version upgrades and ongoing maintenance on self-managed GitLab and Artifactory instances.
+- Performed version upgrades and ongoing maintenance on self-managed GitLab and Artifactory instances.
 
-Assisted in the design and maintenance of GitLab CI/CD pipelines used for application deployment across the organisation.
+- Assisted in the design and maintenance of GitLab CI/CD pipelines used for application deployment across the organisation.
 
-Collaborated with the DevOps team on improvements to business-critical tools, including Jira and Sparx EA.
+- Collaborated with the DevOps team on improvements to business-critical tools, including Jira and Sparx EA.
