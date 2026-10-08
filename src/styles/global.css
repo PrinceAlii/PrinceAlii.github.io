@@ -796,41 +796,46 @@ main {
 
 .not-found {
 	display: flex;
-	min-height: min(52rem, calc(100svh - 6rem));
+	min-height: calc(100svh - 5.5rem);
 	flex-direction: column;
 	justify-content: space-between;
-	gap: 3rem;
-	padding-block: clamp(4rem, 10vw, 8rem) clamp(3rem, 6vw, 5rem);
+	gap: 2rem;
+	padding-block: clamp(3rem, 8vw, 7rem) clamp(2.5rem, 5vw, 4.5rem);
 }
 
 .not-found h1 {
 	width: 100%;
 	color: var(--color-ink);
-	font-size: clamp(6rem, 27vw, 22rem);
-	font-weight: 700;
-	letter-spacing: -0.1em;
-	line-height: 0.72;
-	overflow-wrap: anywhere;
+	font-size: clamp(7rem, 32vw, 29rem);
+	font-weight: 800;
+	letter-spacing: -0.11em;
+	line-height: 0.7;
+	white-space: nowrap;
 }
 
 .not-found-copy {
-	display: grid;
-	grid-template-columns: minmax(0, 1fr) auto;
-	gap: 1rem clamp(2rem, 8vw, 10rem);
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem 2rem;
 	align-items: end;
 	width: 100%;
-	padding-top: 1.25rem;
-	border-top: 1px solid var(--color-line);
+	padding-top: 0.5rem;
 }
 
 .not-found-copy p {
-	max-width: 32ch;
+	max-width: 42ch;
+	margin: 0;
 	color: var(--color-ink);
 	font-family: var(--font-ui);
-	font-size: clamp(1rem, 1.8vw, 1.35rem);
+	font-size: clamp(0.95rem, 1.4vw, 1.2rem);
 	font-weight: 550;
 	letter-spacing: -0.02em;
 	line-height: 1.2;
+}
+
+.not-found-copy .text-link {
+	color: var(--color-stone);
+	font-size: 0.82rem;
 }
 
 @keyframes enter-up {
@@ -1029,22 +1034,10 @@ main {
 
 	.not-found {
 		min-height: calc(100svh - 9rem);
-	}
-}
-
-@media (max-width: 44rem) {
-	.not-found {
-		min-height: calc(100svh - 10rem);
-		padding-block: 4.5rem 3rem;
+		padding-block: 3rem 2.5rem;
 	}
 
 	.not-found h1 {
-		font-size: clamp(6rem, 28vw, 10rem);
-		line-height: 0.78;
-	}
-
-	.not-found-copy {
-		grid-template-columns: 1fr;
-		gap: 0.75rem;
+		font-size: clamp(6rem, 30vw, 12rem);
 	}
 }
