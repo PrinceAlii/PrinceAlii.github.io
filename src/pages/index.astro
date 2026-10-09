@@ -47,12 +47,20 @@ const formatYearRange = (entry: (typeof experience)[number]) =>
 		<div class="experience-index">
 			{absExperience.length > 0 && (
 				<section class="experience-index-abs-group" aria-labelledby="abs-company-title">
+					<img
+						class="experience-index-logo experience-index-logo--abs"
+						src="/logos/abs.svg"
+						alt=""
+						width="44"
+						height="44"
+						loading="lazy"
+						decoding="async"
+					/>
 					<ol class="experience-index-abs-roles">
 					{absExperience.map((entry, index) => (
 						<li class="experience-index-entry experience-index-abs-entry">
 							<p>{formatYearRange(entry)}</p>
 							<div class="experience-index-role experience-index-abs-role">
-								{index === 0 && <img class="experience-index-logo" src="/logos/abs.svg" alt="" width="44" height="44" loading="lazy" decoding="async" />}
 								<p class="experience-index-title">{entry.data.title}</p>
 								{index === 0 && <h3 id="abs-company-title" class="experience-index-company">Australian Bureau of Statistics</h3>}
 							</div>

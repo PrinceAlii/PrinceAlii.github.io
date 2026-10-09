@@ -52,14 +52,39 @@ const isActive = (href: string) =>
 				</svg>
 				<span>Light</span>
 			</button>
+			<span class="theme-selector-indicator" aria-hidden="true"></span>
 		</div>
 	</div>
 </header>
 
 <script>
 	const themeOptions = document.querySelectorAll<HTMLButtonElement>("[data-theme-choice]");
+	const themeSelector = document.querySelector<HTMLElement>(".theme-selector");
 	const themeColorMeta = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
 	const themeStorageKey = "ali-portfolio-theme";
+
+	function updateThemeIndicator(theme: "dark" | "light", animate = false) {
+		const activeOption = themeSelector?.querySelector<HTMLButtonElement>(
+			`[data-theme-choice="${theme}"]`,
+		);
+		if (!themeSelector || !activeOption) return;
+		if (!animate) themeSelector.dataset.ready = "false";
+
+		const selectorBounds = themeSelector.getBoundingClientRect();
+		const optionBounds = activeOption.getBoundingClientRect();
+		themeSelector.style.setProperty(
+			"--theme-indicator-offset",
+			`${optionBounds.left - selectorBounds.left - themeSelector.clientLeft}px`,
+		);
+		themeSelector.style.setProperty("--theme-indicator-width", `${optionBounds.width}px`);
+		if (animate) {
+			themeSelector.dataset.ready = "true";
+		} else {
+			window.requestAnimationFrame(() => {
+				themeSelector.dataset.ready = "true";
+			});
+		}
+	}
 
 	function setTheme(theme: "dark" | "light", shouldPersist = false) {
 		const root = document.documentElement;
@@ -68,6 +93,7 @@ const isActive = (href: string) =>
 		for (const option of themeOptions) {
 			option.setAttribute("aria-pressed", String(option.dataset.themeChoice === theme));
 		}
+		updateThemeIndicator(theme, shouldPersist);
 
 		if (themeColorMeta) {
 			themeColorMeta.content = getComputedStyle(root).backgroundColor;
@@ -90,4 +116,10 @@ const isActive = (href: string) =>
 	}
 
 	setTheme(document.documentElement.dataset.theme === "light" ? "light" : "dark");
+	function updateCurrentThemeIndicator() {
+		updateThemeIndicator(document.documentElement.dataset.theme === "light" ? "light" : "dark");
+	}
+
+	window.addEventListener("resize", updateCurrentThemeIndicator);
+	document.fonts.ready.then(updateCurrentThemeIndicator);
 </script>
