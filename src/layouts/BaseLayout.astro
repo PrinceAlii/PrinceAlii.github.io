@@ -20,7 +20,7 @@ const ogImage = new URL("/social-card.svg", siteUrl);
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -28,7 +28,21 @@ const ogImage = new URL("/social-card.svg", siteUrl);
 		<meta name="description" content={description} />
 		<meta name="author" content="Ali Bonagdaran" />
 		<meta name="theme-color" content="#17231e" />
-		<meta name="color-scheme" content="dark" />
+		<meta name="color-scheme" content="dark light" />
+		<script is:inline>
+			(() => {
+				let savedTheme = null;
+				try {
+					savedTheme = window.localStorage.getItem("ali-portfolio-theme");
+				} catch {
+					// Keep the default theme when browser storage is unavailable.
+				}
+
+				if (savedTheme === "dark" || savedTheme === "light") {
+					document.documentElement.dataset.theme = savedTheme;
+				}
+			})();
+		</script>
 		<link rel="canonical" href={canonical.href} />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
