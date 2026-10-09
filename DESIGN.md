@@ -12,30 +12,6 @@ colors:
   signal: "oklch(58% 0.105 28)"
   signal-light: "oklch(75% 0.075 32)"
 typography:
-  scale:
-    label: "0.7rem"
-    compact: "0.72rem"
-    micro: "0.75rem"
-    meta: "0.78rem"
-    nav: "0.8rem"
-    back-link: "0.82rem"
-    context: "0.84rem"
-    action: "0.88rem"
-    small: "0.9rem"
-    mobile: "0.95rem"
-    base: "1rem"
-    body: "1.0625rem"
-    reading: "1.1rem"
-    role: "clamp(1.35rem, 2.6vw, 2rem)"
-    standfirst: "clamp(1.05rem, 1.6vw, 1.2rem)"
-    deck: "clamp(1.1rem, 1.8vw, 1.35rem)"
-    role-summary: "clamp(1.2rem, 2vw, 1.45rem)"
-    contact-value: "clamp(1.15rem, 2.5vw, 1.8rem)"
-    project-title: "clamp(1.8rem, 4vw, 3.25rem)"
-    prose-heading: "clamp(1.55rem, 3vw, 2.2rem)"
-    experience-title: "clamp(1.65rem, 3vw, 2.6rem)"
-    closing-title: "clamp(2.8rem, 6vw, 5rem)"
-    not-found: "clamp(4rem, 12vw, 6rem)"
   home-role:
     fontSize: "clamp(1.35rem, 2.6vw, 2rem)"
   home-standfirst:
@@ -95,13 +71,11 @@ components:
     height: "44px"
   home-contact-close:
     textColor: "{colors.ink}"
-    layout: "asymmetric two-column contact close with stacked mobile groups"
     padding: "clamp(4rem, 8vw, 7rem)"
   project-entry:
     textColor: "{colors.copy}"
     padding: "clamp(2rem, 5vw, 4rem) 0"
   current-experience-entry:
-    backgroundColor: "{colors.field-raised}"
     textColor: "{colors.copy}"
   contact-directory-entry:
     textColor: "{colors.ink}"
@@ -138,7 +112,7 @@ The palette stays in a subtly warm green-black range: the field and raised field
 ### Neutral
 
 - **Warm Graphite Field** (`field`): The page and document canvas.
-- **Raised Graphite** (`field-raised`): A tonal surface for the featured-work band, the current experience entry, and inline code; it is never a floating card.
+- **Raised Graphite** (`field-raised`): A tonal surface for the featured-work band and inline code; it is never a floating card.
 - **Calcium Ink** (`ink`): Primary headings, strong links, and high-priority facts.
 - **Weathered Copy** (`copy`): Default reading text on the dark field.
 - **Weathered Stone** (`stone`): Supporting metadata, labels, dates, stacks, and subdued navigation.
@@ -149,7 +123,7 @@ The palette stays in a subtly warm green-black range: the field and raised field
 
 **The One Signal Rule.** The oxidised-red signal is sparse semantic punctuation, not a general decoration or a fill color for whole sections.
 
-**The Tonal Field Rule.** Use `field-raised` only when a bounded reading band or current-role emphasis needs separation; do not turn tonal layering into a card system.
+**The Tonal Field Rule.** Use `field-raised` only for the featured-work band and inline code; do not turn tonal layering into a card system.
 
 ## Typography
 
@@ -179,7 +153,7 @@ The shared shell is centered at a maximum measure of `84rem` and uses `--page-in
 
 Desktop composition is intentionally asymmetric. The home hero uses a single-column reading path with a minimum height of `min(48rem, calc(100svh - 5rem))`; section headers, current-role records, page intros, project details, experience records, and the contact close use unequal fractional columns with generous responsive gaps. Lists are ruled rows rather than cards. Project details keep their evidence and direct links close to the work; they do not introduce a global card surface.
 
-At `60rem` and below, major two-column compositions collapse to one column, sticky project metadata becomes static two-column support, and the current experience row receives an inset inline boundary. At `44rem` and below, the current-role record, contact close, project records, experience records, writing rows, and contact rows all stack to one column; the header becomes a compact two-row grid; project stacks become left-aligned; the current role becomes a full-bleed raised band. The contact close keeps the email first, then social links, then practical contact/resume actions. This is deliberate recomposition, not a scaled-down desktop grid.
+At `60rem` and below, major two-column compositions collapse to one column, sticky project metadata becomes static two-column support, and the current experience row receives an inset inline boundary. At `44rem` and below, the current-role record, contact close, project records, experience records, writing rows, and contact rows all stack to one column; the header becomes a compact two-row grid and the links align to the left; project stacks become left-aligned; the current role carries its inset boundary across the full-bleed row. The contact close keeps the email first, then social links, then practical contact/resume actions. This is deliberate recomposition, not a scaled-down desktop grid.
 
 The recurring rhythm is generous block padding expressed with clamps (`4.5rem–8rem` for sections, `5rem–9rem` for page introductions, `4rem–7rem` for the home contact close, and smaller spacing before the copyright footer) plus one-pixel rules. Semantic `<header>`, `<nav>`, `<section>`, `<article>`, `<aside>`, `<dl>`, `<ul>`, and anchor patterns carry the information architecture; Astro renders the routes statically without a client-side interaction layer.
 
@@ -213,7 +187,7 @@ There is no button or input system in the shipped site. Calls to action are sema
 
 ### Navigation
 
-The shared header pairs the `AB` initials mark and Ali Bonagdaran wordmark on the left with four primary links—Home, Projects, Experience, and Contact—on the right. Navigation uses Schibsted Grotesk at `0.8rem`, weight `600`, `0.04em` tracking, subdued stone at rest, and calcium ink on hover or the current route. The current route is an underlined state using the signal color. All navigation items are at least `44px` high; at `44rem` and below the header becomes a two-row grid and the links align to the left. Writing is intentionally absent from primary navigation.
+The shared header pairs the Ali Bonagdaran wordmark on the left with four primary links—Home, Projects, Experience, and Contact—on the right. Navigation uses Schibsted Grotesk at `0.8rem`, weight `600`, `0.04em` tracking, subdued stone at rest, and calcium ink on hover or the current route. The current route is an underlined state using the signal color. All navigation items are at least `44px` high; at `44rem` and below the header becomes a two-row grid and the links align to the left. Writing is intentionally absent from primary navigation.
 
 ### Footer
 
@@ -221,7 +195,7 @@ The shared footer closes every route with a top rule and a single copyright line
 
 ### Text Links
 
-Text links are the action primitive: calcium ink, Schibsted Grotesk, `0.88rem`, weight `650`, and a minimum `44px` inline hit target. The default underline uses the signal color; hover shifts the text to the light signal. External destinations append a small `↗` mark, and the same pattern is used for resume, project, case-study, live-tool, source, back, and contact actions.
+Text links are the action primitive: calcium ink, Schibsted Grotesk, `0.88rem`, weight `650`, and a minimum `44px` inline hit target. The default underline uses the signal color; hover shifts the text to the light signal. External links underline only their text label; the separate `↗` mark stays un-underlined. The same pattern is used for resume, project, case-study, live-tool, source, back, and contact actions.
 
 ### Project Entries
 
@@ -229,7 +203,7 @@ Text links are the action primitive: calcium ink, Schibsted Grotesk, `0.88rem`, 
 
 ### Experience Entries
 
-`ExperienceItem` renders a chronological record with dates and location in the supporting column, title and company in the main column, reading prose, and a slash-separated list of areas of work. The current Graduate DevOps Engineer role at the Australian Bureau of Statistics is marked `Current role` and receives the raised graphite treatment; earlier ABS, Service NSW, Commonwealth Bank, and McDonald's records remain ruled, flat entries. Date ranges read "Feb 2026 to Present". Desktop preserves the asymmetric two-column relationship; mobile stacks dates before evidence.
+`ExperienceItem` renders a chronological record with dates and location in the supporting column, title and company in the main column, reading prose, and a slash-separated list of areas of work. The current Graduate DevOps Engineer role at the Australian Bureau of Statistics is marked `Current role` and receives an inset-rule boundary; earlier ABS, Service NSW, Commonwealth Bank, and McDonald's records remain ruled, flat entries. Date ranges read "Feb 2026 to Present". Desktop preserves the asymmetric two-column relationship; mobile stacks dates before evidence.
 
 ### Record Sections
 
@@ -241,7 +215,7 @@ The home page closes with a direct contact section rather than another project p
 
 ### Contact Directory
 
-The contact route is a five-row semantic navigation directory: `01` Email, `02` Website, `03` LinkedIn, `04` GitHub, and `05` Resume. Each row is a full-width ruled anchor with a small type label and a large value. Hover changes the value to the light signal; external rows use `↗`; values can wrap anywhere for narrow screens. On mobile the three-column directory becomes a stacked single-column record with `1.4rem` vertical padding.
+The contact route is a five-row semantic navigation directory: `01` Email, `02` Website, `03` LinkedIn, `04` GitHub, and `05` Resume. Each row is a full-width ruled anchor with a small type label and a large value; the resume action reads “Download PDF.” Hover changes the value to the light signal; external rows use `↗`; values can wrap anywhere for narrow screens. On mobile the three-column directory becomes a stacked single-column record with `1.4rem` vertical padding.
 
 ### Focus, Motion, and Reduced Motion
 

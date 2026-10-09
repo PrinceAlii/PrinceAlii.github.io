@@ -20,14 +20,17 @@ const formatYearRange = (entry: (typeof experience)[number]) =>
 				I support cloud platforms and developer tooling at the Australian Bureau of Statistics.
 			</p>
 			<nav class="hero-actions" aria-label="Links">
-				<a class="text-link" href="/resume.pdf"><span class="link-label">Open resume</span> <span class="external-mark" aria-hidden="true">↗</span></a>
+				<a class="text-link text-link--external" href="/resume.pdf">
+					<span class="link-label">Open resume</span>
+					<span class="external-mark" aria-hidden="true">↗</span>
+				</a>
 				<a class="text-link" href="/contact">Contact Me</a>
 			</nav>
 		</div>
 	</section>
 
 	<section class="section" aria-labelledby="work-history-title">
-		<header class="section-header">
+		<header class="section-header section-header--single">
 			<h2 id="work-history-title">Work history</h2>
 		</header>
 		<div class="experience-index">
@@ -35,7 +38,10 @@ const formatYearRange = (entry: (typeof experience)[number]) =>
 				experience.map((entry) => (
 					<div class="experience-index-entry">
 						<p>{formatYearRange(entry)}</p>
-						<p>{entry.data.title}, {entry.data.company}</p>
+						<div class="experience-index-role">
+							<p class="experience-index-title">{entry.data.title}</p>
+							<p class="experience-index-company">{entry.data.company}</p>
+						</div>
 					</div>
 				))
 			}
@@ -50,7 +56,10 @@ const formatYearRange = (entry: (typeof experience)[number]) =>
 			<SocialLinks />
 			<div class="inline-links">
 				<a class="text-link" href="/contact">All contact details</a>
-				<a class="text-link" href="/resume.pdf"><span class="link-label">Resume</span> <span class="external-mark" aria-hidden="true">↗</span></a>
+				<a class="text-link text-link--external" href="/resume.pdf">
+					<span class="link-label">Resume</span>
+					<span class="external-mark" aria-hidden="true">↗</span>
+				</a>
 			</div>
 		</div>
 	</section>

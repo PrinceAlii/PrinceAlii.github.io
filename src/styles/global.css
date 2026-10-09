@@ -163,7 +163,6 @@ main {
 .site-mark {
 	display: inline-flex;
 	align-items: center;
-	gap: 0.65rem;
 	min-height: 44px;
 	color: var(--color-ink);
 	font-size: 1rem;
@@ -171,14 +170,6 @@ main {
 	letter-spacing: -0.015em;
 	text-decoration: none;
 }
-
-.site-mark-initials {
-	color: var(--color-signal-light);
-	font-size: 0.8rem;
-	font-weight: 800;
-	letter-spacing: 0.06em;
-}
-
 .site-nav {
 	display: flex;
 	align-items: center;
@@ -240,6 +231,7 @@ main {
 	text-decoration-color: var(--color-signal);
 	text-decoration-thickness: 1px;
 	text-underline-offset: 0.22em;
+	transition: text-decoration-color 180ms var(--ease-out-expo);
 }
 
 .footer-copyright {
@@ -297,6 +289,18 @@ main {
 	line-height: 1.25;
 }
 
+.text-link--external,
+.inline-link--external,
+.social-link {
+	text-decoration: none;
+}
+
+.text-link--external:hover .link-label,
+.inline-link--external:hover .link-label,
+.social-link:hover .link-label {
+	text-decoration-color: var(--color-signal-light);
+}
+
 .section {
 	padding-block: clamp(4.5rem, 10vw, 8rem);
 	border-top: 1px solid var(--color-line);
@@ -317,6 +321,10 @@ main {
 .section-header p {
 	max-width: var(--measure-reading);
 	font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+}
+
+.section-header--single {
+	grid-template-columns: minmax(0, 1fr);
 }
 
 .entry-index,
@@ -340,13 +348,18 @@ main {
 	border-bottom: 1px solid var(--color-line);
 }
 
-.experience-index-entry p:first-child {
+.experience-index-entry > p:first-child {
 	color: var(--color-stone);
 	font-family: var(--font-ui);
 	font-size: 0.8rem;
 }
 
-.experience-index-entry p:last-child {
+.experience-index-role {
+	display: grid;
+	gap: 0.25rem;
+}
+
+.experience-index-title {
 	color: var(--color-ink);
 	font-family: var(--font-ui);
 	font-size: 1rem;
@@ -355,6 +368,14 @@ main {
 
 .experience-index + .text-link {
 	margin-top: 1.25rem;
+}
+
+.experience-index-company {
+	color: var(--color-copy);
+	font-family: var(--font-ui);
+	font-size: 0.9rem;
+	font-weight: 500;
+	line-height: 1.35;
 }
 
 .home-close {
@@ -417,6 +438,12 @@ main {
 	align-items: end;
 	padding-block: clamp(5rem, 12vw, 9rem) clamp(3.5rem, 8vw, 6rem);
 	animation: enter-up 650ms var(--ease-out-expo) both;
+}
+
+.page-intro--single {
+	grid-template-columns: minmax(0, 1fr);
+	gap: 1.25rem;
+	align-items: start;
 }
 
 .page-intro h1 {

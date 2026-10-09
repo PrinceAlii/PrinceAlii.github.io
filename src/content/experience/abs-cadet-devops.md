@@ -1,5 +1,5 @@
 ---
-title: "Cadet DevOps"
+title: "Cadet - DevOps"
 company: "Australian Bureau of Statistics"
 location: "Sydney, NSW"
 startDate: "2025-03-01"

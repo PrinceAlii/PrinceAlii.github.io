@@ -3,9 +3,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout title="Contact" description="Direct ways to reach Ali Bonagdaran.">
-	<header class="page-intro">
+	<header class="page-intro page-intro--single">
 		<h1>Contact</h1>
-		<p class="page-deck">Email, website, LinkedIn, GitHub, and a PDF resume.</p>
 	</header>
 
 	<nav class="contact-directory" aria-label="Contact options">
@@ -32,7 +31,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 		<a class="contact-entry" href="/resume.pdf">
 			<span class="contact-index" aria-hidden="true">05</span>
 			<span class="contact-type">Resume</span>
-			<span class="contact-value"><span class="link-label">Download the PDF</span> <span class="external-mark" aria-hidden="true">↗</span></span>
+			<span class="contact-value"><span class="link-label">Download PDF</span> <span class="external-mark" aria-hidden="true">↗</span></span>
 		</a>
 	</nav>
 </BaseLayout>
