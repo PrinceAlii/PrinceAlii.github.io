@@ -428,6 +428,11 @@ main {
 	object-fit: contain;
 }
 
+.experience-index-abs-role .experience-index-logo {
+	top: calc(100% + 1rem);
+	transform: translateY(-50%);
+}
+
 .experience-index-title {
 	color: var(--color-ink);
 	font-family: var(--font-ui);
@@ -1070,8 +1075,11 @@ main {
 		height: calc(100% + 3.47rem);
 	}
 
+	.experience-index-abs-role .experience-index-logo {
+		top: calc(100% + 2.625rem);
+	}
+
 	.experience-index-logo {
-		top: 0;
 		left: -4.5rem;
 		width: 2rem;
 		height: 2rem;
