@@ -7,8 +7,19 @@ import SocialLinks from "../components/SocialLinks.astro";
 const experience = (await getCollection("experience")).sort(
 	(a, b) => b.data.startDate.getTime() - a.data.startDate.getTime(),
 );
+const absExperience = experience.filter(
+	(entry) => entry.data.company === "Australian Bureau of Statistics",
+);
+const otherExperience = experience.filter(
+	(entry) => entry.data.company !== "Australian Bureau of Statistics",
+);
+const employerLogos: Record<string, string> = {
+	"Commonwealth Bank of Australia": "commbank",
+	"Service NSW": "service-nsw",
+	"McDonald's": "mcdonalds",
+};
 const formatYearRange = (entry: (typeof experience)[number]) =>
-	`${entry.data.startDate.getFullYear()} to ${entry.data.endDate === "Present" ? "Present" : entry.data.endDate.getFullYear()}`;
+	`${entry.data.startDate.getFullYear()} - ${entry.data.endDate === "Present" ? "Present" : entry.data.endDate.getFullYear()}`;
 ---
 
 <BaseLayout title="Home">
@@ -34,11 +45,28 @@ const formatYearRange = (entry: (typeof experience)[number]) =>
 			<h2 id="work-history-title">Work history</h2>
 		</header>
 		<div class="experience-index">
+			{absExperience.length > 0 && (
+				<section class="experience-index-abs-group" aria-labelledby="abs-company-title">
+					<ol class="experience-index-abs-roles">
+					{absExperience.map((entry, index) => (
+						<li class="experience-index-entry experience-index-abs-entry">
+							<p>{formatYearRange(entry)}</p>
+							<div class="experience-index-role experience-index-abs-role">
+								{index === 0 && <img class="experience-index-logo" src="/logos/abs.svg" alt="" width="44" height="44" loading="lazy" decoding="async" />}
+								<p class="experience-index-title">{entry.data.title}</p>
+								{index === 0 && <h3 id="abs-company-title" class="experience-index-company">Australian Bureau of Statistics</h3>}
+							</div>
+						</li>
+					))}
+					</ol>
+				</section>
+			)}
 			{
-				experience.map((entry) => (
+				otherExperience.map((entry) => (
 					<div class="experience-index-entry">
 						<p>{formatYearRange(entry)}</p>
 						<div class="experience-index-role">
+							{employerLogos[entry.data.company] && <img class="experience-index-logo" src={`/logos/${employerLogos[entry.data.company]}.svg`} alt="" width="44" height="44" loading="lazy" decoding="async" />}
 							<p class="experience-index-title">{entry.data.title}</p>
 							<p class="experience-index-company">{entry.data.company}</p>
 						</div>

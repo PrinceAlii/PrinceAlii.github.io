@@ -340,23 +340,92 @@ main {
 	border-top: 1px solid var(--color-line);
 }
 
+.experience-index-abs-group {
+	border-bottom: 1px solid var(--color-line);
+}
+
+.experience-index-abs-roles {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.experience-index-entry.experience-index-abs-entry {
+	padding-block: 0.75rem;
+	border-bottom: 0;
+}
+
+.experience-index-abs-entry:first-child {
+	padding-top: 1.5rem;
+}
+
+.experience-index-abs-entry:last-child {
+	padding-bottom: 1.5rem;
+}
+
+.experience-index-abs-role {
+	position: relative;
+}
+
+.experience-index-abs-role::before,
+.experience-index-abs-entry:first-child .experience-index-abs-role::after {
+	position: absolute;
+	content: "";
+}
+
+.experience-index-abs-role::before {
+	z-index: 1;
+	top: 0.5rem;
+	left: -1.15rem;
+	width: 0.45rem;
+	aspect-ratio: 1;
+	border: 1px solid var(--color-stone);
+	border-radius: 50%;
+	background: var(--color-field);
+}
+
+.experience-index-abs-entry:first-child .experience-index-abs-role::after {
+	z-index: 0;
+	top: 0.725rem;
+	left: -0.925rem;
+	width: 1px;
+	height: calc(100% + 1.5rem);
+	background: var(--color-line-strong);
+}
+
 .experience-index-entry {
 	display: grid;
-	grid-template-columns: minmax(9rem, 0.38fr) minmax(0, 1fr);
+	grid-template-columns: minmax(0, 1fr) minmax(9rem, auto);
 	gap: clamp(1.5rem, 5vw, 6rem);
 	padding-block: 1.5rem;
 	border-bottom: 1px solid var(--color-line);
 }
 
 .experience-index-entry > p:first-child {
+	grid-column: 2;
+	grid-row: 1;
+	text-align: right;
 	color: var(--color-stone);
 	font-family: var(--font-ui);
 	font-size: 0.8rem;
 }
 
 .experience-index-role {
+	position: relative;
+	grid-column: 1;
+	grid-row: 1;
+	margin-left: 4.5rem;
 	display: grid;
 	gap: 0.25rem;
+}
+
+.experience-index-logo {
+	position: absolute;
+	top: 0;
+	left: -4.5rem;
+	width: 2.75rem;
+	height: 2.75rem;
+	object-fit: contain;
 }
 
 .experience-index-title {
@@ -995,6 +1064,24 @@ main {
 	.contact-entry {
 		grid-template-columns: 1fr;
 		gap: 0.65rem;
+	}
+
+	.experience-index-abs-entry:first-child .experience-index-abs-role::after {
+		height: calc(100% + 3.47rem);
+	}
+
+	.experience-index-logo {
+		top: 0;
+		left: -4.5rem;
+		width: 2rem;
+		height: 2rem;
+	}
+
+	.experience-index-entry > p:first-child {
+		grid-column: 1;
+		grid-row: 2;
+		margin-left: 4.5rem;
+		text-align: left;
 	}
 
 	.record-row {
